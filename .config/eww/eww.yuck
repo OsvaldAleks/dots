@@ -1,0 +1,187 @@
+;; VARIABLES
+
+(defvar eww "$HOME/Apps/eww/target/release/eww -c $HOME/.config/eww")
+
+;; Music vars
+(defpoll SONG :interval "1s" "scripts/musicInfo.sh --song")
+(defpoll ARTIST :interval "1s" "scripts/musicInfo.sh --artist")
+(defpoll STATUS :interval "1s" "scripts/musicInfo.sh --status")
+(defpoll POS_IN_TRACK :interval "1s" "scripts/musicInfo.sh --time")
+(defpoll TRACKLENGTH :interval "1s" "scripts/musicInfo.sh --length")
+(defpoll ONSHUFFLE :interval "1s" "scripts/musicInfo.sh --getShuffle")
+(defpoll ONLOOP :interval "1s" "scripts/musicInfo.sh --getLoop")
+(defpoll COVER :interval "1s" "scripts/musicInfo.sh --cover")
+
+;; calendar vars
+(defpoll TODAY :interval "5s" `date +%m/%d/%y`)
+
+;; notification vars
+(defvar notificationLiteral "(box :class 'empty' :orientation 'v' :vexpand true :space-evenly false :valign 'center' (label :class 'icon' :text '')(label :text 'No notifications'))")
+
+;; settings vars
+(defvar showPowerMenu true)
+(defvar showBluetoothMenu false)
+(defvar showBatteryMenu false)
+
+;; -*-*-*-*-*
+;; WIDGETS
+
+;; Music player
+(defwidget music [] 
+        (box :orientation "h" :halign "start" :space-evenly "false"
+                (box :class "album_art" :style "background-image: url('${COVER}');")
+                (box :class "musicbox" :orientation "v" :valign "center"
+                        (label :class "song" :halign "start" :wrap "false" :limit-width 40 :text SONG)
+                        (label :class "artist" :halign "start" :wrap "false"  :limit-width 100 :text ARTIST)
+                        (scale :width 40 :value POS_IN_TRACK :min 0 :max {TRACKLENGTH/1000000} :onchange "scripts/musicInfo.sh --settime {}")
+                        (box :class "musicbuttons" :orientation "h" :space-evenly true
+                                (box :orientation "h" :space-evenly true :halign "start"
+                                (button
+                                        :class {ONSHUFFLE=="On" ? "active" : ""}
+                                        :onclick "./scripts/musicInfo.sh --toggleShuffle"
+                                        '')
+                                )
+                                (box :orientation "h"
+                                        (button
+                                                :onclick "./scripts/musicInfo.sh --prev"
+                                                '')
+                                        (button :class "playbutton"
+                                                :onclick "./scripts/musicInfo.sh --toggle"
+                                                {STATUS=="Playing"? '⏸': '▶'})
+                                        (button
+                                                :onclick "./scripts/musicInfo.sh --next"
+                                                ''))
+                                (box :orientation "h" :space-evenly true :halign "end"
+                                (button
+                                        :class {ONLOOP=="None" ? "" : "active"}
+                                        :onclick "./scripts/musicInfo.sh --toggleLoop"
+                                        '')
+                                )
+                                )
+)))
+
+;; Calendar
+(defwidget cal []
+        (calendar
+                :hexpand true
+                :vexpand true
+                :class "cal"
+                :show-details false
+        )
+)
+
+;; Notifications
+
+(defwidget notificationsList []
+        (box :orientation "v" :halign "left" :space-evenly false :class "wrapper"
+                (box :orientation "h" :halign "left" :space-evenly false
+                        (label :halign "left" :text "Notifications")
+                        (box :orientation "h" :halign "right" :hexpand true :space-evenly false)
+                                (button :onclick "dunstctl history-clear && $HOME/.config/waybar/scripts/processNotification.sh" '')
+                )
+                (scroll :class "tray" :hscroll false :vscroll true :height 400
+                        (literal :content notificationLiteral)
+                ))
+)
+
+;; Settings
+(defwidget settingsPanel []
+        (box :orientation "v" :spacing 0 :valign "start" :space-evenly "false" :vexpand false :class "wrapper"
+                        (button :onclick "${eww} update showPowerMenu=${!showPowerMenu}" :class {showPowerMenu ? "active" : "inactive"} '')
+                        (revealer
+                                :transition "slidedown" 
+                                :reveal showPowerMenu
+                                :duration "0.2s"
+                                (box :orientation "v" :spacing  0 :valign "start" :space-evenly false :vexpand "false" :class "menuBox"
+                                        (button :onclick "pkill -KILL -u $USER" :class "subbutton" (box :space-evenly false :halign "start" ' Log Out'))
+                                        (button :onclick "reboot" :class "subbutton" (box :space-evenly false :halign "start" '↻ Reboot'))
+                                        (button :onclick "poweroff" :class "subbutton powerButton" (box :space-evenly false :halign "start" ' Power Off'))
+                                ))
+
+                  (box :orientation "h"
+                        (box :orientation "h")(button :hexpand true :onclick "wofi --show drun &" ''))
+;                (box :orientation "h"
+;                        (button :hexpand true :onclick "${eww} update showBatteryMenu=false & ${eww} update showBluetoothMenu=${!showBluetoothMenu}" :class {showBluetoothMenu ? "active" : "inactive"} '')
+;                        (button :hexpand true :onclick "${eww} update showBluetoothMenu=false & ${eww} update showBatteryMenu=${!showBatteryMenu}" :class {showBatteryMenu ? "active" : "inactive"} '')
+;                 )
+;                 (revealer :transition "slidedown" 
+;                                :reveal showBluetoothMenu
+;                                :duration "0.2s"
+;                                (box :orientation "v" :spacing  0 :valign "start" :space-evenly false :vexpand "false" :class "menuBox menuCornerAlt1"
+;                                        (centerbox :orientation "h"
+;                                                (button :onclick "ehco 2" :class "subbutton" ' ↻')
+;                                                (label :text "Devices")
+;                                                (button :onclick "ehco 2" :class "subbutton" ' ')
+;                                        )
+;                                        (button :onclick "echo 3" :class "subbutton leftButton" :space-evenly false :halign "start" (label :text 'todo deviceList'))
+;                                        (button :onclick "echo 3" :class "subbutton leftButton" :space-evenly false :halign "start" (label :text 'todo deviceList'))
+;                                        (button :onclick "echo 3" :class "subbutton leftButton" :space-evenly false :halign "start" (label :text 'todo devicdseList'))
+;                                        ))
+;                (revealer :transition "slidedown" 
+;                                :reveal showBatteryMenu
+;                                :duration "0.2s"
+;                                (box :orientation "v" :spacing  0 :valign "start" :space-evenly false :vexpand "false" :class "menuBox menuCornerAlt2"
+;                                        (button :onclick "ehco 2" :class "subbutton" ' Performance')
+;                                        (button :onclick "ehco 2" :class "subbutton" ' Regular')
+;                                        (button :onclick "echo 3" :class "subbutton" ' Power Saver')))
+;
+;
+
+))
+
+;; -*-*-*-*-*
+;; WINDOWS
+
+(defwindow media
+        :monitor 0
+        :geometry (geometry :x "5px"
+                        :y "5px"
+                        :height "120px"
+                        :anchor "top left")
+        :stacking "fg"
+        :reserve (struts :distance "40px" :side "top")
+        :windowtype "dock"
+        :wm-ignore false
+        (music)
+)
+
+(defwindow calendar
+        :monitor 0
+        :geometry (geometry :x "0"
+                        :y "5px"
+                        :width "15%"
+                        :height "10%"
+                        :anchor "top center")
+        :stacking "fg"
+        :reserve (struts :distance "40px" :side "top")
+        :windowtype "dock"
+        :wm-ignore false
+        (cal)
+)
+
+(defwindow notifications
+        :monitor 0
+        :geometry (geometry :x "0"
+                        :y "5px"
+                        :width "420px"
+                        :anchor "top center")
+        :stacking "fg"
+        :reserve (struts :distance "40px" :side "top")
+        :windowtype "dock"
+        :wm-ignore false
+        (notificationsList)
+)
+
+(defwindow settings
+        :monitor 0
+        :geometry (geometry :x "5px"
+                        :y "5px"
+                        :width "10%"
+                        :anchor "top right")
+        :stacking "fg"
+        :reserve (struts :distance "40px" :side "top")
+        :windowtype "dock"
+        :wm-ignore false
+        :class "settings"
+        (settingsPanel)
+)

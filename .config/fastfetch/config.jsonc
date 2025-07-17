@@ -1,0 +1,119 @@
+{
+  "logo": {
+    "padding": {
+      "top": 2,
+      "left": 1,
+      "right": 2
+    },
+    "color": {
+      "1": "93",
+      "2": "Yellow"
+    }
+  },
+  "display": {
+    "separator": "  "
+  },
+  "modules": [
+    // Title
+    {
+      "type": "title",
+      "format": "{#1}╭───────────── {#33}{user-name}"
+    },
+    // System Information
+    {
+      "type": "custom",
+      "format": "{#1}│ {#33}System Information"
+    },
+    {
+      "type": "os",
+      "key": "{#separator}│  {#keys}{#93}󰍹 OS"
+    },
+    {
+      "type": "kernel",
+      "key": "{#separator}│  {#keys}{#93}󰒋 Kernel"
+    },
+    {
+      "type": "uptime",
+      "key": "{#separator}│  {#keys}{#93}󰅐 Uptime"
+    },
+    {
+      "type": "packages",
+      "key": "{#separator}│  {#keys}{#93}󰏖 Packages",
+      "format": "{all}"
+    },
+    {
+      "type": "custom",
+      "format": "{#1}│"
+    },
+    // Desktop Environment
+    {
+      "type": "custom",
+      "format": "{#1}│ {#33}Desktop Environment"
+    },
+    {
+      "type": "de",
+      "key": "{#separator}│  {#keys}{#93}󰧨 DE"
+    },
+    {
+      "type": "wm",
+      "key": "{#separator}│  {#keys}{#93}󱂬 WM"
+    },
+    {
+      "type": "wmtheme",
+      "key": "{#separator}│  {#keys}{#93}󰉼 Theme"
+    },
+    {
+      "type": "display",
+      "key": "{#separator}│  {#keys}{#93}󰹑 Resolution"
+    },
+    {
+      "type": "shell",
+      "key": "{#separator}│  {#keys}{#93}󰞷 Shell"
+    },
+    {
+      "type": "terminalfont",
+      "key": "{#separator}│  {#keys}{#93}󰛖 Font"
+    },
+    {
+      "type": "custom",
+      "format": "{#1}│"
+    },
+    // Hardware Information
+    {
+      "type": "custom",
+      "format": "{#1}│ {#33}Hardware Information"
+    },
+    {
+      "type": "cpu",
+      "key": "{#separator}│  {#keys}{#93}󰻠 CPU"
+    },
+    {
+      "type": "gpu",
+      "key": "{#separator}│  {#keys}{#93}󰢮 GPU"
+    },
+    {
+      "type": "memory",
+      "key": "{#separator}│  {#keys}{#93}󰍛 Memory"
+    },
+    {
+      "type": "disk",
+      "key": "{#separator}│  {#keys}{#93}󰋊 Disk (/)",
+      "folders": "/"
+    },
+    {
+      "type": "custom",
+      "format": "{#1}│"
+    },
+    // Colors
+    {
+      "type": "colors",
+      "key": "{#separator}│",
+      "symbol": "circle"
+    },    
+    // Footer
+    {
+      "type": "custom",
+      "format": "{#1}╰───────────────────────────────╯"
+    }
+  ]
+}

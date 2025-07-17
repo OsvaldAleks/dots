@@ -1,0 +1,71 @@
+*{
+  text-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
+}
+#window {
+  background-color: rgba(30, 27, 24, 0);
+  border-radius: 5px;
+  font-size: .8rem;
+  border: 1px solid rgba(158, 155, 148, 0.4);
+  box-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
+  margin: 10px;
+  /* The name of the box that contains everything */
+}
+#window #outer-box {
+  /* The name of the search bar */
+  /* The name of the scrolled window containing all of the entries */
+  border-radius: 5px;
+}
+#input {
+  background-color: rgba(85, 81, 68, 0.5);
+  color: #E9E2E1;
+  text-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
+  border: none;
+  padding: 0.7rem 1rem 0.6rem 1rem;
+  font-size: 1.5rem;
+  border-radius: 5px 5px 0 0;
+  border-bottom: 3px solid rgba(215, 210, 77, 0.5);
+}
+#input:focus {
+  border-bottom: 3px solid rgba(215, 210, 77, 1);
+  box-shadow: none;
+}
+
+#window #outer-box #scroll {
+  /* The name of the box containing all of the entries */
+    background-color: rgba(61, 54, 42, 0.6);
+    border-radius: 0 0 5px 5px;
+}
+#window #outer-box #scroll #inner-box {
+  /* The name of all entries */
+  /* The name of all boxes shown when expanding  */
+  /* entries with multiple actions */
+}
+#entry {
+  color: #E9E2E1;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin: 7px;
+  height: 2rem; 
+  outline: none;
+  font-weight: bold ;
+  /* The name of all images in entries displayed in image mode */
+  /* The name of all the text in entries */
+}
+#entry #img {
+  padding-left: 0px;
+}
+
+#entry:selected{
+  background-color: rgba(215, 210, 77, 0.3);
+}
+
+#window #outer-box #scroll #inner-box #entry:selected label,
+#entry:selected>expander>list label{
+ text-shadow: none;
+}
+
+
+expander>list{
+  margin-top: 7px;
+  background: none;
+}

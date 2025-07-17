@@ -1,0 +1,218 @@
+*{
+  font-family: "DejaVu Sans", "Font Awesome 5 Free"; 
+  text-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
+  transition: 0.25s;
+}
+window{
+  background-color: rgba(61, 54, 42, 0.6);
+  border-radius: 5px;
+  color: #E9E2E1;
+  border: 1px solid rgba(158, 155, 148, 0.4);
+}
+
+button{
+    background: none;
+    border: 0;
+    box-shadow: none;
+    color: #E9E2E1;
+    border-radius: 5px;
+    text-shadow: none;
+}
+/*----- MUSIC */
+
+.album_art {
+  min-height: 140px;
+	min-width: 140px;
+  margin: 10px;
+  border-radius: 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.song {
+	font-size : 20px;
+	font-weight : bold;
+  margin-left:0;
+}
+.artist {
+	font-size : 14px;
+  margin-left:0;
+}
+.musicbox{
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.musicbox button.active{
+  background-color: #D7D24D;
+  color: rgb(30, 27, 24);
+}
+
+scale trough {
+  all: unset;
+  background-color: #E9E2E1;
+  border-radius: 10px;
+  box-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
+}
+
+scale trough > highlight {
+  background-image: none;
+  border-radius: 10px;
+  min-height: 5px;
+  background-color: #D7D24D;
+}
+
+scale slider {
+  background-image: none;
+  box-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
+  background-color: #D7D24D;
+  border: none;
+}
+
+/*----- CALANDER */
+.cal{
+  background: none;
+  border: 0;
+  color: #E9E2E1;
+  font-size: 1rem;
+}
+.cal.header{
+  text-shadow: none;
+  background-color:  rgba(215, 210, 77, 0.6);
+  border-radius: 5px 5px 0 0 ;
+  border-bottom: 1px solid rgba(215, 210, 77, 0.2);
+  color: rgb(30, 27, 24);
+}
+.cal:selected {
+  background: #D7D24D;
+  color: rgb(30, 27, 24);
+  border-radius: 5px;
+  text-shadow: none;
+}
+
+.cal.highlight {
+  color: rgba(215, 210, 77, 1);
+}
+.cal:indeterminate {
+  color: rgba(158, 155, 148, 0.5);
+}
+.cal.button{
+  background-color: rgba(30, 27, 24,0.2);
+  padding: 5px;
+  border-radius: 5px;
+  color: rgb(30, 27, 24);
+}
+.cal.button:hover{
+  background-color: rgba(30, 27, 24,0.6);
+}
+
+/*------ NOTIFICATIONS*/
+.notifications  label{
+  font-weight: bold;
+}
+
+.notifications .tray .empty {
+  opacity: 0.3;
+}
+
+.notifications .tray label.icon{
+  font-weight: bold;
+  margin: 0;
+  font-size: 5rem;
+}
+
+.notifications button{
+  margin-bottom: 5px;
+  background-color: rgba(158, 155, 148,0.6);
+  font-size: 20px;
+}
+
+.notifications .notification {
+  background-color: rgba(158, 155, 148,0.6);
+  margin: 0;
+  margin-bottom: 10px;
+  box-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
+}
+
+.icon {
+  min-height: 80px;
+	min-width: 90px;
+  margin: 5px;
+  border-radius: 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.notification .line1{
+  font-size: 0.9rem;
+}
+
+.notification .line2,
+.notification .line3{
+  font-size:  1.1rem;
+}
+
+.notification .line1,
+.notification .line3{
+  font-weight: normal;
+}
+
+.notification .line1,
+.notification .line2,
+.notification .line3{
+  margin: 0;
+  margin: 4px;
+  color: #E9E2E1;  
+}
+
+/*------ SETTINGS */
+.wrapper{
+  padding: 10px;
+}
+
+.settings button:not(.subbutton){
+  margin: 5px;
+  padding: 5px 15px;
+  background-color: rgba(158, 155, 148,0.6);
+  font-size: 15px;
+  box-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
+}
+
+.menuBox{
+  margin: 5px;
+  padding: 5px;
+  margin-top: 0;
+  background-color: rgba(85, 81, 68, 0.5);
+  box-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
+  border-radius: 0 0 5px 5px;
+}
+
+.settings button.active{ 
+  background-color: rgba(215, 210, 77, 0.5);
+  margin-bottom: 0;  
+  border-radius: 5px 5px 0 0 ;
+}
+
+.settings button:hover{
+  background-color: rgba(215, 210, 77, 0.9);
+}
+
+.subbutton{
+  margin: 2px 0;
+}
+
+.musicbox button:hover,
+.settings  button.subbutton:hover,
+.notifications button:hover{
+  background-color: rgba(158, 155, 148, 0.7);
+}
+
+.powerButton{
+  background-color: #C36134;
+}
+
+.menuCornerAlt1{
+  border-radius: 0 5px 5px 5px;
+}
+.menuCornerAlt2{
+  border-radius: 5px 0 5px 5px;
+}

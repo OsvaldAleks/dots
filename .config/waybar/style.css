@@ -1,0 +1,168 @@
+* {
+  border: none;
+  font-family: "Font Awesome", "DejaVu Sans";
+  font-size: 14px;
+}
+
+window{
+    text-shadow: 0 2 4 rgba(17, 16, 15, 0.7);
+}
+
+#workspaces,
+#mpris,
+#clock,
+#custom-notifications,
+window .modules-right {
+  background: rgba(61, 54, 42, 0.6);
+  padding: 0px 8px 0px 8px;
+  border: 1px solid rgba(158, 155, 148, 0.4);
+  border-top: 0;
+}
+
+window .modules-right {
+  border-bottom-left-radius: 5px;
+}
+
+#clock,
+#custom-notifications,
+#mpris{
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 5px;
+  color: #E9E2E1;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+tooltip{
+  background-color: rgba(158, 155, 148,0.1);
+  border-radius: 5px;
+  border: 1px solid rgba(158, 155, 148, 0.4);
+}
+tooltip label {
+  color: #E9E2E1;
+  font-size: 12px;
+  padding: 0;
+}
+
+#workspaces{
+  margin:0;
+  border-left: 0;
+  border-bottom-right-radius: 5px;
+}
+
+#workspaces button {
+  font-weight: bolder;
+  margin: 3px;
+  padding: 0px 2px 0px 2px;
+  background-color: transparent;
+  color: rgba(158, 155, 148, 0.5);
+  min-width: 18px;
+}
+
+#workspaces button:hover {
+  background: transparent;
+  box-shadow: none;
+  text-shadow: none;
+  color: rgba(158, 155, 148, 0.9);
+}
+
+#workspaces button.active {
+  background: transparent;
+  color: #D7D24D;
+}
+
+#workspaces button.urgent {
+  color: rgb(195, 97, 52);
+  text-shadow: 0 0 2 rgba(195, 97, 52, 1);
+}
+
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#mpd,
+#window,
+#workspaces,
+#custom-menu
+{
+  padding: 0px 8px 0px 8px;
+  margin: 0 5px;
+  color: #E9E2E1;
+}
+
+#mpris.paused{
+  background-color: rgba(158, 155, 148,0.1);
+}
+
+#network.disconnected, #network.disabled {
+  color: rgba(158, 155, 148, 1);;
+}
+
+#clock {
+  font-weight: bold;
+}
+
+#custom-notifications.nonempty{
+  color: #C36134;
+  animation-name: blink;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 3;
+  animation-direction: alternate;
+}
+
+#pulseaudio.quiet{
+  color: #9E9694;
+}
+
+#pulseaudio.muted{
+  color: #C36134;
+}
+
+@keyframes blink {
+  50% {
+    color: #E9E2E1;
+  }
+}
+
+#battery.critical:not(.charging) {
+  color: #C36134;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery.warning:not(.charging){
+  color: #E3B93A;
+}
+
+#battery.charging {
+  color: #D7D24D;
+}
+
+#battery.good{
+  color: #83D43B
+}
+
+#battery.charged{
+  color: #77C509;
+}
+
+#battery.regular:not(.charging){
+  color: #E9E2E1;
+}
