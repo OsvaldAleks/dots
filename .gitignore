@@ -19,4 +19,6 @@
 !/.config/waybar/**
 !/.config/wofi/
 !/.config/wofi/**
+!/.config/powerline/
+!/.config/powerline/**
 !/README.md
