@@ -23,4 +23,4 @@
 !/.config/powerline/**
 !/README.md
 !/Pictures/dotfilePics/
-!/Pictures/dotfilePics/*
+!/Pictures/dotfilePics/**
