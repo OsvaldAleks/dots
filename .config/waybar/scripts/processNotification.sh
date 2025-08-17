@@ -1,5 +1,5 @@
 #!/bin/bash
- $HOME/.config/eww/scripts/renderNotifications.sh &
+python $HOME/.config/eww/scripts/renderNotifications.py &
 
 pkill -SIGRTMIN+1 waybar &
 

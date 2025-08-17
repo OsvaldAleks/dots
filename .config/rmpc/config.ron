@@ -3,7 +3,7 @@
 #![enable(unwrap_variant_newtypes)]
 (
     address: "127.0.0.1:6600",
-    password: None,
+    password: "iReallyWannaEatHotCoals",
     theme: "theme",
     cache_dir: None,
     on_song_change: None,
@@ -122,34 +122,26 @@
     ),
     tabs: [
         (
-            name: "Queue",
+            name: " Queue",
             pane: Split(
                 direction: Horizontal,
                 panes: [(size: "70%", pane: Pane(Queue)),(size: "30%", pane: Pane(AlbumArt))],
             ),
         ),
         (
-            name: "Directories",
-            pane: Pane(Directories),
-        ),
-        (
-            name: "Artists",
-            pane: Pane(Artists),
-        ),
-        (
-            name: "Album Artists",
+            name: " Artists",
             pane: Pane(AlbumArtists),
         ),
         (
-            name: "Albums",
+            name: " Albums",
             pane: Pane(Albums),
         ),
         (
-            name: "Playlists",
+            name: " Playlists",
             pane: Pane(Playlists),
         ),
         (
-            name: "Search",
+            name: " Search",
             pane: Pane(Search),
         ),
     ],

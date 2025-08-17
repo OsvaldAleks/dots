@@ -18,6 +18,7 @@
 			"before": "ST "
 		},
 		"cwd": {
+			"before": " ",
 			"args": {
 				"ellipsis": "…"
 			}
@@ -66,6 +67,9 @@
 		},
 		"powerline.segments.common.env.virtualenv": {
 			"before": "(e) "
+		},
+		"powerline.segments.common.env.user":{
+			"before": " "
 		},
 		"powerline.segments.common.wthr.weather": {
 			"args": {

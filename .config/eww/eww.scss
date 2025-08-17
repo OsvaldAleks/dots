@@ -1,21 +1,33 @@
+$background: rgba(46, 51, 47, 0.6);
+$red: #b32a2a;
+$accent: #abcc15;
+$accent-light: rgba(215, 230, 81, 0.816);
+$orange:#d89822;
+$yellow: #dac71b;
+$text: #ebecd4;
+$black: rgba(17, 18, 19, 0.6);
+$gray: #7e818699;
+$gray-light: #d4d4dbc7;
+
+$border-radius: 5px;
+
 *{
-  font-family: "DejaVu Sans", "Font Awesome 5 Free"; 
+  font-family: "DejaVu Sans Mono", "Symbols Nerd Font Mono"; 
   text-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
   transition: 0.25s;
 }
 window{
-  background-color: rgba(61, 54, 42, 0.6);
-  border-radius: 5px;
-  color: #E9E2E1;
-  border: 1px solid rgba(158, 155, 148, 0.4);
+  background-color: $background;
+  color:  $text;
+  border-radius: $border-radius;
 }
 
 button{
     background: none;
     border: 0;
     box-shadow: none;
-    color: #E9E2E1;
-    border-radius: 5px;
+    color: $text;
+    border-radius: $border-radius;
     text-shadow: none;
 }
 /*----- MUSIC */
@@ -24,8 +36,9 @@ button{
   min-height: 140px;
 	min-width: 140px;
   margin: 10px;
-  border-radius: 5px;
+  border-radius: $border-radius;
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
 }
 .song {
@@ -42,29 +55,30 @@ button{
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
 .musicbox button.active{
-  background-color: #D7D24D;
-  color: rgb(30, 27, 24);
+  background-color: $accent;
+  color: $black;
 }
 
 scale trough {
   all: unset;
-  background-color: #E9E2E1;
-  border-radius: 10px;
-  box-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
+  background-color: $text;
+  border-radius: $border-radius;
+  box-shadow: 0 2 4 $black;
 }
 
 scale trough > highlight {
   background-image: none;
-  border-radius: 10px;
+  border-radius: $border-radius;
   min-height: 5px;
-  background-color: #D7D24D;
+  background-color: $accent;
 }
 
 scale slider {
   background-image: none;
-  box-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
-  background-color: #D7D24D;
+  box-shadow: 0 2 4 $black;
+  background-color: $accent;
   border: none;
 }
 
@@ -72,37 +86,38 @@ scale slider {
 .cal{
   background: none;
   border: 0;
-  color: #E9E2E1;
+  color: $text;
   font-size: 1rem;
+  margin: 0;
+  padding: 0;
 }
 .cal.header{
   text-shadow: none;
-  background-color:  rgba(215, 210, 77, 0.6);
-  border-radius: 5px 5px 0 0 ;
-  border-bottom: 1px solid rgba(215, 210, 77, 0.2);
-  color: rgb(30, 27, 24);
+  background-color:  $accent;
+  color: $black;
+  padding: 0;
+  border-radius: $border-radius $border-radius 0 0;
 }
 .cal:selected {
-  background: #D7D24D;
-  color: rgb(30, 27, 24);
-  border-radius: 5px;
+  background: $accent;
+  color: $black;
   text-shadow: none;
 }
 
 .cal.highlight {
-  color: rgba(215, 210, 77, 1);
+  color: $accent;
 }
 .cal:indeterminate {
-  color: rgba(158, 155, 148, 0.5);
+  color: $gray-light;
 }
 .cal.button{
-  background-color: rgba(30, 27, 24,0.2);
-  padding: 5px;
-  border-radius: 5px;
-  color: rgb(30, 27, 24);
+  background-color: $black;
+  color: $text;
+  border-radius: $border-radius;
 }
 .cal.button:hover{
-  background-color: rgba(30, 27, 24,0.6);
+  background-color: $gray;
+  color: $text;
 }
 
 /*------ NOTIFICATIONS*/
@@ -122,22 +137,20 @@ scale slider {
 
 .notifications button{
   margin-bottom: 5px;
-  background-color: rgba(158, 155, 148,0.6);
-  font-size: 20px;
+  background-color: $gray;
 }
 
 .notifications .notification {
-  background-color: rgba(158, 155, 148,0.6);
+  background-color: $gray;
   margin: 0;
   margin-bottom: 10px;
-  box-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
+  box-shadow: 0 2 4 $black;
 }
 
 .icon {
   min-height: 80px;
 	min-width: 90px;
   margin: 5px;
-  border-radius: 5px;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -161,7 +174,7 @@ scale slider {
 .notification .line3{
   margin: 0;
   margin: 4px;
-  color: #E9E2E1;  
+  color: $text;  
 }
 
 /*------ SETTINGS */
@@ -171,48 +184,48 @@ scale slider {
 
 .settings button:not(.subbutton){
   margin: 5px;
-  padding: 5px 15px;
-  background-color: rgba(158, 155, 148,0.6);
-  font-size: 15px;
-  box-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
+  padding: 3px;
+  background-color: $gray;
+  box-shadow: 0 2 4 $black;
 }
 
 .menuBox{
   margin: 5px;
   padding: 5px;
   margin-top: 0;
-  background-color: rgba(85, 81, 68, 0.5);
-  box-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
-  border-radius: 0 0 5px 5px;
+  background-color: $background;
+  box-shadow: 0 2 4 $black;
+  border-radius: 0 0 $border-radius $border-radius;
 }
 
 .settings button.active{ 
-  background-color: rgba(215, 210, 77, 0.5);
+  background-color: $accent-light;
   margin-bottom: 0;  
-  border-radius: 5px 5px 0 0 ;
+  border-radius: $border-radius $border-radius 0 0 ;
 }
 
 .settings button:hover{
-  background-color: rgba(215, 210, 77, 0.9);
+  background-color: $accent;
 }
 
 .subbutton{
   margin: 2px 0;
+  padding: 5px;
 }
 
 .musicbox button:hover,
 .settings  button.subbutton:hover,
 .notifications button:hover{
-  background-color: rgba(158, 155, 148, 0.7);
+  background-color: $gray-light;
 }
 
 .powerButton{
-  background-color: #C36134;
+  background-color: $red;
 }
 
 .menuCornerAlt1{
-  border-radius: 0 5px 5px 5px;
+  border-radius: 0 $border-radius $border-radius $border-radius;
 }
 .menuCornerAlt2{
-  border-radius: 5px 0 5px 5px;
+  border-radius: $border-radius 0 $border-radius $border-radius;
 }

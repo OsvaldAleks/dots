@@ -30,7 +30,7 @@
 (defwidget music [] 
         (box :orientation "h" :halign "start" :space-evenly "false"
                 (box :class "album_art" :style "background-image: url('${COVER}');")
-                (box :class "musicbox" :orientation "v" :valign "center"
+                (box :class "musicbox" :orientation "v" :valign "center" :space-evenly false
                         (label :class "song" :halign "start" :wrap "false" :limit-width 40 :text SONG)
                         (label :class "artist" :halign "start" :wrap "false"  :limit-width 100 :text ARTIST)
                         (scale :width 40 :value POS_IN_TRACK :min 0 :max {TRACKLENGTH/1000000} :onchange "scripts/musicInfo.sh --settime {}")
@@ -47,7 +47,7 @@
                                                 '')
                                         (button :class "playbutton"
                                                 :onclick "./scripts/musicInfo.sh --toggle"
-                                                {STATUS=="Playing"? '⏸': '▶'})
+                                                {STATUS=="Playing"? '': ''})
                                         (button
                                                 :onclick "./scripts/musicInfo.sh --next"
                                                 ''))
@@ -77,7 +77,7 @@
                 (box :orientation "h" :halign "left" :space-evenly false
                         (label :halign "left" :text "Notifications")
                         (box :orientation "h" :halign "right" :hexpand true :space-evenly false)
-                                (button :onclick "dunstctl history-clear && $HOME/.config/waybar/scripts/processNotification.sh" '')
+                                (button :onclick "dunstctl history-clear && $HOME/.config/waybar/scripts/processNotification.sh" '')
                 )
                 (scroll :class "tray" :hscroll false :vscroll true :height 400
                         (literal :content notificationLiteral)
@@ -94,12 +94,13 @@
                                 :duration "0.2s"
                                 (box :orientation "v" :spacing  0 :valign "start" :space-evenly false :vexpand "false" :class "menuBox"
                                         (button :onclick "pkill -KILL -u $USER" :class "subbutton" (box :space-evenly false :halign "start" ' Log Out'))
-                                        (button :onclick "reboot" :class "subbutton" (box :space-evenly false :halign "start" '↻ Reboot'))
+                                        (button :onclick "reboot" :class "subbutton" (box :space-evenly false :halign "start" ' Reboot'))
                                         (button :onclick "poweroff" :class "subbutton powerButton" (box :space-evenly false :halign "start" ' Power Off'))
                                 ))
 
                   (box :orientation "h"
-                        (box :orientation "h")(button :hexpand true :onclick "wofi --show drun &" ''))
+                        (button :hexpand true :onclick "hyprshot -m region" '')
+                        (button :hexpand true :onclick "wofi --show drun &" ''))
 ;                (box :orientation "h"
 ;                        (button :hexpand true :onclick "${eww} update showBatteryMenu=false & ${eww} update showBluetoothMenu=${!showBluetoothMenu}" :class {showBluetoothMenu ? "active" : "inactive"} '')
 ;                        (button :hexpand true :onclick "${eww} update showBluetoothMenu=false & ${eww} update showBatteryMenu=${!showBatteryMenu}" :class {showBatteryMenu ? "active" : "inactive"} '')

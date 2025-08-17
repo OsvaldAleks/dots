@@ -13,9 +13,12 @@
 	"hyprland/workspaces": {
 		"format": "{icon}",
 		"format-icons": {
-			"1": "",
+			"1": "",
 			"active": "",
-			"default": ""
+			"default": ""
+		},
+		"persistent-workspaces": {
+			"*": 3
 		},
 		"on-scroll-up":"hyprctl dispatch workspace m-1",
 		"on-scroll-down":"hyprctl dispatch workspace m+1"
@@ -35,7 +38,7 @@
 
 // CENTER
     "clock": {
-		"format": "{:%B %d - %H:%M}",
+		"format": "{:%b %d - %H:%M}",
 		"tooltip":false,
 		"on-click":"~/.config/waybar/scripts/toggleWidget.sh calendar"
     },
@@ -52,28 +55,28 @@
     "network": {
 		"tooltip": true,
 		"rotate": 0,
-		"format-wifi": " {essid}",
-		"format-ethernet": " ",
+		"format-wifi": "{essid} 󰖩",
+		"format-ethernet": "",
 		"tooltip-format": "Network: <b>{essid}</b>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>",
-		"format-linked": " {essid}",
-		"format-disconnected": "×",
+		"format-linked": "{essid} ",
+		"format-disconnected": "󰖪",
 		"tooltip-format-disconnected": "Disconnected",
 		"interval": 2
     },
 	
 	"backlight":{
 		"device":"eDP-1",
-		"format":"{icon} {percent}%",
-		"format-icons":["☼", "☀"],
+		"format":"{percent}% {icon}",
+		"format-icons":["󰃞", "󰃟", "󰃠"],
 		"reverse-scrolling": true,
 		"scroll-step": 1,
 		"tooltip":false
 	},
 
     "pulseaudio": {
-		"format": "{icon} {volume}%",
-		"format-bluetooth": "{icon} {volume}%",
-		"format-muted": "×",
+		"format": "{volume}% {icon}",
+		"format-bluetooth": "{volume}%{icon} ",
+		"format-muted": "",
 		"format-icons": {
 			"alsa_output.pci-0000_00_1f.3.analog-stereo": "",
 			"alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "",
@@ -95,8 +98,8 @@
     },
 
 	"battery": {
-		"format": "{icon} {capacity}%",
-		"format-charging": " {capacity}%",
+		"format": "{capacity}% {icon}",
+		"format-charging": "{capacity}% ",
 		"states": {
 			"charged":100,
 			"good":80,
@@ -104,8 +107,8 @@
 			"warning": 30,
 			"critical": 15
 		},
-		"format-warning": " {capacity}%",
-		"format-critical": " {capacity}%",
+		"format-warning": "{capacity}% ",
+		"format-critical": "{capacity}% ",
 		"format-icons": ["", "", "", "", ""]
 	},
 	"custom/menu":{

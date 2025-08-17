@@ -30,9 +30,9 @@ generateNotificationYuck() {
                 (box :orientation \"h\" :height 100 :space-evenly false
                     $icon_box
                     (box :orientation \"v\" :space-evenly false :valign \"center\"
-                        (box :orientation \"h\" :space-evenly false :halign \"start\" (label :class \"line1\" :limit-width 100 :lines 1 :text \"$appname\"))
-                        (box :orientation \"h\" :space-evenly false :halign \"start\" (label :class \"line2\" :limit-width 100 :lines 1 :text \"$title\"))
-                        (box :orientation \"h\" :space-evenly false :halign \"start\" (label :class \"line3\" :limit-width 100 :lines 1 :text \"$body\"))
+                        (box :orientation \"h\" :space-evenly false :halign \"start\" (label :class \"line1\" :limit-width 50 :lines 1 :text \"$appname\"))
+                        (box :orientation \"h\" :space-evenly false :halign \"start\" (label :class \"line2\" :limit-width 50:lines 1 :text \"$title\"))
+                        (box :orientation \"h\" :space-evenly false :halign \"start\" (label :class \"line3\" :limit-width 50 :lines 1 :text \"$body\"))
                     )
                 )
             )"
@@ -45,8 +45,12 @@ generateNotificationYuck() {
 }
 
 removeEntry() {
-    dunstctl history-rm "$1"
-    $HOME/.config/waybar/scripts/processNotification.sh    
+    local id="$1"
+    # repeat until no entries with this ID remain
+    while dunstctl history --json | jq -e ".data[0][] | select(.id.data == $id)" >/dev/null; do
+        dunstctl history-rm "$id"
+        "$HOME/.config/waybar/scripts/processNotification.sh"
+    done
 }
 
 if [[ "$1" == "--remove-entry" ]]; then

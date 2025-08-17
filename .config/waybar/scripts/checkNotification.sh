@@ -10,7 +10,7 @@ CURRENT=${CURRENT:-0}
 SUM=$(( HISTORY + WAITING + CURRENT ))
 
 if (( SUM > 0 )); then
-    echo '{"text": "<b></b>", "tooltip": "'$SUM' notifications", "class": "nonempty", "percentage": 100 }'
+    echo '{"text": "", "tooltip": "'$SUM' notifications", "class": "nonempty", "percentage": 100 }'
 else
-    echo '{ "text": "<b></b>", "tooltip": "No notifications", "class": "empty", "percentage": 0 }'
+    echo '{ "text": "", "tooltip": "No notifications", "class": "empty", "percentage": 0 }'
 fi
