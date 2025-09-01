@@ -87,15 +87,15 @@
 ;; Settings
 (defwidget settingsPanel []
         (box :orientation "v" :spacing 0 :valign "start" :space-evenly "false" :vexpand false :class "wrapper"
-                        (button :onclick "${eww} update showPowerMenu=${!showPowerMenu}" :class {showPowerMenu ? "active" : "inactive"} '')
+                        (button :onclick "${eww} update showPowerMenu=${!showPowerMenu}" :class {showPowerMenu ? "active" : "inactive"} '󰐥')
                         (revealer
                                 :transition "slidedown" 
                                 :reveal showPowerMenu
                                 :duration "0.2s"
                                 (box :orientation "v" :spacing  0 :valign "start" :space-evenly false :vexpand "false" :class "menuBox"
-                                        (button :onclick "pkill -KILL -u $USER" :class "subbutton" (box :space-evenly false :halign "start" ' Log Out'))
-                                        (button :onclick "reboot" :class "subbutton" (box :space-evenly false :halign "start" ' Reboot'))
-                                        (button :onclick "poweroff" :class "subbutton powerButton" (box :space-evenly false :halign "start" ' Power Off'))
+                                        (button :onclick "pkill -KILL -u $USER" :class "subbutton" (box :space-evenly false :halign "start" '  Log Out'))
+                                        (button :onclick "reboot" :class "subbutton" (box :space-evenly false :halign "start" '  Reboot'))
+                                        (button :onclick "poweroff" :class "subbutton powerButton" (box :space-evenly false :halign "start" ' 󰐥 Power Off'))
                                 ))
 
                   (box :orientation "h"

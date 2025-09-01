@@ -1,18 +1,18 @@
-$background: rgba(46, 51, 47, 0.6);
-$red: #b32a2a;
-$accent: #abcc15;
-$accent-light: rgba(215, 230, 81, 0.816);
-$orange:#d89822;
-$yellow: #dac71b;
-$text: #ebecd4;
-$black: rgba(17, 18, 19, 0.6);
-$gray: rgba(126, 129, 134, 0.6);
-$gray-light: rgba(212, 212, 219, 0.78);
+$background: rgba(56, 63, 68, 0.8);
+$red: #e17b7b;
+$accent: #84c46d;
+$accent-light: rgba(218, 238, 118, 0.8);
+$orange:#8a8933;
+$yellow: #daee76;
+$text: #d3d4cb;
+$black: rgb(21, 24, 26);
+$gray: rgb(80, 91, 99);
+$gray-light: rgb(165, 175, 182);
 
 $border-radius: 5px;
 
 *{
-  font-family: "DejaVu Sans Mono", "Symbols Nerd Font Mono"; 
+  font-family: "Symbols Nerd Font Mono", "DejaVu Sans Mono"; 
   text-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
   transition: 0.25s;
 }

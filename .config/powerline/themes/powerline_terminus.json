@@ -66,10 +66,10 @@
 			"before": "MAIL "
 		},
 		"powerline.segments.common.env.virtualenv": {
-			"before": "(e) "
+			"before": " "
 		},
 		"powerline.segments.common.env.user":{
-			"before": " "
+			"before": " "
 		},
 		"powerline.segments.common.wthr.weather": {
 			"args": {

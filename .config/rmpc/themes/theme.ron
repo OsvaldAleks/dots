@@ -2,64 +2,64 @@
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]
 (
-    default_album_art_path: "~/Apps/utils/generic.jpg",
+    default_album_art_path: "~/Apps/utils/generic.png",
     show_song_table_header: true,
     draw_borders: true,
     browser_column_widths: [20, 38, 42],
-    text_color: "#ebecd4",
-    header_background_color: "#111213",
-    modal_background_color: "#111213",
+    text_color: "15",
+    header_background_color: "#383f44",
+    modal_background_color: "#383f44",
     modal_backdrop: true,
     tab_bar: (
-        enabled: true,
-        active_style: (fg: "#1e1b18", bg: "#d4d4db", modifiers: "Bold"),
+        enabled: false,
+        active_style: (fg: "16", bg: "15", modifiers: "Bold"),
         inactive_style: (),
     ),
-    highlighted_item_style: (fg: "#abcc15", modifiers: "Bold"),
-    current_item_style: (fg: "#1e1b18", bg: "#d4d4db", modifiers: "Bold"),
-    borders_style: (fg: "#abcc15"),
-    highlight_border_style: (fg: "#d85c22"),
+    highlighted_item_style: (fg: "11", modifiers: "Bold"),
+    current_item_style: (fg: "2", bg: "15", modifiers: "Bold"),
+    borders_style: (fg: "10"),
+    highlight_border_style: (fg: "11"),
     symbols: (song: "󰎇", dir: "󰉋", marker: " ", ellipsis: "..."),
     progress_bar: (
-        symbols:["█", "█", "", "▒", "▒"],
-        track_style: (fg: "#111213"),
-        elapsed_style: (fg: "#abcc15"),
-        thumb_style: (fg: "#abcc15"),
+        symbols:["", "█", "", "█", ""],
+        track_style: (fg: "2"),
+        elapsed_style: (fg: "10"),
+        thumb_style: (fg: "10", bg: "2"),
     ),
     scrollbar: (
-        symbols: ["▒", "█", "▲", "▼"],
-        track_style: (fg: "#111213"),
-        ends_style: (fg: "#d4d4db"),
-        thumb_style: (fg: "#d4d4db"),
+        symbols: ["█", "█", "", ""],
+        track_style: (fg: "2"),
+        ends_style: (fg: "10"),
+        thumb_style: (fg: "10"),
     ),
     song_table_format: [ // view in the queue
         (
             prop: (kind: Property(Artist),
-                default: (kind: Text("Unknown")), style: (fg: "#7e8186")
+                default: (kind: Text("Unknown")), style: (fg: "15")
             ),
             width: "30%",
             alignment: Right
         ),
         (
-            prop: (kind: Text("-"), style: (fg: "#7e8186"), default: (kind: Text("Unknown"))),
+            prop: (kind: Text("-"), style: (fg: "15"), default: (kind: Text("Unknown"))),
             width: "1",
             alignment: Center,
         ),
         (
-            prop: (kind: Property(Title),
+            prop: (kind: Property(Title), style: (fg: "10"),
                 default: (kind: Text("Unknown"))
             ),
             width: "30%",
         ),
         (
-            prop: (kind: Property(Album), style: (fg: "#7e8186"),
-                default: (kind: Text("Unknown Album"), style: (fg: "#7e8186"))
+            prop: (kind: Property(Album), style: (fg: "15"),
+                default: (kind: Text("Unknown Album"), style: (fg: "15"))
             ),
             width: "30%",
         ),
         (
             prop: (kind: Property(Duration),
-                default: (kind: Text("-")), style: (fg: "#7e8186")
+                default: (kind: Text("-")), style: (fg: "15")
             ),
             width: "10%",
             alignment: Right,
@@ -68,78 +68,76 @@
     layout: Split(
         direction: Vertical,
         panes: [
+            (pane: Component("margin"), size: "1",),
+            (
+                pane: Pane(TabContent),
+                size: "100%",
+            ),
+            (pane: Component("margin"), size: "1",),
             (
                 pane: Pane(Header),
                 size: "2",
             ),
             (
-                pane: Pane(Tabs),
-                size: "3",
-            ),
-            (
-                pane: Pane(TabContent),
-                size: "90%",
-            ),
-            (
-                pane: Pane(ProgressBar),
+                pane: Component("progress"),
                 size: "1",
             ),
         ],
     ),
+    
     header: (
         rows: [
             (
                 left: [
-                    (kind: Text("["), style: (fg: "#d85c22", modifiers: "Bold")),
-                    (kind: Property(Status(StateV2(playing_label: "Playing", paused_label: "Paused", stopped_label: "Stopped"))), style: (fg: "#abcc15", modifiers: "Bold")),
-                    (kind: Text("]"), style: (fg: "#d85c22", modifiers: "Bold"))
+                    (kind: Text(" ")),
+                    (kind: Property(Status(StateV2(playing_label: " Playing", paused_label: " Paused", stopped_label: " Stopped"))), style: (fg: "2", bg:"15", modifiers: "Bold")),
+                    (kind: Text("")),
                 ],
                 center: [
-                    (kind: Property(Song(Title)), style: (fg: "#ebecd4", modifiers: "Bold"),
-                        default: (kind: Text("No Song"), style: (modifiers: "Bold"))
-                    )
-                ],
-                right: [
-                    (kind: Property(Widget(Volume)), style: (fg: "#d85c22"))
-                ]
-            ),
-            (
-                left: [
-                    (kind: Property(Status(Elapsed))),
-                    (kind: Text(" / ")),
-                    (kind: Property(Status(Duration))),
-                    (kind: Text(" (")),
-                    (kind: Property(Status(Bitrate))),
-                    (kind: Text(" kbps)"))
-                ],
-                center: [
-                    (kind: Property(Song(Artist)), style: (fg: "#d85c22", modifiers: "Bold"),
-                        default: (kind: Text("Unknown"), style: (fg: "#d85c22", modifiers: "Bold"))
+                    (kind: Text(""), style: (fg: "15")),
+                    
+                    (kind: Text(" "), style: (fg: "10", bg: "15")),
+                    (kind: Property(Song(Artist)), default: (kind: Text("Unknown Artist")),style: (fg: "2", bg: "15")),
+                    (kind: Text(" "), style: (fg: "10", bg: "15")),
+
+                    (kind: Text(""), style: (fg: "10", bg: "15")),
+                    (kind: Text(" "), style: (fg: "10", bg: "10")),
+                    (kind: Property(Song(Title)),
+                        style: (fg: "2", bg: "10", modifiers: "Bold"),
+                        default: (kind: Text("Unknown Title"), style: (fg: "2", bg: "10", modifiers: "Bold"))
                     ),
-                    (kind: Text(" - ")),
-                    (kind: Property(Song(Album)),
-                        default: (kind: Text("Unknown Album"))
-                    )
+                    (kind: Text(" "), style: (fg: "10", bg: "10")),
+
+                    (kind: Text(""), style: (fg: "10")),
                 ],
                 right: [
-                    (kind: Property(Status(RandomV2(
-                                    on_label: " ", off_label: " ",
-                                    on_style: (fg: "#abcc15", modifiers: "Bold"), off_style: (fg: "#7e8186", modifiers: "Bold"))))),
-                    (kind: Text(" | "),style: (fg: "#d85c22")),
+                    (kind: Text(""), style: (fg: "10")),
                     (kind: Property(Status(RepeatV2(
-                                    on_label: " ", off_label: " ",
-                                    on_style: (fg: "#abcc15", modifiers: "Bold"), off_style: (fg: "#7e8186", modifiers: "Bold"))))),
-                    (kind: Text(" | "),style: (fg: "#d85c22")),
+                        on_label: " ", off_label: " ",
+                        on_style: (fg: "15", bg:"10", modifiers: "Bold"), off_style: (fg: "2", bg:"10", modifiers: "Bold")
+                    )))),
+                    (kind: Property(Status(RandomV2(
+                        on_label: " ", off_label: " ",
+                        on_style: (fg: "15", bg:"10", modifiers: "Bold"), off_style: (fg: "2", bg:"10", modifiers: "Bold")
+                    )))),
                     (kind: Property(Status(ConsumeV2(
-                                    on_label: "󰮯 ", off_label: "󰮯 ", oneshot_label: "󰮯󰇊",
-                                    on_style: (fg: "#abcc15", modifiers: "Bold"), off_style: (fg: "#7e8186", modifiers: "Bold"))))),
-                    (kind: Text(" | "),style: (fg: "#d85c22")),
+                        oneshot_label: "󰮯󰎤", on_label: "󰮯 ", off_label: "󰮯 ",
+                        oneshot_style: (fg: "15", bg:"10", modifiers: "Bold"),
+                        on_style: (fg: "15", bg:"10", modifiers: "Bold"), off_style: (fg: "2", bg:"10", modifiers: "Bold")
+                    )))),
                     (kind: Property(Status(SingleV2(
-                                    on_label: "󰎤 ", off_label: "󰎦 ", oneshot_label: "󰇊", off_oneshot_label: "󱅊",
-                                    on_style: (fg: "#abcc15", modifiers: "Bold"), off_style: (fg: "#7e8186", modifiers: "Bold"))))),
+                        on_label: "󰎤 ", off_label: "󰎦 ",
+                        oneshot_label: "󰇊 ",
+                        oneshot_style: (fg: "15", bg:"10", modifiers: "Bold"),
+                        on_style: (fg: "15", bg:"10", modifiers: "Bold"), off_style: (fg: "2", bg:"10", modifiers: "Bold")
+                    )))),
+                    (kind: Text(""), style: (fg: "15", bg:"10")),
+                    (kind: Property(Widget(Volume)), style: (fg: "2", bg: "15")),
+                    (kind: Text(" "), style: (fg: "15")),
+
                 ]
-            ),
-        ],
+            )
+        ]
     ),
     browser_song_format: [
         (
@@ -164,4 +162,73 @@
         debug: (fg: "light_green", bg: "black"),
         trace: (fg: "magenta", bg: "black"),
     ),
+
+    components: {
+        "progress": Split(
+            direction: Horizontal,
+            panes: [
+                (size: "6", pane: Pane(Property(content: [(kind: Property(Status(Elapsed)))], align: Right))),
+                (size: "1", pane: Component("margin")),
+                (size: "100%", pane: Pane(ProgressBar)),
+                (size: "1", pane: Component("margin")),
+                (size: "6", pane: Pane(Property(content: [(kind: Property(Status(Duration)))], align: Left)),),
+            ],
+        ),
+        "margin": Pane(Property(content: [(kind: Text(""))])),
+        
+        "album_window": Split(
+            direction: Horizontal,
+            panes: [
+                (size: "1", pane: Component("margin")),
+                (size: "100%", pane: Split(
+                        direction: Vertical,
+                        panes: [
+                            (size: "2", pane: Pane(Property(content: [
+                                (kind: Text("█"), style: (fg: "10")),
+                                (kind: Property(Song(Album)), style: (fg: "2", bg: "10", modifiers: "Bold")),
+                                (kind: Text("█"), style: (fg: "10")),
+                            ], align: Center))),
+                            (size: "100%", pane: Pane(AlbumArt)),
+                        ],
+                    ),
+                ),
+                (size: "1", pane: Component("margin")),
+            ]
+        ),
+
+        "song_panel": Split(
+            direction: Horizontal,
+            panes: [
+                (size: "1", pane: Component("margin")),
+                (size: "70%", pane: Split(
+                    direction: Vertical,
+                    panes: [
+                        (size: "3", borders: "NONE", pane: Pane(Tabs)),
+                        (size: "100%", borders: "ALL", pane: Pane(Queue)),
+                    ])),
+                (size: "1", pane: Component("margin")),
+                (size: "30%", pane: Split(direction: Vertical,
+                    panes: [
+                        (size: "0.4r", borders: "ALL", pane: Component("album_window")),
+                        (size: "100%", borders:"ALL", pane: Pane(Lyrics))],
+                        ),
+                ),
+                (size: "1", pane: Component("margin")),
+            ]),
+
+        "lyrics_panel": Split(direction: Horizontal,
+            panes: [
+                (size: "1", pane: Component("margin")),
+                (size: "70%", pane: Split(direction: Vertical, panes: [
+                    (size: "3", borders: "NONE", pane: Pane(Tabs)),
+                    (size: "100%", borders:"ALL", pane: Pane(Lyrics)),
+                ])),
+                (size: "1", pane: Component("margin")),
+                (size: "30%", pane: Split(direction: Vertical, panes: [
+                    (size: "0.4r", borders: "ALL", pane: Component("album_window")),
+                    (size: "100%", borders:"ALL", pane: Pane(Queue)),
+                ])),
+                (size: "1", pane: Component("margin"))
+            ],),
+    }
 )
