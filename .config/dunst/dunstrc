@@ -1,22 +1,23 @@
 [global]
+    icon_theme = Papirus-dark
     monitor = 0
-    width = (400, 400)
-    height = (100,100)
-    origin = top-center
-    offset = 00x08
-    notification_limit = 10
+    width = (350, 350)
+    height = (50,1000)
+    origin = bottom-right
+    offset = 20x20
+    notification_limit = 5
     progress_bar = true
-    progress_bar_height = 10
-    progress_bar_frame_width = 5
-    progress_bar_min_width = 5
-    progress_bar_max_width = 400
-    progress_bar_corner_radius = 5
-    icon_corner_radius = 5
+    progress_bar_height = 15
+    progress_bar_frame_width = 0
+    progress_bar_min_width = 350
+    progress_bar_max_width = 350
+    progress_bar_corner_radius = 0
+    icon_corner_radius = 0
     indicate_hidden = true
     padding = 10
     horizontal_padding = 10
     text_icon_padding = 10
-    frame_width = 0
+    frame_width = 2
     gap_size = 3
     sort = urgency_descending
     idle_threshold = 120
@@ -25,8 +26,8 @@
     format = "<sub>%a</sub>\n<b>%s</b>\n%b\n"
     alignment = left
     vertical_alignment = center
-    word_wrap = no
-    ellipsize = end
+    word_wrap = yes
+    ellipsize = none
     ignore_newline = no
     stack_duplicates = true
     hide_duplicate_count = false
@@ -37,47 +38,44 @@
     max_icon_size = 80
     sticky_history = yes
     history_length = 50
-    dmenu = /usr/bin/dmenu -i -fn Ubuntu-18 -l 30 -p dunst:
+    dmenu = fuzzel
     always_run_script = true
     title = Dunst
     class = Dunst
-    corner_radius = 10
+    corner_radius = 0
     ignore_dbusclose = false
     force_xwayland = false
     force_xinerama = false
-    mouse_left_click = close_current
+    mouse_left_click = do_action, close_current
     mouse_middle_click = do_action, close_current
     mouse_right_click = close_all
-    script = .config/waybar/scripts/processNotification.sh
+    background = "#14141e80"
 
 [experimental]
     per_monitor_dpi = false
 
 [urgency_low]
-    background = "#1e1b18D9"
-    foreground = "#91d85b"
-    highlight = "#91d85b"
+    foreground = "#d3d4cbff"
+    highlight = "#d3d4cbff"
+    frame_color = "#d3d4cbaa"
     timeout = 5
-    skip_display = true
 
 [urgency_normal]
-    background = "#1e1b18D9"
-    foreground = "#E9E2E1"
-    highlight = "#E9E2E1"
+    foreground = "#d3d4cb"
+    highlight = "#daee76"
+    frame_color = "#d3d4cbaa"
     timeout = 5
-    skip_display = true
 
 [urgency_critical]
-    background = "#1e1b18D9"
-    foreground = "#D73934"
-    highlight = "#D73934"
+    foreground = "#e17b7b"
+    highlight = "#e17b7b"
+    frame_color = "#d3d4cbaa"
     timeout = 0
-    skip_display = true
 
-[ignore_spotify]
-    appname=Spotify
-    history_ignore=true
-
-[ignore_kew]
-    appname=kew
-    history_ignore=true
+[ignore_status_updates]
+    appname = "status"
+    background = "#14142e80"
+    foreground = "#6D77A1"
+    highlight = "#6D77A1"
+    frame_color = "#6D77A1aa"
+    format = "<b>%s</b>\n%b\n"

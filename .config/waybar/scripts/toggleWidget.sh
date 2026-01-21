@@ -12,6 +12,11 @@ update_media(){
        "$HOME/.config/eww/scripts/musicInfo.sh" --cover --force
     fi
 }
+render_notifications(){
+    if [ "$1" == "notifications" ]; then
+        python $HOME/.config/eww/scripts/renderNotifications.py &
+    fi
+}
 
 # Define the path to the Eww executable
 EWW_DIR="$HOME/Apps/eww/target/release/eww"
@@ -40,6 +45,8 @@ else
     fi
     $EWW_DIR open "$WIDGET"
     update_media $WIDGET
+    render_notifications $WIDGET
+
 fi
 
 echo "toggeled $WIDGET"

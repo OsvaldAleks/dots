@@ -3,7 +3,14 @@
 		"left": [
 			{
 				"type": "string",
-				"contents": "",
+				"contents": "",
+				"highlight_groups": ["background1"],
+				"draw_hard_divider": false,
+				"draw_soft_divider": false
+			},
+			{
+				"type": "string",
+				"contents": " ",
 				"highlight_groups": ["archlogo"],
 				"draw_hard_divider": true
 			},
@@ -50,6 +57,12 @@
 				"args": {
 					"shorten_len": 2
 				}
+			},			
+			{
+				"type": "string",
+				"contents": "█",
+				"highlight_groups": ["background2"],
+				"draw_hard_divider": false
 			}
 		]
 	}

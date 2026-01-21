@@ -58,7 +58,7 @@ get_cover() {
 	if [[ "$1" == "--force" ]]; then
 		NEW_SONG="1"
 	else
-		NEW_SONG="$(echo $TIME  1 | awk '{if (($1 < $2)) print 1; else print 0}')"
+		NEW_SONG="$(echo $TIME 5 | awk '{if (($1 < $2)) print 1; else print 0}')"
 	fi
 
 	ERRS=$?
@@ -124,4 +124,10 @@ elif [[ "$1" == "--next" ]]; then
 	{ playerctl next; }
 elif [[ "$1" == "--prev" ]]; then
 	{ playerctl previous; }
+elif [[ "$1" == "--player-get" ]]; then
+	{ playerctl -l | head -n 1 | grep -oP '^[^.]+'; }
+elif [[ "$1" == "--player-next" ]]; then
+	{ playerctld shift;}
+elif [[ "$1" == "--player-prev" ]]; then
+	{ playerctld unshift;}
 fi

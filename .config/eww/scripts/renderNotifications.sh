@@ -50,6 +50,7 @@ removeEntry() {
     while dunstctl history --json | jq -e ".data[0][] | select(.id.data == $id)" >/dev/null; do
         dunstctl history-rm "$id"
         "$HOME/.config/waybar/scripts/processNotification.sh"
+        python $HOME/.config/eww/scripts/renderNotifications.py &
     done
 }
 

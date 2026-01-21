@@ -1,25 +1,61 @@
-$background: rgba(56, 63, 68, 0.8);
-$red: #e17b7b;
-$accent: #84c46d;
-$accent-light: rgba(218, 238, 118, 0.8);
-$orange:#8a8933;
+$background: rgba(20, 20, 30, 0.5);
+$red: #8b4141;
+$accent: #7bd687;
+$accent-light: #4b8649;
+$orange:#a09e45;
 $yellow: #daee76;
 $text: #d3d4cb;
-$black: rgb(21, 24, 26);
-$gray: rgb(80, 91, 99);
-$gray-light: rgb(165, 175, 182);
+$border-color: rgba(211, 212, 203, 0.667);
+$black: rgb(54, 54, 71);
+$gray: #696969;
+$gray-light: #aaaaaa;
+$blue: #8692e2;
 
-$border-radius: 5px;
+$shadow: 0 0px 6px 4px rgba(20, 20, 30, 0.5);
+
+$border-radius: 15px;
+$border-radius-sharp: 0px;
+
+$size-title: 20px;
+$size-subtitle: 16px;
+$size-regular: 14px;
+
+/*----- GENERAL */
 
 *{
   font-family: "Symbols Nerd Font Mono", "DejaVu Sans Mono"; 
-  text-shadow: 0 2 4 rgba(30, 27, 24, 0.9);
-  transition: 0.25s;
 }
-window{
+
+window {
+  background-color: rgba(0,0,0, 0);
+}
+
+.wrapper,
+.wrapper_music,
+.wrapper_cal{
   background-color: $background;
   color:  $text;
-  border-radius: $border-radius;
+  border-radius: $border-radius-sharp;
+  margin-top: 0;
+  border: 2px solid $border-color;
+  margin: 12px;
+  box-shadow: $shadow;
+}
+
+.wrapper:nth-child(2){
+  margin-top: 0;
+}
+
+.wrapper button{
+  margin: 10px;
+}
+
+.wrapper_music {
+  padding: 0;
+}
+.wrapper_cal{
+  background-color: rgba($color: #000000, $alpha: 0);
+  padding: 0;
 }
 
 button{
@@ -29,203 +65,301 @@ button{
     color: $text;
     border-radius: $border-radius;
     text-shadow: none;
-}
-/*----- MUSIC */
-
-.album_art {
-  min-height: 140px;
-	min-width: 140px;
-  margin: 10px;
-  border-radius: $border-radius;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-.song {
-	font-size : 20px;
-	font-weight : bold;
-  margin-left:0;
-}
-.artist {
-	font-size : 14px;
-  margin-left:0;
-}
-.musicbox{
-  margin-right: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+    padding: 0;
 }
 
-.musicbox button.active{
-  background-color: $accent;
-  color: $black;
+scale{
+  margin: 0;
+  padding: 0;
 }
 
 scale trough {
-  all: unset;
-  background-color: $text;
+  background-color: $accent-light;
   border-radius: $border-radius;
-  box-shadow: 0 2 4 $black;
+  margin: 0;
+  min-height: 22px;
+  border: none;
+  padding: 0; 
 }
 
 scale trough > highlight {
   background-image: none;
   border-radius: $border-radius;
-  min-height: 5px;
+  min-height: $size-title;
+  min-width: $size-title;
   background-color: $accent;
+  box-shadow: none;
+  border: 0;
 }
 
 scale slider {
   background-image: none;
-  box-shadow: 0 2 4 $black;
-  background-color: $accent;
+  outline: none;
   border: none;
+  box-shadow: none;
+  background-color: rgba(0,0,0,0);
+  border-radius: 100%;
+}
+
+/*----- MUSIC */
+.musicbox button:hover{
+  background-color: $gray;
+}
+.playerctl{
+  background-color: $accent-light;
+  border-radius: $border-radius;
+  color:$text;
+  font-size: $size-regular;
+  margin: 5px 0;
+}
+.playerctl>button {
+  padding: 0 5px;
+  color:$black;
+  border-radius: $border-radius;
+  background-color: $gray-light;
+  margin: 0;
+}
+
+.playerctl>button:hover {
+  color: $gray;
+  background-color: $gray-light;
+}
+
+.playerctl>label {
+  margin: 0 20px;
+}
+
+.wrapper_art .album_art {
+  min-height: 160px;
+  min-width: 160px;
+  border-radius: $border-radius-sharp;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin: 10px;
+}
+
+.wrapper_art {
+  border-right: 2px solid $border-color;
+}
+
+.wrapper_player{
+  margin: 0 10px;
+}
+
+.song,
+.artist{
+  background-color: $gray;
+  color: $text;
+  margin: 5px 0;
+  border-radius: $border-radius;
+}
+.song {
+	font-size : $size-regular;
+	font-weight : bold;
+}
+.artist {
+	font-size : $size-regular;
+}
+.song>label,
+.artist>label{
+  padding: 5px 10px;
+}
+.icon{
+  background-color: $accent;
+  color: $black;
+  border-radius: $border-radius;
+  padding: 25px;
+}
+
+.track_row{
+  background-color: $gray-light;
+  border-radius: $border-radius;
+  padding: 0 10px 0 0;
+  margin: 5px 0;
+}
+
+.track_row button{
+  margin: 0;
+  padding: 0 5px;
+  background: none;
+  color: $black
+}
+
+.track_row button:hover{
+  color: $gray;
+  background: none;
+}
+
+.track_row scale{
+  min-width: 200px;
+  margin: 0 5px;
+}
+
+.track_row button.active{
+  color: $accent-light;
+  background: none;
+}
+.track_row .playbutton{
+  background-color: $text;
+  color: $black;
+  padding: 0 10px;
+}
+.track_row .playbutton:hover{
+  background-color: $gray;
+  color: $text;
+}
+
+.wrapper_music .slider{
+  margin-left: 0;
 }
 
 /*----- CALANDER */
 .cal{
-  background: none;
-  border: 0;
+  background: $background;
   color: $text;
-  font-size: 1rem;
+  font-size: $size-regular;
+  border-radius:$border-radius-sharp;
   margin: 0;
   padding: 0;
+  border: 0;
 }
 .cal.header{
   text-shadow: none;
-  background-color:  $accent;
-  color: $black;
+  color: $text;
   padding: 0;
-  border-radius: $border-radius $border-radius 0 0;
+  border-radius: $border-radius-sharp $border-radius-sharp 0 0;
+  border-bottom: 2px solid $border-color;
+  background: none;
 }
 .cal:selected {
   background: $accent;
   color: $black;
   text-shadow: none;
+  border-radius: $border-radius;
 }
 
 .cal.highlight {
-  color: $accent;
+  color: $text;
+  background-color: $gray;
+  border-radius: $border-radius;
 }
+
 .cal:indeterminate {
   color: $gray-light;
 }
 .cal.button{
-  background-color: $black;
-  color: $text;
+  background-color: $accent;
+  color: $black;
   border-radius: $border-radius;
 }
 .cal.button:hover{
-  background-color: $gray;
+  background-color: $gray-light;
   color: $text;
 }
 
-/*------ NOTIFICATIONS*/
-.notifications  label{
-  font-weight: bold;
-}
-
-.notifications .tray .empty {
-  opacity: 0.3;
-}
-
-.notifications .tray label.icon{
-  font-weight: bold;
-  margin: 0;
-  font-size: 5rem;
-}
-
-.notifications button{
-  margin-bottom: 5px;
-  background-color: $gray;
-}
-
-.notifications .notification {
-  background-color: $gray;
-  margin: 0;
-  margin-bottom: 10px;
-  box-shadow: 0 2 4 $black;
-}
-
-.icon {
-  min-height: 80px;
-	min-width: 90px;
-  margin: 5px;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.notification .line1{
-  font-size: 0.9rem;
-}
-
-.notification .line2,
-.notification .line3{
-  font-size:  1.1rem;
-}
-
-.notification .line1,
-.notification .line3{
-  font-weight: normal;
-}
-
-.notification .line1,
-.notification .line2,
-.notification .line3{
-  margin: 0;
-  margin: 4px;
-  color: $text;  
-}
-
 /*------ SETTINGS */
-.wrapper{
-  padding: 10px;
+
+button{
+  border-radius: $border-radius;
+  background-color: $gray;
+  margin: 5px 0;
 }
 
-.settings button:not(.subbutton){
-  margin: 5px;
-  padding: 3px;
-  background-color: $gray;
-  box-shadow: 0 2 4 $black;
+.wrapper button{
+  padding: 0 10px;
 }
 
 .menuBox{
-  margin: 5px;
-  padding: 5px;
-  margin-top: 0;
-  background-color: $background;
-  box-shadow: 0 2 4 $black;
+  background-color: $gray;
   border-radius: 0 0 $border-radius $border-radius;
+  margin: 10px;
+  margin-top: 0;
 }
 
-.settings button.active{ 
+.menuBox button{
+  margin: 0;
+}
+
+.dropdown button.active{ 
+  margin: 10px 10px 0 10px;
+  margin-bottom: 0;
   background-color: $accent-light;
-  margin-bottom: 0;  
   border-radius: $border-radius $border-radius 0 0 ;
 }
-
-.settings button:hover{
+.wrapper button:hover,
+.wrapper button.active:hover
+{
   background-color: $accent;
+  color: $black;
 }
 
 .subbutton{
-  margin: 2px 0;
-  padding: 5px;
+  margin: 0 0;
+  padding: 0 10px;
+}
+.subbutton:hover{
+  background-color:$gray-light;
 }
 
-.musicbox button:hover,
-.settings  button.subbutton:hover,
-.notifications button:hover{
+.slider{
+  background-color: $gray;
+  border-radius: $border-radius;
+  margin: 5px 10px;
+}
+.slider:last-child{
+  margin-bottom: 10px;
+}
+.slider label{
+  padding: 0 15px;
+}
+
+.line{
+  border-bottom: 2px solid $border-color;
+  padding:0;
+}
+
+.slider button {
+  margin: 0;
+  padding: 0;
+}
+
+.slider button:hover {
+  background-color: transparent;
+}
+.slider:hover {
+  background-color: $accent-light;
+}
+
+.slider button:hover {
+  background-color: transparent;
+}
+
+.slider.off,
+.slider.off button
+{
+  background-color: $gray;
+  color: $red;
+}
+.slider.off scale trough{
   background-color: $gray-light;
 }
-
-.powerButton{
+.slider.off scale trough > highlight{
   background-color: $red;
 }
 
-.menuCornerAlt1{
-  border-radius: 0 $border-radius $border-radius $border-radius;
+.setting_line{
+  margin: 0 10px
+  }
+
+.setting_line button{
+  margin: 10px 5px;
 }
-.menuCornerAlt2{
-  border-radius: $border-radius 0 $border-radius $border-radius;
+
+.setting_line button:nth-child(1){
+  margin-left:0;
+}
+
+.setting_line button:last-child{
+  margin-right:0;
 }

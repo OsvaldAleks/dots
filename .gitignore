@@ -19,8 +19,8 @@
 !/.config/waybar/**
 !/.config/wofi/
 !/.config/wofi/**
-!/.config/powerline/
-!/.config/powerline/**
+!/.config/fuzzel/
+!/.config/fuzzel/**
 !/README.md
 !/Pictures/
 !/Pictures/dotfilePics/

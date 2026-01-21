@@ -6,22 +6,25 @@ import re
 def clean_text(text: str) -> str:
     if not text:
         return ""
-    # strip html tags
+
     text = re.sub(r"<.*?>", "", text)
-    # escape quotes for yuck
     text = text.replace('"', '\\"')
 
-    # split into lines
-    lines = text.splitlines()
+    lines = [l.strip() for l in text.splitlines() if l.strip()]
 
-    if len(lines) >= 3:
-        hidden = len(lines) - 1
-        # show "[n]^ ..." and the last line only
-        text = f"{hidden}^ ...\n{lines[-1]}"
+    content = lines[2:] if len(lines) > 2 else []
+
+    if len(content) > 1:
+        hidden = len(content) - 1
+        text = f"{hidden}^ ...\n{content[-1]}"
+    elif content:
+        text = content[-1]
     else:
-        text = "\n".join(lines)
+        text = lines[-1] if lines else ""
 
     return text
+
+
 
 eww_path = os.path.expanduser("~/Apps/eww/target/release/eww")
 

@@ -6,8 +6,8 @@
       "right": 2
     },
     "color": {
-      "1": "39",
-      "2": "37"
+      "1": "94",
+      "2": "34"
     }
   },
   "display": {
@@ -26,19 +26,19 @@
     },
     {
       "type": "os",
-      "key": "{#separator}{#37}│  {#keys}{#37}󰍹 OS"
+      "key": "{#separator}{#37}│  {#keys}{#34}󰍹 OS"
     },
     {
       "type": "kernel",
-      "key": "{#separator}{#37}│  {#keys}{#37}󰒋 Kernel"
+      "key": "{#separator}{#37}│  {#keys}{#34}󰒋 Kernel"
     },
     {
       "type": "uptime",
-      "key": "{#separator}{#37}│  {#keys}{#37}󰅐 Uptime"
+      "key": "{#separator}{#37}│  {#keys}{#34}󰅐 Uptime"
     },
     {
       "type": "packages",
-      "key": "{#separator}{#37}│  {#keys}{#37}󰏖 Packages",
+      "key": "{#separator}{#37}│  {#keys}{#34}󰏖 Packages",
       "format": "{all}"
     },
     {
@@ -52,27 +52,27 @@
     },
     {
       "type": "de",
-      "key": "{#separator}{#37}│  {#keys}{#37}󰧨 DE"
+      "key": "{#separator}{#37}│  {#keys}{#34}󰧨 DE"
     },
     {
       "type": "wm",
-      "key": "{#separator}{#37}│  {#keys}{#37}󱂬 WM"
+      "key": "{#separator}{#37}│  {#keys}{#34}󱂬 WM"
     },
     {
       "type": "wmtheme",
-      "key": "{#separator}{#37}│  {#keys}{#37}󰉼 Theme"
+      "key": "{#separator}{#37}│  {#keys}{#34}󰉼 Theme"
     },
     {
       "type": "display",
-      "key": "{#separator}{#37}│  {#keys}{#37}󰹑 Resolution"
+      "key": "{#separator}{#37}│  {#keys}{#34}󰹑 Resolution"
     },
     {
       "type": "shell",
-      "key": "{#separator}{#37}│  {#keys}{#37}󰞷 Shell"
+      "key": "{#separator}{#37}│  {#keys}{#34}󰞷 Shell"
     },
     {
       "type": "terminalfont",
-      "key": "{#separator}{#37}│  {#keys}{#37}󰛖 Font"
+      "key": "{#separator}{#37}│  {#keys}{#34}󰛖 Font"
     },
     {
       "type": "custom",
@@ -85,19 +85,19 @@
     },
     {
       "type": "cpu",
-      "key": "{#separator}{#37}│  {#keys}{#37}󰻠 CPU"
+      "key": "{#separator}{#37}│  {#keys}{#34}󰻠 CPU"
     },
     {
       "type": "gpu",
-      "key": "{#separator}{#37}│  {#keys}{#37}󰢮 GPU"
+      "key": "{#separator}{#37}│  {#keys}{#34}󰢮 GPU"
     },
     {
       "type": "memory",
-      "key": "{#separator}{#37}│  {#keys}{#37}󰍛 Memory"
+      "key": "{#separator}{#37}│  {#keys}{#34}󰍛 Memory"
     },
     {
       "type": "disk",
-      "key": "{#separator}{#37}│  {#keys}{#37}󰋊 Disk (/)",
+      "key": "{#separator}{#37}│  {#keys}{#34}󰋊 Disk (/)",
       "folders": "/"
     },
     {

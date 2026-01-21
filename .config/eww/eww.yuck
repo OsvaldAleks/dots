@@ -11,63 +11,104 @@
 (defpoll ONSHUFFLE :interval "1s" "scripts/musicInfo.sh --getShuffle")
 (defpoll ONLOOP :interval "1s" "scripts/musicInfo.sh --getLoop")
 (defpoll COVER :interval "1s" "scripts/musicInfo.sh --cover")
+(defpoll PLAYERNAME :interval "1s" "scripts/musicInfo.sh --player-get")
 
 ;; calendar vars
-(defpoll TODAY :interval "5s" `date +%m/%d/%y`)
+(defpoll TODAY :interval "10s" `date +%m/%d/%y`)
 
 ;; notification vars
 (defvar notificationLiteral "(box :class 'empty' :orientation 'v' :vexpand true :space-evenly false :valign 'center' (label :class 'icon' :text '')(label :text 'No notifications'))")
 
 ;; settings vars
-(defvar showPowerMenu true)
+(defvar showPowerMenu false)
+(defvar showEyeCare false)
 (defvar showBluetoothMenu false)
 (defvar showBatteryMenu false)
+
+(defpoll TEMP :interval "1s" "scripts/sliderControl.sh --get-temp")
+(defpoll BRIGHT :interval "1s" "scripts/sliderControl.sh --get-bright")
+(defpoll VOL :interval "1s" "scripts/sliderControl.sh --get-vol")
+(defpoll VOL_MUTE :interval "1s" "scripts/sliderControl.sh --get-vol-mute")
+(defpoll MIC :interval "1s" "scripts/sliderControl.sh --get-mic-mute")
+(defpoll MIC_VOL :interval "1s" "scripts/sliderControl.sh --get-mic-vol")
 
 ;; -*-*-*-*-*
 ;; WIDGETS
 
+;; volume gets reused
+
+(defwidget volume []
+    (box :orientation "h" :spacing 0 :space-evenly "false" :halign "center" :class {VOL_MUTE ? "slider off" : "slider"}
+        (button :onclick "scripts/sliderControl.sh --toggle-vol-mute"  {VOL_MUTE ? "󰝟" : "󰕾"})  
+        (scale :width 170 :halign "fill" :value VOL :min 0 :max 101 :onchange "scripts/sliderControl.sh --set-vol {}")
+    )
+)
+
+
 ;; Music player
 (defwidget music [] 
-        (box :orientation "h" :halign "start" :space-evenly "false"
-                (box :class "album_art" :style "background-image: url('${COVER}');")
-                (box :class "musicbox" :orientation "v" :valign "center" :space-evenly false
-                        (label :class "song" :halign "start" :wrap "false" :limit-width 40 :text SONG)
-                        (label :class "artist" :halign "start" :wrap "false"  :limit-width 100 :text ARTIST)
-                        (scale :width 40 :value POS_IN_TRACK :min 0 :max {TRACKLENGTH/1000000} :onchange "scripts/musicInfo.sh --settime {}")
-                        (box :class "musicbuttons" :orientation "h" :space-evenly true
-                                (box :orientation "h" :space-evenly true :halign "start"
-                                (button
-                                        :class {ONSHUFFLE=="On" ? "active" : ""}
-                                        :onclick "./scripts/musicInfo.sh --toggleShuffle"
-                                        '')
-                                )
-                                (box :orientation "h"
+                (box :orientation "h" :halign "start" :space-evenly "false" :class "wrapper_music"
+                    (box :class "wrapper_art" :orientation "h" :halign "start" :space-evenly "false"
+                        (box :class "album_art" :style "background-image: url('${COVER}');"))
+                        (box :class "wrapper_player" :orientation "v" :valign "center" :space-evenly false
+                                (box :class "playerctl" :orientation "h" :space-evenly false :w 100
+                                        (button :hexpand false
+                                                :onclick "./scripts/musicInfo.sh --player-next & ./scripts/musicInfo.sh --cover --force"
+                                                '')
+                                        (label :hexpand true :wrap "false" :limit-width 10 :text PLAYERNAME)
                                         (button
-                                                :onclick "./scripts/musicInfo.sh --prev"
-                                                '')
-                                        (button :class "playbutton"
-                                                :onclick "./scripts/musicInfo.sh --toggle"
-                                                {STATUS=="Playing"? '': ''})
+                                                :onclick "./scripts/musicInfo.sh --player-prev & ./scripts/musicInfo.sh --cover --force"
+                                                ''))
+                                (box :class "song" :space-evenly false :halign "start"
+                                    (label :class "icon" :halign "start" :wrap "false" :limit-width 40 :text "󰎇")
+                                    (label :halign "start" :wrap "false" :limit-width 40 :text SONG)
+                                )
+                                (box :class "artist" :space-evenly false :halign "start"
+                                    (label :class "icon" :halign "start" :wrap "false" :limit-width 40 :text "")
+                                    (label :halign "start" :wrap "false"  :limit-width 100 :text ARTIST)
+                                )
+                                (box :class "track_row" :orientation "h" :halign "fill" :space-evenly false
+                                    (box :orientation "h" :space-evenly false
+                                                (button :class "playbutton"
+                                                        :onclick "./scripts/musicInfo.sh --toggle"
+                                                        {STATUS=="Playing"? '': ''})
+                                                (button
+                                                        :onclick "./scripts/musicInfo.sh --prev"
+                                                        '')
+                                                
+                                                (button
+                                                        :onclick "./scripts/musicInfo.sh --next"
+                                                        ''))
+
+
+                                    (scale :width 40 :value POS_IN_TRACK :min 0 :max {TRACKLENGTH/1000000} :onchange "scripts/musicInfo.sh --settime {}")
+                                    
+                                    (box :orientation "h" :space-evenly true
                                         (button
-                                                :onclick "./scripts/musicInfo.sh --next"
-                                                ''))
-                                (box :orientation "h" :space-evenly true :halign "end"
-                                (button
-                                        :class {ONLOOP=="None" ? "" : "active"}
-                                        :onclick "./scripts/musicInfo.sh --toggleLoop"
-                                        '')
-                                )
-                                )
-)))
+                                                :class {ONSHUFFLE=="On" ? "active" : ""}
+                                                :onclick "./scripts/musicInfo.sh --toggleShuffle"
+                                                '')
+                                        (button
+                                                :class {ONLOOP=="None" ? "" : "active"}
+                                                :onclick "./scripts/musicInfo.sh --toggleLoop"
+                                                '')
+                                        )
+                                    )
+                                    (box :orientation "h" :space-evenly false :halign "start"
+                                        (volume)
+                                    )
+                                )                                     
+))
 
 ;; Calendar
 (defwidget cal []
+        (box :class "wrapper_cal"
         (calendar
                 :hexpand true
                 :vexpand true
                 :class "cal"
                 :show-details false
-        )
+        ))
 )
 
 ;; Notifications
@@ -77,7 +118,7 @@
                 (box :orientation "h" :halign "left" :space-evenly false
                         (label :halign "left" :text "Notifications")
                         (box :orientation "h" :halign "right" :hexpand true :space-evenly false)
-                                (button :onclick "dunstctl history-clear && $HOME/.config/waybar/scripts/processNotification.sh" '')
+                                (button :onclick "dunstctl history-clear && $HOME/.config/waybar/scripts/processNotification.sh & python scripts/renderNotifications.py" '')
                 )
                 (scroll :class "tray" :hscroll false :vscroll true :height 400
                         (literal :content notificationLiteral)
@@ -85,50 +126,66 @@
 )
 
 ;; Settings
+(defwidget sliders []
+        (box :orientation "v" :spacing 0 :valign "start" :space-evenly "false" :vexpand false :class "wrapper dropdown"
+    (button :onclick "${eww} update showEyeCare=${!showEyeCare}" :halign "fill" :class {showEyeCare ? "active" : "inactive"} '󰈈 Presets')
+        (revealer
+            :transition "slidedown" 
+            :reveal showEyeCare
+            :duration "0.2s"
+            (box :orientation "v" :spacing  0 :valign "start" :space-evenly false :vexpand "false" :class "menuBox"
+                (button :onclick "scripts/sliderControl.sh --set-temp 0 & scripts/sliderControl.sh --set-bright 90 & openrgb -c F8DDB8" :class "subbutton" (box :space-evenly false :halign "start" ' 󰖨 Normal'))
+                (button :onclick "scripts/sliderControl.sh --set-temp 75 & scripts/sliderControl.sh --set-bright 70 & openrgb -c FB7D4C" :class "subbutton" (box :space-evenly false :halign "start" ' 󱓷 Reading'))
+                (button :onclick "scripts/sliderControl.sh --set-temp 100 & scripts/sliderControl.sh --set-bright 20 & openrgb -c F85909" :class "subbutton" (box :space-evenly false :halign "start" ' Cozy'))
+                        ))
+
+                (box :orientation "h" :spacing 0 :space-evenly "false" :halign "center" :class "slider"
+                        (label :text "")  
+                        (scale :width 170 :halign "fill" :value TEMP :min 0 :max 101 :onchange "scripts/sliderControl.sh --set-temp {}")
+                )
+                (box :orientation "h" :spacing 0 :space-evenly "false" :halign "center" :class "slider"
+                        (label :text "󰃠")  
+                        (scale :width 170 :halign "fill" :value BRIGHT :min 0 :max 101 :onchange "scripts/sliderControl.sh --set-bright {}")
+                )
+                (box :class "line")
+                (volume)
+                (box :orientation "h" :spacing 0 :space-evenly "false" :halign "center" :class {MIC ? "slider off" : "slider"}
+                        (button :onclick "scripts/sliderControl.sh --toggle-mic-mute" {MIC ? "󰍭" : "󰍬"})  
+                        (scale :width 170 :halign "fill" :value MIC_VOL :min 0 :max 101 :onchange "scripts/sliderControl.sh --set-mic-vol {}")
+                )
+        )
+)
+
 (defwidget settingsPanel []
-        (box :orientation "v" :spacing 0 :valign "start" :space-evenly "false" :vexpand false :class "wrapper"
-                        (button :onclick "${eww} update showPowerMenu=${!showPowerMenu}" :class {showPowerMenu ? "active" : "inactive"} '󰐥')
-                        (revealer
+    (box :orientation "v" :space-evenly false
+                (box :orientation "v" :spacing 0 :valign "start" :space-evenly "false" :vexpand false :class "wrapper" :hexpand false :halign "end"
+                        (box :orientation "v" :space-evenly "false" :class "dropdown"
+                                (button :onclick "${eww} update showPowerMenu=${!showPowerMenu}" :class {showPowerMenu ? "active" : "inactive"} '󰐥 Power')
+                         (revealer
                                 :transition "slidedown" 
                                 :reveal showPowerMenu
                                 :duration "0.2s"
                                 (box :orientation "v" :spacing  0 :valign "start" :space-evenly false :vexpand "false" :class "menuBox"
                                         (button :onclick "pkill -KILL -u $USER" :class "subbutton" (box :space-evenly false :halign "start" '  Log Out'))
                                         (button :onclick "reboot" :class "subbutton" (box :space-evenly false :halign "start" '  Reboot'))
-                                        (button :onclick "poweroff" :class "subbutton powerButton" (box :space-evenly false :halign "start" ' 󰐥 Power Off'))
+                                        (button :onclick "poweroff" :class "subbutton" (box :space-evenly false :halign "start" ' 󰐥 Power Off'))
                                 ))
+                        )
+                        (box :class "line")
+                        (box :orientation "h" :space-evenly true :class "setting_line"
+                                (button :hexpand true :onclick "networkmanager_dmenu &" '')
+                                (button :hexpand true :onclick "DMENU_BLUETOOTH_LAUNCHER=fuzzel dmenu-bluetooth" '󰂯')
+                        )
+                        (box :class "line")
+                        (box :orientation "h" :space-evenly true :class "setting_line"
+                                (button :hexpand true :onclick "hyprpicker &" '󰈊')
+                                (button :hexpand true :onclick "hyprshot -m region" '')
+                                (button :hexpand true :onclick "fuzzel -a center &" '')
+                        )
 
-                  (box :orientation "h"
-                        (button :hexpand true :onclick "hyprshot -m region" '')
-                        (button :hexpand true :onclick "wofi --show drun &" ''))
-;                (box :orientation "h"
-;                        (button :hexpand true :onclick "${eww} update showBatteryMenu=false & ${eww} update showBluetoothMenu=${!showBluetoothMenu}" :class {showBluetoothMenu ? "active" : "inactive"} '')
-;                        (button :hexpand true :onclick "${eww} update showBluetoothMenu=false & ${eww} update showBatteryMenu=${!showBatteryMenu}" :class {showBatteryMenu ? "active" : "inactive"} '')
-;                 )
-;                 (revealer :transition "slidedown" 
-;                                :reveal showBluetoothMenu
-;                                :duration "0.2s"
-;                                (box :orientation "v" :spacing  0 :valign "start" :space-evenly false :vexpand "false" :class "menuBox menuCornerAlt1"
-;                                        (centerbox :orientation "h"
-;                                                (button :onclick "ehco 2" :class "subbutton" ' ↻')
-;                                                (label :text "Devices")
-;                                                (button :onclick "ehco 2" :class "subbutton" ' ')
-;                                        )
-;                                        (button :onclick "echo 3" :class "subbutton leftButton" :space-evenly false :halign "start" (label :text 'todo deviceList'))
-;                                        (button :onclick "echo 3" :class "subbutton leftButton" :space-evenly false :halign "start" (label :text 'todo deviceList'))
-;                                        (button :onclick "echo 3" :class "subbutton leftButton" :space-evenly false :halign "start" (label :text 'todo devicdseList'))
-;                                        ))
-;                (revealer :transition "slidedown" 
-;                                :reveal showBatteryMenu
-;                                :duration "0.2s"
-;                                (box :orientation "v" :spacing  0 :valign "start" :space-evenly false :vexpand "false" :class "menuBox menuCornerAlt2"
-;                                        (button :onclick "ehco 2" :class "subbutton" ' Performance')
-;                                        (button :onclick "ehco 2" :class "subbutton" ' Regular')
-;                                        (button :onclick "echo 3" :class "subbutton" ' Power Saver')))
-;
-;
-
-))
+)
+    (sliders))
+)
 
 ;; -*-*-*-*-*
 ;; WINDOWS
@@ -137,7 +194,7 @@
         :monitor 0
         :geometry (geometry :x "5px"
                         :y "5px"
-                        :height "120px"
+                        :height "130px"
                         :anchor "top left")
         :stacking "fg"
         :reserve (struts :distance "40px" :side "top")
@@ -160,19 +217,6 @@
         (cal)
 )
 
-(defwindow notifications
-        :monitor 0
-        :geometry (geometry :x "0"
-                        :y "5px"
-                        :width "420px"
-                        :anchor "top center")
-        :stacking "fg"
-        :reserve (struts :distance "40px" :side "top")
-        :windowtype "dock"
-        :wm-ignore false
-        (notificationsList)
-)
-
 (defwindow settings
         :monitor 0
         :geometry (geometry :x "5px"
@@ -183,6 +227,18 @@
         :reserve (struts :distance "40px" :side "top")
         :windowtype "dock"
         :wm-ignore false
-        :class "settings"
         (settingsPanel)
+)
+
+(defwindow screenAndVolume
+        :monitor 0
+        :geometry (geometry :x "5px"
+                        :y "5px"
+                        :width "10%"
+                        :anchor "top right")
+        :stacking "fg"
+        :reserve (struts :distance "40px" :side "top")
+        :windowtype "dock"
+        :wm-ignore false
+        (sliders)
 )

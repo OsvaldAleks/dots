@@ -1,15 +1,23 @@
 {
 	// GENERAL
     "layer": "top",
-	"margin-left":-0,
-	"margin-right":-0,
-	"margin-top":-0,
+	"margin-left":0,
+	"margin-right":0,
+	"margin-top":0,
 	"output": ["eDP-1"],
-    "modules-left": ["custom/specialWorkspace", "hyprland/workspaces", "mpris"], 
-    "modules-center": ["clock","custom/notifications"],
-    "modules-right": ["network", "backlight", "pulseaudio", "battery", "custom/menu"],
+    "modules-left": ["group/left-pill", "group/player"], 
+    "modules-center": ["clock#date", "clock#time"],
+    "modules-right": ["tray","group/right-pill"],
 
 	//LEFT SIDE
+
+    "group/left-pill": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/specialWorkspace",
+            "hyprland/workspaces"
+        ]
+    },
     "custom/specialWorkspace": {
         "format": " ",
         "tooltip": false,
@@ -19,10 +27,10 @@
 		"format": "{icon}",
 		"format-icons": {
 			"active": " ",
-            "1":"",
-            "2":"",
-            "3":"",
-			"default": ""
+            "1":"󰟟",
+            "2":"󰟟",
+            "3":"󰟟",
+			"default": "󱔐"
 		},
 		"persistent-workspaces": {
 			"*": 3
@@ -30,54 +38,148 @@
 		"on-scroll-up":"hyprctl dispatch workspace m-1",
 		"on-scroll-down":"hyprctl dispatch workspace m+1"
     },
-
-	"mpris": {
-	"format": "{status_icon} {title} - {artist}",
-	"status-icons": {
-		"default": "♫",
-		"paused": "⏸"
-	},
-	"max-length": 25,
-	"ellipsis":"...",
-	"on-click":"~/.config/waybar/scripts/toggleWidget.sh media",
-	"tooltip-format":"{player}: {title} - {artist} ({position}/{length})"
-},
-
-// CENTER
-    "clock": {
-		"format": "{:%b %d - %H:%M}",
-		"tooltip":false,
-		"on-click":"~/.config/waybar/scripts/toggleWidget.sh calendar"
+    "group/player": {
+        "orientation": "horizontal",
+        "modules": [
+            "group/controls",
+            "mpris"
+        ]
+    },
+    "group/controls": {
+        "orientation": "horizontal",
+        "modules": [
+            "mpris#controls-prev",
+            "group/controls-play",
+            "mpris#controls-next"
+        ]
+    },
+    "group/controls-play": {
+        "orientation": "horizontal",
+        "modules": [
+            "mpris#controls"
+        ]
     },
 
+    "mpris": {
+        "format": "{title}",
+    	"player-icons": {
+	    	"default": "▶",
+	    	"mpv": "🎵"
+    	},
+	    "max-length": 25,
+	    "ellipsis":"...",
+	    "on-click":"~/.config/waybar/scripts/toggleWidget.sh media",
+	    "tooltip-format":"{player}: {title} - {artist} ({position}/{length})"
+    },
+    "mpris#controls": {
+       "format": "{status_icon}",
+       "status-icons": {
+           "playing": "",
+           "paused": "",
+            "stopped": ""
+       },
+       "on-click": "playerctl play-pause",
+       "tooltip": false
+    },
+     "mpris#controls-prev": {
+       "format": "",
+       "on-click": "playerctl previous",
+       "tooltip": false
+    },
+    "mpris#controls-next": {
+       "format": "",
+       "on-click": "playerctl next",
+       "tooltip": false
+    },
+
+    "tray": {
+		"icon-size": 14,
+		"spacing": 5
+	},
+	
+
+    // CENTER
+    "clock#date": {
+        "format": " {:%b %d}",
+        "tooltip": false,
+        "on-click": "~/.config/waybar/scripts/toggleWidget.sh calendar"
+    },
+
+    "clock#time": {
+        "format": " {:%H:%M:%S}",
+        "tooltip": false,
+        "interval": 1
+    },
 	"custom/notifications":{
 		"hide-empty-text": false,
 		"exec":"~/.config/waybar/scripts/checkNotification.sh",
 		"return-type": "json",
-		"signal": 1,
+		"signal": 2,
 		"on-click":"~/.config/waybar/scripts/toggleWidget.sh notifications"
 	},
 
 	//RIGHT
+    "group/right-pill": {
+        "orientation": "horizontal",
+        "modules": [
+            "group/network-group",
+            "custom/wl-gammarelay-temperature",
+            "backlight",
+            "pulseaudio",
+            "battery",
+            "custom/menu"
+        ],
+		"signal": 15
+    },
+
+    "group/network-group": {
+        "orientation": "horizontal",
+        "modules": [
+            "network",
+            "custom/bluetooth"
+        ]
+    },
+
     "network": {
 		"tooltip": true,
 		"rotate": 0,
 		"format-wifi": "{essid} 󰖩",
-		"format-ethernet": "",
+		"format-ethernet": "󱘖",
 		"tooltip-format": "Network: <b>{essid}</b>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>",
-		"format-linked": "{essid} ",
+		"format-linked": "{essid} 󱘖",
 		"format-disconnected": "󰖪",
 		"tooltip-format-disconnected": "Disconnected",
-		"interval": 2
+        "interval": 2,
+        "on-click": "networkmanager_dmenu"
     },
-	
+    "custom/bluetooth":{
+        "format":"󰂯",
+        "tooltip":false,
+        "on-click": "DMENU_BLUETOOTH_LAUNCHER=fuzzel dmenu-bluetooth"
+    },
+	"custom/wl-gammarelay-temperature": { //required gammarelay-rs
+        "format": "{text} {icon}",
+		"format-icons": ["","","","",""],
+		"return-type": "json",
+        "exec": "~/.config/waybar/scripts/gammaRelayWrapper.sh --check",
+		"signal": 15,
+		"interval": "once",
+		"tooltip": false,
+		"reverse-scrolling": true,
+        "on-scroll-up": "~/.config/waybar/scripts/gammaRelayWrapper.sh --down",
+        "on-scroll-down": "~/.config/waybar/scripts/gammaRelayWrapper.sh --up",
+        "on-click":"~/.config/waybar/scripts/toggleWidget.sh screenAndVolume"
+    },
+
 	"backlight":{
 		"device":"eDP-1",
 		"format":"{percent}% {icon}",
-		"format-icons":["󰃞", "󰃟", "󰃠"],
+		"format-icons":["󰃚", "󰃛", "󰃜", "󰃞", "󰃟", "󰃠"],
 		"reverse-scrolling": true,
 		"scroll-step": 1,
-		"tooltip":false
+		"tooltip":false,
+		"signal": 14,
+        "on-click":"~/.config/waybar/scripts/toggleWidget.sh screenAndVolume"
 	},
 
     "pulseaudio": {
@@ -94,14 +196,15 @@
 			"phone-muted": "",
 			"portable": "",
 			"car": "",
-			"default": ["", ""]
+			"default": ["","","","",""]
 		},
 		"states":{
 			"quiet":0
 		},
 		"scroll-step":1,
 		"reverse-scrolling":true,
-		"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+		"signal": 13,
+        "on-click":"~/.config/waybar/scripts/toggleWidget.sh screenAndVolume"
     },
 
 	"battery": {
@@ -116,7 +219,8 @@
 		},
 		"format-warning": "{capacity}% ",
 		"format-critical": "{capacity}% ",
-		"format-icons": ["", "", "", "", ""]
+		"format-icons": ["", "", "", "", ""],
+        "on-click":"~/.config/waybar/scripts/toggleWidget.sh screenAndVolume"
 	},
 	"custom/menu":{
 		"format":"",

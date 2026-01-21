@@ -1,15 +1,15 @@
 {
 	"dividers": {
 		"left": {
-			"hard": " ",
-			"soft": " "
+			"hard": "",
+			"soft": ""
 		},
 		"right": {
-			"hard": " ",
-			"soft": " "
+			"hard": "",
+			"soft": ""
 		}
 	},
-	"spaces": 1,
+	"spaces": 0,
 	"segment_data": {
 		"branch": {
 			"before": "🔀 "
@@ -59,7 +59,7 @@
 			}
 		},
 		"powerline.segments.common.sys.uptime": {
-			"before": "⇑ "
+			"before": "⇑"
 		},
 		"powerline.segments.common.mail.email_imap_alert": {
 			"before": "✉ "
