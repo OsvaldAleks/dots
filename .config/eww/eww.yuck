@@ -111,20 +111,6 @@
         ))
 )
 
-;; Notifications
-
-(defwidget notificationsList []
-        (box :orientation "v" :halign "left" :space-evenly false :class "wrapper"
-                (box :orientation "h" :halign "left" :space-evenly false
-                        (label :halign "left" :text "Notifications")
-                        (box :orientation "h" :halign "right" :hexpand true :space-evenly false)
-                                (button :onclick "dunstctl history-clear && $HOME/.config/waybar/scripts/processNotification.sh & python scripts/renderNotifications.py" '')
-                )
-                (scroll :class "tray" :hscroll false :vscroll true :height 400
-                        (literal :content notificationLiteral)
-                ))
-)
-
 ;; Settings
 (defwidget sliders []
         (box :orientation "v" :spacing 0 :valign "start" :space-evenly "false" :vexpand false :class "wrapper dropdown"

@@ -78,4 +78,6 @@
     foreground = "#6D77A1"
     highlight = "#6D77A1"
     frame_color = "#6D77A1aa"
+    timeout = 0
     format = "<b>%s</b>\n%b\n"
+    history_ignore = true
