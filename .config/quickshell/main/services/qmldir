@@ -1,0 +1,2 @@
+singleton BrightnessReader BrightnessReader.qml
+singleton ScreenTempReader ScreenTempReader.qml

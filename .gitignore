@@ -21,6 +21,8 @@
 !/.config/wofi/**
 !/.config/fuzzel/
 !/.config/fuzzel/**
+!/.config/quickshell/
+!/.config/quickshell/**
 !/README.md
 !/Pictures/
 !/Pictures/dotfilePics/
