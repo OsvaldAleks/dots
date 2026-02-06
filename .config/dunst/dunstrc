@@ -3,7 +3,7 @@
     monitor = 0
     width = (350, 350)
     height = (50,1000)
-    origin = bottom-right
+    origin = top-center
     offset = 20x20
     notification_limit = 5
     progress_bar = true
@@ -17,7 +17,7 @@
     padding = 10
     horizontal_padding = 10
     text_icon_padding = 10
-    frame_width = 2
+    frame_width = 0
     gap_size = 3
     sort = urgency_descending
     idle_threshold = 120
@@ -42,7 +42,7 @@
     always_run_script = true
     title = Dunst
     class = Dunst
-    corner_radius = 0
+    corner_radius = 5
     ignore_dbusclose = false
     force_xwayland = false
     force_xinerama = false
