@@ -37,4 +37,17 @@ Rounded elements, terminal-driven colors, and rounded powerline-inspired accents
 - Borders unified with Kitty and Hyprland
 
 # Preview
-ToDo
+## General Overview
+![Look and Feel](https://raw.githubusercontent.com/OsvaldAleks/dots/main/Pictures/dotfilePics/look_and_feel.png)
+
+## Media Controls
+![Media Bar](https://raw.githubusercontent.com/OsvaldAleks/dots/main/Pictures/dotfilePics/media_bar.png)
+
+## Player
+![Player](https://raw.githubusercontent.com/OsvaldAleks/dots/main/Pictures/dotfilePics/player.png)
+
+## rmpc
+![rmpc](https://raw.githubusercontent.com/OsvaldAleks/dots/main/Pictures/dotfilePics/rmpc.png)
+
+## Wallpaper Collection
+![Wallpaper Collection](https://raw.githubusercontent.com/OsvaldAleks/dots/main/Pictures/dotfilePics/wallpaper_collection.png)
