@@ -1,36 +1,40 @@
-# Config files for my Arch x Hyprland setup
-## Hyprland
-Rich keybind set
+# Arch Linux × Hyprland Setup
+Minimal, muted, consistent.
+Rounded elements, terminal-driven colors, and rounded powerline-inspired accents.
 
-## Fuzzel
+# Components
+## Hyprland
+- Structured and extensive keybind system
+- Special workspace toggles
+- Integrated with terminal color palette
+- Using swww for wallpaper managment
+
+## Quickshell
+- Workspace indicator
+- Media player
+- Clock
+- Screen & audio controls
+- Battery status
+- Powermenu
 
 ## Kitty
-transparend and muted
+- Transparent background
+- making use of Powerline for PS1 prompt
 
-## Powerline
-Rouded using terminal colors
-
-## Waybar
-Special workspace toggle
-Media player
-Clock
-Network and bluetooth options
-Screen info
-Volume
-Battery
-Eww Powermenu toggle
+## Fuzzel
+- Styled to match terminal palette
+- Using Papyrus icons
 
 ## Dunst
-Seperate urgency styles and seperate system notification style.
-
-## Eww
-Powermenu widget
-Screen brightness and temeperature cntrols
-Audio controls (Output volume, Mic volume, and mute)
-Music player
+- Separate urgency styles
+- Dedicated system notification theme
 
 ## Fastfetch
-[!img.png]
+- Clean system overview
 
-## Rmpc
-Themed using round powerline inspired elements and borders unified with Kitty and Hyprland.
+## rmpc
+- Rounded, round powerline-inspired theme
+- Borders unified with Kitty and Hyprland
+
+# Preview
+ToDo
