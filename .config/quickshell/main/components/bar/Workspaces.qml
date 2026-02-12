@@ -19,7 +19,7 @@ Rectangle {
         return ids.length ? Math.max(...ids) : 0
     }
 
-    gradient: Style.bgGradient
+    gradient: Style.bgGradientNone
 
     border{
         color:Style.colorBorders

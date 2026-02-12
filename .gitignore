@@ -3,8 +3,6 @@
 !/.config/
 !/.config/dunst/
 !/.config/dunst/**
-!/.config/eww/
-!/.config/eww/**
 !/.config/fastfetch/
 !/.config/fastfetch/**
 !/.config/hypr/
@@ -15,10 +13,6 @@
 !/.config/powerline/**
 !/.config/rmpc/
 !/.config/rmpc/**
-!/.config/waybar/
-!/.config/waybar/**
-!/.config/wofi/
-!/.config/wofi/**
 !/.config/fuzzel/
 !/.config/fuzzel/**
 !/.config/quickshell/
@@ -27,3 +21,5 @@
 !/Pictures/
 !/Pictures/dotfilePics/
 !/Pictures/dotfilePics/**
+!/Pictures/wallpapers/
+!/Pictures/wallpapers/**

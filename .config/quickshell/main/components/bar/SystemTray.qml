@@ -22,6 +22,28 @@ RowLayout {
             implicitWidth: itemWrapper.implicitWidth
             Layout.fillHeight: true
 
+            RectangularShadow {
+                id: shadow
+                anchors.centerIn: itemWrapper
+                visible: itemWrapper.expanded || opacity > 0
+                opacity: itemWrapper.expanded*0.49
+                Behavior on opacity { NumberAnimation { duration: 200 } }
+
+                readonly property real pad: blur + spread + 2
+                width: itemWrapper.width + pad * 2
+                height: itemWrapper.height + pad * 2
+
+                radius: itemWrapper.radius
+                blur: 10
+                spread: 10
+                color: expanded ? Style.bg : "transparent"
+                material: ShadowIgnoreBg {
+                    opacity: parent.opacity
+                    rectSize: Qt.size(itemWrapper.implicitWidth*0.5, itemWrapper.implicitHeight*0.5)
+                    iResolution: Qt.vector3d(width, height, 1.0)
+                }
+            }
+
             Rectangle{
                 id: itemWrapper
                 implicitWidth: itemContents.implicitWidth
@@ -45,6 +67,8 @@ RowLayout {
                     Item {
                         Layout.leftMargin: itemWrapper.expanded * Style.padding
                         Layout.topMargin: 3
+
+                        Behavior on Layout.leftMargin { NumberAnimation { duration: 50 } }
                         
                         implicitWidth: trayIcon.width
                         implicitHeight: trayIcon.height
@@ -85,7 +109,7 @@ RowLayout {
                             }
                         }
                     }
-    
+                    
                     MenuPopup{
                         visible: itemWrapper.expanded
                         opener.menu: modelData.menu

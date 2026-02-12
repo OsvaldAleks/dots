@@ -12,7 +12,7 @@ Rectangle {
 
     property bool isCharging: { return UPower.displayDevice.state === 1 }
 
-    gradient: Style.bgGradient
+    gradient: Style.bgGradientNone
     border{
         color:Style.colorBorders
         width:Style.borders

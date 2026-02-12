@@ -72,7 +72,7 @@
     song_table_format: [
         (
             prop: (kind: Property(Artist),
-                default: (kind: Text("Unknown"))
+                default: (kind: Text("Unknown")), style: (fg: "gray")
             ),
             label_prop: (kind: Group([
                 (kind: Text(""), style: (fg: "dark_gray")),
@@ -100,8 +100,8 @@
             width: "35%",
         ),
         (
-            prop: (kind: Property(Album), style: (fg: "white"),
-                default: (kind: Text("Unknown Album"), style: (fg: "white"))
+            prop: (kind: Property(Album),
+                default: (kind: Text("Unknown Album"), style: (fg: "dark_gray")), style: (fg: "gray")
             ), 
             label_prop: (kind: Group([
                 (kind: Text(""), style: (fg: "dark_gray")),
@@ -113,7 +113,7 @@
         ),
         (
             prop: (kind: Property(Duration),
-                default: (kind: Text("-"))
+                default: (kind: Text("-")), style: (fg: "gray")
             ),
             label_prop: (kind: Group([
                 (kind: Text(""), style: (fg: "dark_gray")),

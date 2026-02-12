@@ -45,6 +45,9 @@ Singleton {
     readonly property var bgGradient: Gradient {
         GradientStop { position: 0.0; color: bg }
         GradientStop { position: 1.0; color: "#8044444e"}
+    } 
+    readonly property var bgGradientNone: Gradient {
+        GradientStop { position: 0.0; color: bg }
     }
     readonly property var transparentGradient: Gradient {
         GradientStop { position: 0.0; color: "transparent" }

@@ -1,14 +1,46 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Services.Pipewire
 import "root:/styles"
 import "root:/services" as Services
 import "root:/components/common"
 
+Item{
+    id: wrapper
+
+    implicitWidth: mediaBar.implicitWidth
+    implicitHeight: mediaBar.implicitHeight
+    
+    property bool expanded: hoverChecker.hovered
+
+    RectangularShadow {
+        id: shadow
+        anchors.centerIn: mediaBar
+        visible: expanded || opacity > 0
+        opacity: expanded*0.49
+        Behavior on opacity { NumberAnimation { duration: 200 } }
+
+        readonly property real pad: blur + spread + 2
+
+        width: mediaBar.width + pad * 2
+        height: mediaBar.height + pad * 2
+
+        radius: mediaBar.radius
+        blur: 10
+        spread: 10
+        color: expanded ? Style.bg : "transparent"
+        material: ShadowIgnoreBg {
+            opacity: parent.opacity
+            rectSize: Qt.size(mediaBar.implicitWidth*0.5, mediaBar.implicitHeight*0.5)
+            iResolution: Qt.vector3d(width, height, 1.0)
+        }
+    }
+
 Rectangle {
     id: mediaBar
-    implicitHeight: expanded ? 200 : Style.panelHeight
+    implicitHeight: wrapper.expanded ? 200 : Style.panelHeight
     implicitWidth: content.width + 2*Style.padding
     radius: Style.cornerRadius
 
@@ -17,9 +49,7 @@ Rectangle {
     Behavior on implicitWidth { NumberAnimation { duration: 50 } }
     Behavior on implicitHeight { NumberAnimation { duration: 50 } }
 
-    property bool expanded: hoverChecker.hovered
-    
-    gradient: Style.bgGradient
+    gradient: expanded ? Style.bgGradient : Style.bgGradientNone
     border{
         color:Style.colorBorders
         width:Style.borders
@@ -49,12 +79,12 @@ Rectangle {
 
         SliderInfo{
             id: micInfo
-            visible: mediaBar.expanded || (Pipewire.defaultAudioSource && Pipewire.defaultAudioSource.audio.muted)
-            expanded: mediaBar.expanded
-            opacity: mediaBar.expanded || (Pipewire.defaultAudioSource && Pipewire.defaultAudioSource.audio.muted)
+            visible: wrapper.expanded || (Pipewire.defaultAudioSource && Pipewire.defaultAudioSource.audio.muted)
+            expanded: wrapper.expanded
+            opacity: wrapper.expanded || (Pipewire.defaultAudioSource && Pipewire.defaultAudioSource.audio.muted)
             Behavior on opacity { NumberAnimation { duration: 75 } }
-            Layout.topMargin: mediaBar.expanded*Style.padding 
-            Layout.bottomMargin: mediaBar.expanded*Style.padding
+            Layout.topMargin: wrapper.expanded*Style.padding 
+            Layout.bottomMargin: wrapper.expanded*Style.padding
             Layout.alignment: Qt.AlignVCenter
             ratio: Pipewire.defaultAudioSource ? Pipewire.defaultAudioSource.audio.volume : 0
             isDisabled: !Pipewire.defaultAudioSource || Pipewire.defaultAudioSource.audio.muted
@@ -70,9 +100,9 @@ Rectangle {
 
         SliderInfo{
             id: volInfo
-            expanded: mediaBar.expanded
-            Layout.topMargin: mediaBar.expanded*Style.padding 
-            Layout.bottomMargin: mediaBar.expanded*Style.padding
+            expanded: wrapper.expanded
+            Layout.topMargin: wrapper.expanded*Style.padding 
+            Layout.bottomMargin: wrapper.expanded*Style.padding
             Layout.alignment: Qt.AlignVCenter
             ratio: Pipewire.defaultAudioSink ? Pipewire.defaultAudioSink.audio.volume : 0
             isDisabled: !Pipewire.defaultAudioSink || Pipewire.defaultAudioSink.audio.muted
@@ -88,9 +118,9 @@ Rectangle {
 
         SliderInfo{
             id: brightInfo
-            expanded: mediaBar.expanded
-            Layout.topMargin: mediaBar.expanded*Style.padding 
-            Layout.bottomMargin: mediaBar.expanded*Style.padding 
+            expanded: wrapper.expanded
+            Layout.topMargin: wrapper.expanded*Style.padding 
+            Layout.bottomMargin: wrapper.expanded*Style.padding 
             ratio: Services.BrightnessReader.percent
             iconList: ["󰃚", "󰃛", "󰃜", "󰃞", "󰃟", "󰃠"]
             onTrackClicked: (ratio) => {
@@ -103,10 +133,10 @@ Rectangle {
     
         SliderInfo{
             id: tempInfo
-            visible: mediaBar.expanded || !Services.ScreenTempReader.disabled
-            expanded: mediaBar.expanded
-            Layout.topMargin: mediaBar.expanded*Style.padding 
-            Layout.bottomMargin: mediaBar.expanded*Style.padding 
+            visible: wrapper.expanded || !Services.ScreenTempReader.disabled
+            expanded: wrapper.expanded
+            Layout.topMargin: wrapper.expanded*Style.padding 
+            Layout.bottomMargin: wrapper.expanded*Style.padding 
             ratio: 1-Services.ScreenTempReader.ratio
             iconList: ["","","","",""]
             disabledIcon: "󰸁"
@@ -135,4 +165,5 @@ Rectangle {
             }
         }
     }
+}
 }

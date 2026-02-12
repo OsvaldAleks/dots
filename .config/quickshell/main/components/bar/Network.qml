@@ -6,7 +6,7 @@ import "root:/styles"
 
 Rectangle {
     implicitHeight: Style.panelHeight
-    gradient: Style.bgGradient
+    gradient: Style.bgGradientNone
 
     implicitWidth: content.width + Style.padding
 

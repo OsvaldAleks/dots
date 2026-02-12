@@ -1,9 +1,42 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Services.UPower
 import "root:/styles"
 import "root:/components/common"
+
+Item{
+    id: wrapper
+
+    implicitWidth: miscMenu.implicitWidth
+    implicitHeight: miscMenu.implicitHeight
+    
+    property bool expanded: hoverChecker.hovered
+
+
+    RectangularShadow {
+        id: shadow
+        anchors.centerIn: miscMenu
+        visible: expanded || opacity > 0
+        opacity: expanded*0.49
+        Behavior on opacity { NumberAnimation { duration: 200 } }
+
+        readonly property real pad: blur + spread + 2
+
+        width: miscMenu.width + pad * 2
+        height: miscMenu.height + pad * 2
+
+        radius: miscMenu.radius
+        blur: 10
+        spread: 10
+        color: expanded ? Style.bg : "transparent"
+        material: ShadowIgnoreBg {
+            opacity: parent.opacity
+            rectSize: Qt.size(miscMenu.implicitWidth*0.5, miscMenu.implicitHeight*0.5)
+            iResolution: Qt.vector3d(width, height, 1.0)
+        }
+    }
 
 Rectangle {
     id: miscMenu
@@ -190,4 +223,5 @@ Rectangle {
             }
         }
     }
+}
 }
