@@ -109,7 +109,22 @@ Rectangle {
                             }
                         }
                     }
-
+                    Button{
+                        visible: powerDropdown.expanded && miscMenu.expanded
+                        opacity: powerDropdown.expanded
+                        Behavior on opacity { NumberAnimation { duration: 125 } }
+                        Layout.fillWidth: true
+                        icon: ""
+                        text: "Lock"
+                        alignment: "left"
+                        backgroundColor: Style.darkGray
+                        textColor: Style.white
+                        onClicked: () => {
+                            Quickshell.execDetached({
+                                command: ["hyprlock"]
+                            })
+                        }
+                    }
                     Button{
                         visible: powerDropdown.expanded && miscMenu.expanded
                         opacity: powerDropdown.expanded

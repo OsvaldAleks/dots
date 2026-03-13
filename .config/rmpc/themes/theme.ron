@@ -167,7 +167,7 @@
                             pane: Component("header_left")
                         ),
                         (
-                            size: "20",
+                            size: "23",
                             pane: Component("header_right")
                         ),
                     ]
@@ -281,7 +281,7 @@
                     pane: Pane(Property(content: [(kind: Property(Status(InputBuffer())), style: (fg: "light_green"), align: Left)]))
                 ),
                 (
-                    size: "11",
+                    size: "14",
                     pane: Pane(Property(content: [
                         (kind: Text(""), style: (fg: "dark_gray")),
                         (kind: Text(" "), style: (bg: "dark_gray")),
@@ -291,12 +291,14 @@
                             on_style: (fg: "light_green", bg: "dark_gray"),
                             off_style: (fg: "gray", bg: "dark_gray"),
                         )))),
+                        (kind: Text(" "), style: (bg: "dark_gray")),
                         (kind: Property(Status(RandomV2(
                             on_label: " ",
                             off_label: " ",
                             on_style: (fg: "light_green", bg: "dark_gray"),
                             off_style: (fg: "gray", bg: "dark_gray"),
                         )))),
+                        (kind: Text(" "), style: (bg: "dark_gray")),
                         (kind: Property(Status(ConsumeV2(
                             on_label: "󰆘 ",
                             off_label: "󰆘 ",
@@ -305,6 +307,7 @@
                             off_style: (fg: "gray", bg: "dark_gray"),
                             oneshot_style: (fg: "light_green", bg: "dark_gray"),
                         )))),
+                        (kind: Text(" "), style: (bg: "dark_gray")),
                         (kind: Property(Status(SingleV2(
                             on_label: " ",
                             off_label: " ",

@@ -79,11 +79,14 @@ ColumnLayout{
         }
 
         Rectangle{
+            id: marker
+
             anchors.bottom: parent.bottom
             implicitWidth: parent.width
             height: parent.height * sliderInfo.ratio
-            radius: Style.cornerRadius/2
             Behavior on height { NumberAnimation { duration: 50 } }
+            radius: Style.cornerRadius/2
+            Behavior on radius { NumberAnimation { duration: 150 } }
 
             color: isDisabled ? Style.colorUrgent : Style.accent
         }
@@ -97,12 +100,14 @@ ColumnLayout{
             property bool dragging: false
 
             onPressed: (mouse) => {
+                marker.radius = marker.width
                 dragging = true
                 sliderInfo.ratio = (parent.height-mouse.y)/parent.height
                 sliderInfo.trackClicked(sliderInfo.ratio)
             }
 
             onReleased: (mouse) => {
+                marker.radius = Style.cornerRadius/2
                 dragging = false
                 sliderInfo.ratio = Math.max(0,Math.min(1,(parent.height-mouse.y)/parent.height))
                 sliderInfo.trackClicked(sliderInfo.ratio)

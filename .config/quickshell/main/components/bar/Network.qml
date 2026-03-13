@@ -62,7 +62,7 @@ Rectangle {
 
             Layout.margins: Style.borders
 
-            color: Style.white
+            color: Style.blue
 
             topLeftRadius: height / 2
             bottomLeftRadius: height / 2
@@ -76,14 +76,15 @@ Rectangle {
                 anchors.centerIn: parent
                 Text{
                     id: connectedNetworkIcon
-                    text:"󰖪"
-                    color: Style.darkRed
+                    // text:"󰖪"
+                    text:" 󰖩"
+                    color: Style.black
                     font: Style.fontIcons
                 }
                 Text{
                     id: connectedNetworkText
-                    text:"Not connected"
-                    color: Style.darkRed
+                    text:"Redmi A3"
+                    color: Style.black
                     font: Style.fontMain
                 }
             }

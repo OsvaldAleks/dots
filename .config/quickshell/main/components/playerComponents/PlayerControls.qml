@@ -89,9 +89,14 @@ Rectangle{
             }
 
             Rectangle{
+                id: elapsed
+
                 implicitHeight: parent.implicitHeight
                 width: activePlayer ? parent.width * (activePlayer.position / activePlayer.length) : 0
                 Behavior on width { NumberAnimation { duration: 50 } }
+
+                radius: Style.cornerRadius/2
+                Behavior on radius { NumberAnimation { duration: 150 } }
 
                 color: (activePlayer ? true : false && activePlayer.positionSupported) ? Style.accent : Style.white
             }
@@ -105,6 +110,7 @@ Rectangle{
                 property bool dragging: false
 
                 onPressed: (mouse) => {
+                    elapsed.radius = Style.panelHeight
                     dragging = true
                     let ratio = Math.max(0,Math.min(1,mouse.x / width))
                     let targetPos = ratio * activePlayer.length
@@ -112,6 +118,7 @@ Rectangle{
                 }
 
                 onReleased: (mouse) => {
+                    elapsed.radius = Style.cornerRadius/2
                     dragging = false
                     let ratio = Math.max(0,Math.min(1,mouse.x / width))
                     let targetPos = ratio * activePlayer.length
