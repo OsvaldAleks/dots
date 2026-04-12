@@ -73,7 +73,7 @@ Rectangle {
             height: parent.height
 
             delegate: Text {
-                visible: modelData.id > 0
+                visible: modelData.id > 0 && modelData.monitor.name=="eDP-1"
                 readonly property bool isPermanent: modelData.id <= workspaces.permanentCount
 
                 text: (modelData.active && !specialWorkspaceButton.active ? "" : (isPermanent ? "󰟟" : "󱔐"))

@@ -221,22 +221,22 @@
             content: [
                 (kind: Text(""), style: (fg: "light_green")),
                 (kind: Text("  "), style: (fg: "black", bg: "light_green")),
-                (kind: Text(" "), style: (fg: "light_green", bg: "dark_gray")),
-                (kind: Property(Song(Title)), style: (fg: "white", bg: "dark_gray", modifiers: "Bold"),
-                    default: (kind: Text("No Song"), style: (fg: "white", bg: "dark_gray", modifiers: "Bold"))),
-                (kind: Text(" "), style: (bg: "dark_gray")),
-                (kind: Text(""), style: (fg: "dark_gray")),
+                (kind: Text(" "), style: (fg: "light_green", bg: "gray")),
+                (kind: Property(Song(Title)), style: (fg: "black", bg: "gray", modifiers: "Bold"),
+                    default: (kind: Text("   "), style: (fg: "black", bg: "gray", modifiers: "Bold"))),
+                (kind: Text(" "), style: (bg: "gray")),
+                (kind: Text(""), style: (fg: "gray")),
             ],
             align: Left,
         )),
         "volume": Split(
             direction: Horizontal,
             panes: [
-                (size: "1", pane: Pane(Property(content: [(kind: Text(""), style: (fg: "gray"))]))),
-                (size: "1", pane: Pane(Property(content: [(kind: Text(" "), style: (bg: "gray"))]))),
-                (size: "2", pane: Pane(Property(content: [(kind: Text(" "), style: (fg: "black", bg: "gray"))]))),
-                (size: "1", pane: Pane(Property(content: [(kind: Text(" "), style: (bg: "gray"))]))),
-                (size: "1", pane: Pane(Property(content: [(kind: Text(""), style: (fg: "gray", bg: "light_green"))]))),
+                (size: "1", pane: Pane(Property(content: [(kind: Text(""), style: (fg: "dark_gray"))]))),
+                (size: "1", pane: Pane(Property(content: [(kind: Text(" "), style: (bg: "dark_gray"))]))),
+                (size: "2", pane: Pane(Property(content: [(kind: Text(" "), style: (fg: "white", bg: "dark_gray"))]))),
+                (size: "1", pane: Pane(Property(content: [(kind: Text(" "), style: (bg: "dark_gray"))]))),
+                (size: "1", pane: Pane(Property(content: [(kind: Text(""), style: (fg: "dark_gray", bg: "light_green"))]))),
                 (size: "100%", pane: Pane(Volume(kind: Slider(symbols: (start: "█", filled: "█", thumb: "", track: "█", end: ""), track_style: (fg: "green"), filled_style: (fg: "light_green"), thumb_style: (fg: "light_green", bg: "green"),)))),
             ]
         ),
@@ -265,12 +265,12 @@
         "artist": Pane(Property(
             content: [
                 (kind: Text(""), style: (fg: "light_green")),
-                (kind: Text("  "), style: (fg: "black", bg: "light_green", modifiers: "Bold")),
-                (kind: Text(" "), style: (fg: "light_green", bg: "dark_gray")),
-                (kind: Property(Song(Artist)), style: (fg: "white", bg: "dark_gray", modifiers: "Bold"),
-                    default: (kind: Text("Unknown"), style: (fg: "white", bg: "dark_gray", modifiers: "Bold"))),
-                (kind: Text(" "), style: (bg: "dark_gray")),
-                (kind: Text(""), style: (fg: "dark_gray")),
+                (kind: Text("  "), style: (fg: "black", bg: "light_green")),
+                (kind: Text(" "), style: (fg: "light_green", bg: "gray")),
+                (kind: Property(Song(Artist)), style: (fg: "black", bg: "gray", modifiers: "Bold"),
+                    default: (kind: Text("   "), style: (fg: "black", bg: "dark_gray", modifiers: "Bold"))),
+                (kind: Text(" "), style: (bg: "gray")),
+                (kind: Text(""), style: (fg: "gray")),
             ], align: Left
         )),
         "states": Split(

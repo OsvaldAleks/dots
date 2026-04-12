@@ -52,8 +52,7 @@ Item{
             precision: SystemClock.Seconds
         }
 
-        property var now: new Date()
-        property var selectedDate: now
+        property var selectedDate: clockItem.date
 
         border{
             color:Style.colorBorders
@@ -65,7 +64,7 @@ Item{
             margin: Style.padding
             onHoveredChanged: {
                 if (!hovered) {
-                    datetime.selectedDate = datetime.now
+                    datetime.selectedDate = clockItem.date
                 }
             }
         }
@@ -114,7 +113,7 @@ Item{
                                 anchors.centerIn: parent
                                 font: Style.fontMain
                                 color: Style.black
-                                text: expanded ? Qt.formatDateTime(datetime.selectedDate, " MMM dd yyyy") : Qt.formatDateTime(datetime.selectedDate, " MMM dd")
+                                text: expanded ? Qt.formatDateTime(datetime.selectedDate, " MMM dd yyyy") : Qt.formatDateTime(clockItem.date, " MMM dd")
                                 Behavior on width { NumberAnimation { duration: 75 } }
                             }
                         }

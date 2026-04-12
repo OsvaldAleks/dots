@@ -5,8 +5,8 @@
     address: "~/.mpd/socket",
     password: "iReallyWannaEatHotCoals",
     theme: "./themes/theme.ron",
-    lyrics_dir: "~/Music/",
-    cache_dir: "~/Music/rmpc/",
+    lyrics_dir: "~/Nextcloud - personal/Music/",
+    cache_dir: "~/Nextcloud - personal/Music/rmpc/",
     on_song_change: None,
     volume_step: 5,
     max_fps: 30,
@@ -89,8 +89,6 @@
             "<C-Right>":  PaneRight,
             "K":          MoveUp,
             "J":          MoveDown,
-            "<C-u>":      UpHalf,
-            "<C-d>":      DownHalf,
             "<C-b>":      PageUp,
             "<PageUp>":   PageUp,
             "<C-f>":      PageDown,
@@ -172,7 +170,7 @@
                                 ),
                                 (
                                     size: "100%",
-                                    borders: "LEFT | RIGHT | BOTTOM",
+                                    borders: "LEFT | RIGHT",
                                     border_symbols: Rounded,
                                     pane: Split(
                                         direction: Horizontal,
@@ -188,8 +186,24 @@
                                         ]
                                     )
                                 ),
+                                (
+                                    size: "2",
+                                    borders: "LEFT | RIGHT | BOTTOM",
+                                    border_symbols: Rounded,
+                                    pane: Pane(Property(
+
+                                        content: [
+                                            (kind: Text(""), style: (fg: "dark_gray")),
+                                            (kind: Text(" 󰄉 Total: "), style: (fg: "white", bg: "dark_gray")),
+                                            (kind: Text(" "), style: (fg: "dark_gray", bg: "gray")),
+                                            (kind: Property(Status(QueueTimeTotal(separator: " "))), style: (fg: "black", bg: "gray")),
+                                            (kind: Text(" "), style: (fg: "gray")),
+                                        ], align: Right,)),
+
+
+                                ),
                             ],
-                        )
+                        ),
                     ),
                     (
                         size: "30%",
