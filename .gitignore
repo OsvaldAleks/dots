@@ -6,6 +6,8 @@
 !/.config/dunst/**
 !/.config/fastfetch/
 !/.config/fastfetch/**
+!/.config/powerline/
+!/.config/powerline/**
 !/.config/hypr/
 !/.config/hypr/**
 !/.config/kitty/
