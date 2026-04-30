@@ -1,0 +1,110 @@
+# Insert a blank line between shell prompts
+add_newline = true
+
+# Define the order and format of the information in our prompt
+format = """\
+[ ](fg:#d3d4cb)\
+[ 󰣇 ](fg:#6d77a1 bg:#d3d4cb)\
+${custom.icon_separator}${custom.icon_separator_no_conda}\
+$conda\
+$directory\
+${custom.directory_separator_not_git}\
+${custom.directory_separator_git}\
+$symbol($git_branch[](fg:#daee76))\
+$symbol( $git_commit$git_status$git_metrics$git_state)$fill$cmd_duration$all\
+${custom.git_config_email}
+$character"""
+
+# Fill character (empty space) between the left and right prompt
+[fill]
+symbol = " "
+
+# Disable the line break between the first and second prompt lines
+[line_break]
+disabled = true
+
+[character]
+success_symbol = '  [󱞩](fg:#d3d4cb) '
+error_symbol = '  [󱞩](fg:#e17b7b) '
+
+[custom.icon_separator]
+command = ""
+format = "[](fg:#d3d4cb bg:#4b8649)"
+when = "test -n \"$CONDA_DEFAULT_ENV\""
+
+[custom.icon_separator_no_conda]
+command = ""
+format = "[](fg:#d3d4cb bg:#aaaaaa)"
+when = "test -z \"$CONDA_DEFAULT_ENV\""
+
+[conda]
+format = '[ $symbol$environment ]($style)[](fg:#4b8649 bg:#aaaaaa)'
+symbol = " "
+style = "fg:#d3d4cb bg:#4b8649"
+
+# Customize the format of the working directory
+[directory]
+truncate_to_repo = true
+format = "[ $path ]($style)"
+style = "fg:#363647 bg:#aaaaaa"
+
+[git_branch]
+symbol = " "
+format = "[ $symbol$branch(:$remote_branch) ]($style)"
+style = "fg:#363647 bg:#daee76"
+
+[git_metrics]
+disabled = false
+
+[nodejs]
+format = "[$symbol($version)]($style)"
+style = "fg:14141e bg:#daee76"
+
+[package]
+disabled = true # Enable to output the current working directory's package version
+format = "[$symbol$version]($style) "
+display_private = true
+
+# Output the command duration if over 2 seconds
+[cmd_duration]
+min_time = 2_000
+format = "[  $duration ]($style)"
+style = "white"
+
+# Customize the battery indicator
+[battery]
+format = "[$symbol$percentage]($style) "
+
+[[battery.display]]
+threshold = 20
+style = '#e17b7b'
+
+# Output the current git config email address
+[custom.git_config_email]
+description = "Output the current git user's configured email address."
+command = "git config user.email"
+format = "\n[$symbol(  $output)]($style)"
+# Only when inside git repository
+when = "git rev-parse --is-inside-work-tree >/dev/null 2>&1"
+style = "text"
+
+# Output a styled separator right after the directory when inside a git repository.
+[custom.directory_separator_git]
+description = "Output a styled separator right after the directory when inside a git repository."
+command = ""
+format = "[](fg:#aaaaaa bg:#daee76)"
+# Only when inside git repository
+when = "git rev-parse --is-inside-work-tree >/dev/null 2>&1"
+
+# Output a styled separator right after the directory when NOT inside a git repository.
+[custom.directory_separator_not_git]
+description = "Output a styled separator right after the directory when NOT inside a git repository."
+command = ""
+format = "[](fg:#aaaaaa)"
+# Only when NOT inside a git repository
+when = "! git rev-parse --is-inside-work-tree > /dev/null 2>&1"
+
+[python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+symbol = " "
+

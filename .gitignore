@@ -1,6 +1,7 @@
 /**
 !/.gitignore
 !/.config/
+!/.config/starship.toml
 !/.config/dunst/
 !/.config/dunst/**
 !/.config/fastfetch/
@@ -9,8 +10,6 @@
 !/.config/hypr/**
 !/.config/kitty/
 !/.config/kitty/**
-!/.config/poweline/
-!/.config/powerline/**
 !/.config/rmpc/
 !/.config/rmpc/**
 !/.config/fuzzel/

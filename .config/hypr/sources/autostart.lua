@@ -1,0 +1,10 @@
+hl.on("hyprland.start", function () 
+  hl.exec_cmd( "qs -p .config/quickshell/main/shell.qml" )
+  hl.exec_cmd( "wl-gammarelay-rs &" )
+  hl.exec_cmd( "exec-once = awww-daemon & ~/.config/hypr/scripts/wallpaperSwitcher.sh" )
+  hl.exec_cmd( "hyprctl setcursor Vimix-cursors 24" )
+  hl.exec_cmd( "hyprpm reload" )
+  hl.exec_cmd( "systemctl --user start hyprpolkitagent" )
+  hl.exec_cmd( "mpdas" 
+  hl.exec_cmd( "[workspace special:main silent; size 1480 960; pseudo] kitty" )
+end)

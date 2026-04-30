@@ -193,11 +193,11 @@
                                     pane: Pane(Property(
 
                                         content: [
-                                            (kind: Text(""), style: (fg: "dark_gray")),
-                                            (kind: Text(" 󰄉 Total: "), style: (fg: "white", bg: "dark_gray")),
-                                            (kind: Text(" "), style: (fg: "dark_gray", bg: "gray")),
-                                            (kind: Property(Status(QueueTimeTotal(separator: " "))), style: (fg: "black", bg: "gray")),
-                                            (kind: Text(" "), style: (fg: "gray")),
+                                            (kind: Text(""), style: (fg: "gray")),
+                                            (kind: Text(" 󰄉 Total: "), style: (fg: "black", bg: "gray")),
+                                            (kind: Text(" "), style: (fg: "gray", bg: "dark_gray")),
+                                            (kind: Property(Status(QueueTimeTotal(separator: " "))), style: (fg: "white", bg: "dark_gray")),
+                                            (kind: Text(" "), style: (fg: "dark_gray")),
                                         ], align: Right,)),
 
 
