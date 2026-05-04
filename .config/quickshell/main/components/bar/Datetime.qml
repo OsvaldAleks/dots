@@ -5,6 +5,7 @@ import Quickshell
 import QtQuick.Controls
 import "root:/styles"
 import "root:/components/common"
+
 Item{
     id: wrapper
 

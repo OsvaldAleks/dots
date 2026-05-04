@@ -2,6 +2,7 @@
 
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 import "root:/components/"
 import "root:/components/menus"
 import "root:/services" as Services
@@ -10,12 +11,19 @@ ShellRoot {
     id: root
 
     Loader {
-        active: true
-        sourceComponent: Bar{}
+        id: overview
+        active: false
+        sourceComponent: Overview{}
+
+        onActiveChanged: {
+            if(active){
+                Hyprland.activeTopLevel = null
+            }
+        }
     }
 
     Loader {
-        active: false
-        sourceComponent: RightEdge{}
+        active: true
+        sourceComponent: Bar{}
     }
 }

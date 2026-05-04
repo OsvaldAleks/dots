@@ -116,6 +116,7 @@ ColumnLayout{
             onPositionChanged: (mouse) => {
                 if(dragging){
                     sliderInfo.ratio = Math.max(0,Math.min(1,(parent.height-mouse.y)/parent.height))
+                    sliderInfo.trackClicked(sliderInfo.ratio)
                 }
             }
 

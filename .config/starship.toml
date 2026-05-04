@@ -1,6 +1,7 @@
 # Insert a blank line between shell prompts
 add_newline = true
 
+scan_timeout = 2000
 # Define the order and format of the information in our prompt
 format = """\
 [ ](fg:#d3d4cb)\
@@ -24,8 +25,8 @@ symbol = " "
 disabled = true
 
 [character]
-success_symbol = '  [󱞩](fg:#d3d4cb) '
-error_symbol = '  [󱞩](fg:#e17b7b) '
+success_symbol = '  [󱞩](fg:#d3d4cb)'
+error_symbol = '  [󱞩](fg:#e17b7b)'
 
 [custom.icon_separator]
 command = ""
@@ -57,7 +58,7 @@ style = "fg:#363647 bg:#daee76"
 disabled = false
 
 [nodejs]
-format = "[$symbol($version)]($style)"
+format = "[$symbol($version )]($style)"
 style = "fg:14141e bg:#daee76"
 
 [package]
@@ -68,7 +69,7 @@ display_private = true
 # Output the command duration if over 2 seconds
 [cmd_duration]
 min_time = 2_000
-format = "[  $duration ]($style)"
+format = "[   $duration ]($style)"
 style = "white"
 
 # Customize the battery indicator
@@ -83,7 +84,7 @@ style = '#e17b7b'
 [custom.git_config_email]
 description = "Output the current git user's configured email address."
 command = "git config user.email"
-format = "\n[$symbol(  $output)]($style)"
+format = "\n [$symbol ( $output)]($style)"
 # Only when inside git repository
 when = "git rev-parse --is-inside-work-tree >/dev/null 2>&1"
 style = "text"
@@ -108,3 +109,13 @@ when = "! git rev-parse --is-inside-work-tree > /dev/null 2>&1"
 format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 symbol = " "
 
+[rust]
+symbol = "󱘗 "
+format = '[$symbol($version )]($style)'
+
+[dotnet]
+format = '[$symbol($version )]($style)'
+
+[lua]
+symbol = " "
+format = '[$symbol($version )]($style)'

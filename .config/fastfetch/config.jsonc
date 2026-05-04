@@ -1,9 +1,11 @@
 {
   "logo": {
+    "type": "auto",
+    "source": "/home/aleks/.config/fastfetch/i2.png",
     "padding": {
-      "top": 2,
-      "left": 1,
-      "right": 2
+      "top": 11,
+      "left": 4,
+      "right": 1
     },
     "color": {
       "1": "94",
@@ -11,34 +13,38 @@
     }
   },
   "display": {
-    "separator": "  "
+    "separator": "\t"
   },
   "modules": [
     // Title
     {
       "type": "title",
-      "format": "{#37}╭───────────── {#92}{user-name}"
+      "format": "{#37}╭───────{#47}{#1}{#30}{user-name}{#0}{#37}"
+    }, 
+    {
+      "type": "custom",
+      "format": "{#37}│"
     },
     // System Information
     {
       "type": "custom",
-      "format": "{#37}│ {#92}System Information"
+      "format": "{#37}│ {#34}{#0}{#1}{#30}{#44}System Information{#0}{#34}"
     },
     {
       "type": "os",
-      "key": "{#separator}{#37}│  {#keys}{#34}󰍹 OS"
+      "key": "{#separator}{#37}│  {#keys}{#34}󱞩 󰍹 OS"
     },
     {
       "type": "kernel",
-      "key": "{#separator}{#37}│  {#keys}{#34}󰒋 Kernel"
+      "key": "{#separator}{#37}│  {#keys}{#34}󱞩 󰒋 Kernel"
     },
     {
       "type": "uptime",
-      "key": "{#separator}{#37}│  {#keys}{#34}󰅐 Uptime"
+      "key": "{#separator}{#37}│  {#keys}{#34}󱞩 󰅐 Uptime"
     },
     {
       "type": "packages",
-      "key": "{#separator}{#37}│  {#keys}{#34}󰏖 Packages",
+      "key": "{#separator}{#37}│  {#keys}{#34}󱞩 󰏖 Packages",
       "format": "{all}"
     },
     {
@@ -48,31 +54,31 @@
     // Desktop Environment
     {
       "type": "custom",
-      "format": "{#37}│ {#92}Desktop Environment"
+      "format": "{#37}│ {#92}{#0}{#1}{#30}{#102}Desktop Environment{#0}{#92}"
     },
     {
       "type": "de",
-      "key": "{#separator}{#37}│  {#keys}{#34}󰧨 DE"
+      "key": "{#separator}{#37}│  {#keys}{#92}󱞩 󰧨 DE"
     },
     {
       "type": "wm",
-      "key": "{#separator}{#37}│  {#keys}{#34}󱂬 WM"
+      "key": "{#separator}{#37}│  {#keys}{#92}󱞩 󱂬 WM"
     },
     {
       "type": "wmtheme",
-      "key": "{#separator}{#37}│  {#keys}{#34}󰉼 Theme"
+      "key": "{#separator}{#37}│  {#keys}{#92}󱞩 󰉼 Theme"
     },
     {
       "type": "display",
-      "key": "{#separator}{#37}│  {#keys}{#34}󰹑 Resolution"
+      "key": "{#separator}{#37}│  {#keys}{#92}󱞩 󰹑 Res"
     },
     {
       "type": "shell",
-      "key": "{#separator}{#37}│  {#keys}{#34}󰞷 Shell"
+      "key": "{#separator}{#37}│  {#keys}{#92}󱞩 󰞷 Shell"
     },
     {
       "type": "terminalfont",
-      "key": "{#separator}{#37}│  {#keys}{#34}󰛖 Font"
+      "key": "{#separator}{#37}│  {#keys}{#92}󱞩 󰛖 Font"
     },
     {
       "type": "custom",
@@ -81,23 +87,23 @@
     // Hardware Information
     {
       "type": "custom",
-      "format": "{#37}│ {#92}Hardware Information"
+      "format": "{#37}│ {#91}{#0}{#1}{#30}{#101}Hardware Information{#0}{#91}"
     },
     {
       "type": "cpu",
-      "key": "{#separator}{#37}│  {#keys}{#34}󰻠 CPU"
+      "key": "{#separator}{#37}│  {#keys}{#91}󱞩 󰻠 CPU"
     },
     {
       "type": "gpu",
-      "key": "{#separator}{#37}│  {#keys}{#34}󰢮 GPU"
+      "key": "{#separator}{#37}│  {#keys}{#91}󱞩 󰢮 GPU"
     },
     {
       "type": "memory",
-      "key": "{#separator}{#37}│  {#keys}{#34}󰍛 Memory"
+      "key": "{#separator}{#37}│  {#keys}{#91}󱞩 󰍛 Memory"
     },
     {
       "type": "disk",
-      "key": "{#separator}{#37}│  {#keys}{#34}󰋊 Disk (/)",
+      "key": "{#separator}{#37}│  {#keys}{#91}󱞩 󰋊 Disk",
       "folders": "/"
     },
     {
@@ -106,14 +112,17 @@
     },
     // Colors
     {
-      "type": "colors",
-      "key": "{#separator}{#37}│",
-      "symbol": "circle"
-    },    
+        "type": "custom",
+        "format": "{#separator}{#37}│ {#90}█{#101}◣{#91}{#102}█◣{#92}{#103}█◣{#93}{#104}█◣{#94}{#105}█◣{#95}{#106}█◣{#96}{#107}█◣{#0}{#97}█"
+    },
+    {
+        "type": "custom",
+        "format": "{#separator}{#37}│ {#30}█{#31}{#40}◢█{#32}{#41}◢█{#33}{#42}◢█{#34}{#43}◢█{#35}{#44}◢█{#36}{#45}◢█{#46}{#37}◢█{#49}"
+    },
     // Footer
     {
       "type": "custom",
-      "format": "{#37}╰───────────────────────────────╯"
+      "format": "{#37}╰────────────────╯"
     }
   ]
 }

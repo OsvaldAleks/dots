@@ -28,6 +28,16 @@ Rectangle {
 
     Behavior on implicitWidth { NumberAnimation { duration: 50 } }
 
+    HoverHandler {
+        id: hoverChecker
+        margin: 2*Style.padding
+        onHoveredChanged: {
+            if (hovered) {
+                overview.active = true
+            }
+        }
+    }
+
     RowLayout {
         id: content
         height: parent.height
@@ -95,6 +105,7 @@ Rectangle {
             }
         }
     }
+
     WheelHandler {
         id: wheel
         acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad

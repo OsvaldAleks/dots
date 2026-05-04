@@ -56,6 +56,9 @@ Item{
         HoverHandler {
             id: hoverChecker
             margin: Style.padding
+            onHoveredChanged: {
+                overview.active = false
+            }
         }
 
         GridLayout {

@@ -56,6 +56,9 @@ RowLayout {
 
                 HoverHandler {
                     id: hoverChecker
+                    onHoveredChanged: {
+                        overview.active = false
+                    }
                 }
                 
                 gradient: expanded ? Style.bgGradient : Style.transparentGradient

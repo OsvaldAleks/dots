@@ -35,7 +35,7 @@ handleIn() {
 handle3in() {
     if [ -f "$STATEFILE" ]; then
         # HyprExpo is active -> select hovered workspace
-        hyprctl dispatch hyprexpo:expo select
+        qs ipc -p /home/aleks/.config/quickshell/main/shell.qml call overview close
         rm "$STATEFILE"
     else
         # HyprExpo not active -> only open menu if Fuzzel is not running
@@ -73,12 +73,12 @@ handleOut() {
 handle3out() {
     # Only toggle HyprExpo if Fuzzel is not running
     if ! pgrep -x fuzzel >/dev/null; then
-        hyprctl dispatch hyprexpo:expo toggle
+        qs ipc -p /home/aleks/.config/quickshell/main/shell.qml call overview toggle
         if [[ ! -z "$SPECIAL_OPEN_ON_ANY" ]]; then
             hyprctl dispatch togglespecialworkspace "$TARGET"
         fi
         touch "$STATEFILE"
-        hyprctl dispatch hyprexpo:expo on
+        qs ipc -p /home/aleks/.config/quickshell/main/shell.qml call overview open
     else
         pkill fuzzel
     fi

@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Bluetooth
 import "root:/styles"
+import "root:/services" as Services
 
 Rectangle {
     implicitHeight: Style.panelHeight
@@ -62,7 +63,7 @@ Rectangle {
 
             Layout.margins: Style.borders
 
-            color: Style.blue
+            color: (Services.NetworkReader.connectionType == "none") ? Style.white : Style.blue
 
             topLeftRadius: height / 2
             bottomLeftRadius: height / 2
@@ -76,15 +77,23 @@ Rectangle {
                 anchors.centerIn: parent
                 Text{
                     id: connectedNetworkIcon
-                    // text:"󰖪"
-                    text:" 󰖩"
-                    color: Style.black
+                    text: {
+                        switch (Services.NetworkReader.connectionType) {
+                        case "wifi":
+                            return "󰖩"
+                        case "ethernet":
+                            return "󱎔"
+                        default:
+                            return "󰖪"
+                        }
+                    }
+                    color: (Services.NetworkReader.connectionType == "none") ? Style.darkRed : Style.black
                     font: Style.fontIcons
                 }
                 Text{
                     id: connectedNetworkText
-                    text:"Redmi A3"
-                    color: Style.black
+                    text: Services.NetworkReader.connectionName
+                    color: (Services.NetworkReader.connectionType == "none") ? Style.darkRed : Style.black
                     font: Style.fontMain
                 }
             }
