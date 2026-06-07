@@ -52,7 +52,7 @@ Rectangle {
     gradient: expanded ? Style.bgGradient : Style.bgGradientNone
     border{
         color:Style.colorBorders
-        width:Style.borders
+        width: expanded ? Style.borders : 0
     }
 
     HoverHandler {

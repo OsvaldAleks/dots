@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Effects
 import Quickshell
 import Quickshell.Services.UPower
+import Quickshell.Hyprland
 import "root:/styles"
 import "root:/components/common"
 
@@ -136,9 +137,7 @@ Rectangle {
                         backgroundColor: Style.darkGray
                         textColor: Style.white
                         onClicked: () => {
-                            Quickshell.execDetached({
-                                command: ["hyprctl", "dispatch", "exit"]
-                            })
+                            Hyprland.dispatch(" hl.dsp.exit() ")
                         }
                     }
                     Button{

@@ -1,25 +1,16 @@
 --- DEVICES
-require("./sources/devices.lua")
+require("sources.devices")
 
 --- KEYBINDINGS & GESTURES
 --- source = ./sources/binds.conf
-require("./sources/binds.lua")
+require("sources.binds")
 
 --- LOOK AND FEEL
 --- source = ./sources/look_and_feel.conf
+require("sources.lookAndFeel")
 
 --- AUTOSTART
-require("./sources/autostart.lua")
-
----------------------------------------------------------
---- OTHER 
-hl.config({
-    misc = {
-        force_default_wallpaper = -1,
-        disable_hyprland_logo   = true,
-        font_family = "DejaVu Sans Mono"
-    },
-})
+require("sources.autostart")
 
 --- PLUGINS
 --- permission = /usr/(bin|local/bin)/hyprpm, plugin, allow

@@ -19,7 +19,7 @@ Item {
         anchors.fill: parent
         color: "transparent"
         radius: Style.cornerRadius
-        border.width: 2
+        border.width: Style.borders
         border.color: workspaceIndicator.hovered 
             ? Style.white
             : workspace.active
@@ -133,7 +133,7 @@ Item {
                             var targetWorkspaceId = workspaceGrid.hoveredWorkspace
 
                             if (targetWorkspaceId !== 0 && targetWorkspaceId != workspace.id) {                    
-                                Hyprland.dispatch(`movetoworkspacesilent ${targetWorkspaceId},address:0x${toplevel.address}`)
+                                Hyprland.dispatch(`hl.dsp.window.move({ workspace = ${targetWorkspaceId}, follow = false, window = "address:0x${toplevel.address}" })`)
                             } else {
                                 // Snap back to captured origin
                                 toplevelItem.x = toplevelItem.originX
@@ -165,7 +165,8 @@ Item {
                                 var entry = DesktopEntries.byId(modelData.wayland.appId)
                                 if (entry != null && entry.icon)
                                     return "file:///usr/share/icons/Papirus/48x48/apps/" + entry.icon + ".svg"
-                                return "image://icon/" + modelData.wayland.appId
+                                return "file:///usr/share/icons/Papirus/48x48/categories/application-default-icon.svg"
+
                             }
                             width: 32
                             height: 32
@@ -183,6 +184,19 @@ Item {
                         font.pixelSize: 10
                     }
                 }
+            }
+        }
+    }
+
+    WheelHandler {
+        id: wheel
+        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+        margin: Style.padding
+        onWheel: (event) => {
+            if (event.angleDelta.y > 0) {
+                Hyprland.dispatch("hl.dsp.focus( {workspace = \"m-1\" })")
+            } else {
+                Hyprland.dispatch("hl.dsp.focus( {workspace = \"m+1\" })")
             }
         }
     }

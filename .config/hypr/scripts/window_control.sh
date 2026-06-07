@@ -15,7 +15,7 @@ enable_move() {
         hyprctl keyword input:follow_mouse 3
         hyprctl keyword input:float_switch_override_focus 0
         # Tell Hyprland to switch to submap
-        hyprctl dispatch submap move
+        hyprctl dispatch 'hl.dsp.submap("move")'
     else
         # Notify user that the window cannot be moved
         notify-send -r 123 -t 1000 -a "status" -i ~/.config/dunst/icons/status_icon.png "Cannot move" "Only floating windows can be moved"
@@ -41,7 +41,7 @@ enable_resize() {
         hyprctl keyword input:follow_mouse 3
         hyprctl keyword input:float_switch_override_focus 0
         # Tell Hyprland to switch to submap
-        hyprctl dispatch submap resize
+        hyprctl dispatch 'hl.dsp.submap("resize")'
     else
         notify-send -r 123 -t 1000 -a "status" -i ~/.config/dunst/icons/status_icon.png "Cannot resize" "Lone tiled window cannot be resized"
 
@@ -56,7 +56,7 @@ disable_submap() {
     hyprctl keyword input:follow_mouse 1
     hyprctl keyword input:float_switch_override_focus 1
     # Disable submap
-    hyprctl dispatch submap reset
+    hyprctl dispatch 'hl.dsp.submap("reset")'
 }
 
 if [[ "$1" == "--move_window" ]]; then

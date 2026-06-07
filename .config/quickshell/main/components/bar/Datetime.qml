@@ -56,8 +56,8 @@ Item{
         property var selectedDate: clockItem.date
 
         border{
-            color:Style.colorBorders
-            width:Style.borders
+            color: Style.colorBorders
+            width: expanded ? Style.borders : 0
         }
 
         HoverHandler {
@@ -74,7 +74,6 @@ Item{
             id: content
             anchors{
                 left: parent.left
-                margins: Style.borders
             }
             width: expanded ? 350 : undefined
 
@@ -82,11 +81,10 @@ Item{
                 id: topLine
                 height: Style.panelHeight
                 Layout.fillWidth: true
-                Layout.topMargin: Style.borders
 
                 Rectangle{
                     color: Style.gray
-                    height: Style.panelHeight - 2*Style.borders
+                    height: Style.panelHeight
                     implicitWidth: monthControls.implicitWidth + expanded*Style.padding
 
                     Behavior on implicitWidth { NumberAnimation { duration: 100 } }
@@ -95,11 +93,11 @@ Item{
 
                     RowLayout{
                         id: monthControls
-                        height: Style.panelHeight - 2*Style.borders
+                        height: Style.panelHeight
                         spacing: 0
                         Rectangle {
                             color: Style.white
-                            implicitHeight: Style.panelHeight - 2*Style.borders
+                            implicitHeight: Style.panelHeight
                             implicitWidth: date.implicitWidth + 2*Style.padding
 
                             Layout.alignment: Qt.AlignVCenter

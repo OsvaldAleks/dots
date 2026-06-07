@@ -12,7 +12,7 @@ Rectangle {
     topRightRadius: Style.cornerRadius
     bottomRightRadius: Style.cornerRadius
 
-    property int permanentCount: 1
+    property int permanentCount: 3
 
     readonly property int maxWorkspaceId: {
         const ids = Hyprland.workspaces.values.map(w => w.id)
@@ -22,8 +22,8 @@ Rectangle {
     gradient: Style.bgGradientNone
 
     border{
-        color:Style.colorBorders
-        width:Style.borders
+        color: Style.colorBorders
+        width: 0
     }
 
     Behavior on implicitWidth { NumberAnimation { duration: 50 } }
@@ -50,7 +50,7 @@ Rectangle {
                 Hyprland.activeToplevel && Hyprland.activeToplevel.workspace.name === "special:main"
             }
 
-            height: workspaces.height - (2 * Style.borders)
+            height: workspaces.height
             implicitWidth: terminalIcon.implicitWidth + 2*Style.padding
 
             Layout.alignment: Qt.AlignVCenter
@@ -72,7 +72,7 @@ Rectangle {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 onClicked: {
-                    Hyprland.dispatch("togglespecialworkspace main")
+                    Hyprland.dispatch("hl.dsp.workspace.toggle_special( \"main\" )")
                 }
             }
         }
@@ -112,9 +112,9 @@ Rectangle {
         margin: Style.padding
         onWheel: (event) => {
             if (event.angleDelta.y > 0) {
-                Hyprland.dispatch("workspace m-1")
+                Hyprland.dispatch("hl.dsp.focus( {workspace = \"m-1\" })")
             } else {
-                Hyprland.dispatch("workspace m+1")
+                Hyprland.dispatch("hl.dsp.focus( {workspace = \"m+1\" })")
             }
         }
     }

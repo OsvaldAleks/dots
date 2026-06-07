@@ -10,10 +10,10 @@ handleIn() {
     wininfo=$(hyprctl activewindow -j)
     isfloating=$(echo "$wininfo" | jq -r '.floating')
     isfullscreen=$(echo "$wininfo" | jq -r '.fullscreen')
-
+    
     if [ "$isfloating" == "true" ]; then
         # If it's floating -> tile it
-        hyprctl dispatch togglefloating
+        hyprctl dispatch 'hl.dsp.window.float()'
     else
         # If it's tiled -> fullscreen it
 
@@ -23,24 +23,10 @@ handleIn() {
 
         if [ "$numWindows" -eq 1 ]; then
             if [ "$isfullscreen" -lt 2 ]; then
-                hyprctl dispatch fullscreenstate 2
+                hyprctl dispatch 'hl.dsp.window.fullscreen_state( { internal = 2, client = -1})'
             fi
         else
-            hyprctl dispatch fullscreenstate $((isfullscreen + 1))
-        fi
-    fi
-}
-
-
-handle3in() {
-    if [ -f "$STATEFILE" ]; then
-        # HyprExpo is active -> select hovered workspace
-        qs ipc -p /home/aleks/.config/quickshell/main/shell.qml call overview close
-        rm "$STATEFILE"
-    else
-        # HyprExpo not active -> only open menu if Fuzzel is not running
-        if ! pgrep -x fuzzel >/dev/null; then
-            fuzzel --show drun
+            hyprctl dispatch 'hl.dsp.window.fullscreen_state( { internal = '$((isfullscreen + 1))', client = -1})'
         fi
     fi
 }
@@ -59,28 +45,14 @@ handleOut() {
         numWindows=$(hyprctl workspaces -j | jq -r '.[] | select(.id == '$workspace') | .windows')
 
         if [ "$numWindows" -eq 1 ]; then
-            hyprctl dispatch fullscreenstate 0
+            hyprctl dispatch 'hl.dsp.window.fullscreen_state( { internal = 0, client = -1})'
         else
-            hyprctl dispatch fullscreenstate $((isfullscreen - 1))
+            hyprctl dispatch 'hl.dsp.window.fullscreen_state( { internal = '$((isfullscreen - 1))', client = -1})'
         fi
 
     elif [ "$isfloating" = "false" ]; then
         # If it's tiled -> float it
-        hyprctl dispatch togglefloating
-    fi
-}
-
-handle3out() {
-    # Only toggle HyprExpo if Fuzzel is not running
-    if ! pgrep -x fuzzel >/dev/null; then
-        qs ipc -p /home/aleks/.config/quickshell/main/shell.qml call overview toggle
-        if [[ ! -z "$SPECIAL_OPEN_ON_ANY" ]]; then
-            hyprctl dispatch togglespecialworkspace "$TARGET"
-        fi
-        touch "$STATEFILE"
-        qs ipc -p /home/aleks/.config/quickshell/main/shell.qml call overview open
-    else
-        pkill fuzzel
+        hyprctl dispatch 'hl.dsp.window.float()'
     fi
 }
 
@@ -88,8 +60,4 @@ if [ "$1" == "in" ]; then
     handleIn
 elif [ "$1" == "out" ]; then
     handleOut
-elif [ "$1" == "3in" ]; then
-    handle3in
-elif [ "$1" == "3out" ]; then
-    handle3out
 fi

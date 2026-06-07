@@ -53,6 +53,11 @@ RowLayout {
                 Behavior on implicitHeight { NumberAnimation { duration: 50 } }
 
                 property bool expanded: hoverChecker.hovered
+                
+                border{
+                    color: Style.colorBorders
+                    width: expanded ? Style.borders : 0
+                }
 
                 HoverHandler {
                     id: hoverChecker

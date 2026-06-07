@@ -39,7 +39,7 @@ Singleton {
 
     readonly property color text: white
     readonly property color colorUrgent: red
-    readonly property color colorBorders: "#696969" 
+    readonly property color colorBorders: "#80aaaaaa" 
 
     // Gradients
     readonly property var bgGradient: Gradient {
@@ -57,7 +57,7 @@ Singleton {
     readonly property int panelHeight: 25
     readonly property int cornerRadius: 5
     readonly property int padding: 10
-    readonly property int borders: 0
+    readonly property int borders: 1
 
     // Effects
     readonly property real shadowBlur : 1

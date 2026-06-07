@@ -14,8 +14,8 @@ Rectangle {
 
     gradient: Style.bgGradientNone
     border{
-        color:Style.colorBorders
-        width:Style.borders
+        color: Style.colorBorders
+        width: 0
     }
     RowLayout{
         anchors.centerIn: parent

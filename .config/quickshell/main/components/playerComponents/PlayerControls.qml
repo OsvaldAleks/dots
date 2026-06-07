@@ -12,7 +12,7 @@ Rectangle{
     property var activePlayer: Mpris.players.values
     property bool expanded: false
 
-    implicitHeight: expanded ? controls.implicitHeight : Style.panelHeight - 2 * Style.borders
+    implicitHeight: expanded ? controls.implicitHeight : Style.panelHeight
     Layout.preferredWidth: expanded ? -1 : controls.implicitWidth
 
     topLeftRadius: height / 2
@@ -44,7 +44,7 @@ Rectangle{
 
         Text {
             id: prevTrack
-            visible: (activePlayer ? true : false && activePlayer.canGoPrevious)
+            visible: expanded ? (activePlayer ? true : false && activePlayer.canGoPrevious) : false
             color: Style.black
             text: ""
             font: expanded ? Style.fontIcons : Style.fontMain
@@ -57,7 +57,7 @@ Rectangle{
 
         Text {
             id: nextTrack
-            visible: (activePlayer ? true : false && activePlayer.canGoNext)
+            visible: expanded ? (activePlayer ? true : false && activePlayer.canGoPrevious) : false
             color: Style.black
             text: ""
             font: expanded ? Style.fontIcons : Style.fontMain

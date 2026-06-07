@@ -41,8 +41,8 @@ Item{
 
     Rectangle {
         id: player
-        implicitWidth: expanded ? 625 : playerControls.width + artistLabel.width + 2*Style.borders
-        implicitHeight: expanded ? trackImage.height + + 2*Style.padding + 2*Style.borders : Style.panelHeight
+        implicitWidth: expanded ? 625 : playerControls.width + artistLabel.width
+        implicitHeight: expanded ? trackImage.height + 2*Style.padding : Style.panelHeight
         radius: Style.cornerRadius
         Behavior on implicitWidth { NumberAnimation { duration: 50 } }
         Behavior on implicitHeight { NumberAnimation { duration: 50 } }
@@ -50,7 +50,7 @@ Item{
         gradient: expanded ? Style.bgGradient : Style.bgGradientNone
         border {
             color: Style.colorBorders
-            width: Style.borders
+            width: expanded ? Style.borders : 0
         }
 
         HoverHandler {
@@ -115,7 +115,6 @@ Item{
                 Layout.topMargin: expanded ? Style.padding : 0
                 Layout.rightMargin: expanded ? Style.padding : 0
                 Layout.bottomMargin: expanded ? Style.padding : 0
-                Layout.leftMargin: Style.borders
             }
 
             Label{

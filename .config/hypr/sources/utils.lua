@@ -17,7 +17,7 @@ end
 --- PINCHES ---
 ---------------
 --- 2 finger window pinches
-local function handleIn()
+local handleIn = function()
     get_active_window_json(function(wininfo)
         local floating   = wininfo:match('"floating":%s*(%w+)') == "true"
         local fullscreen = tonumber(wininfo:match('"fullscreen":%s*(%d+)')) or 0
@@ -30,10 +30,10 @@ local function handleIn()
                 local num = tonumber(wsinfo:match('"id":%s*'..workspace..'.-"windows":%s*(%d+)')) or 0
 
                 if num == 1 then
-                    hl.dsp.window.fullscreenstate({ internal = 2, client = -1 })
+                    hl.dsp.window.fullscreen_state({ internal = 2, client = -1 })
                 else
                     if fullscreen < 2 then
-                        hl.dsp.window.fullscreenstate({ internal = fullscreen + 1, client = -1 })
+                        hl.dsp.window.fullscreen_state({ internal = fullscreen + 1, client = -1 })
                     end
                 end
             end)
@@ -41,7 +41,7 @@ local function handleIn()
     end)
 end
 
-local function handleOut()
+local handleOut = function()
     get_active_window_json(function(wininfo)
         local floating   = wininfo:match('"floating":%s*(%w+)') == "true"
         local fullscreen = tonumber(wininfo:match('"fullscreen":%s*(%d+)')) or 0
@@ -52,20 +52,22 @@ local function handleOut()
                 local num = tonumber(wsinfo:match('"id":%s*'..workspace..'.-"windows":%s*(%d+)')) or 0
 
                 if num == 1 then
-                    hl.dsp.window.fullscreenstate({ internal = 0, client = -1 })
+                    hl.dsp.window.fullscreen_state({ internal = 0, client = -1 })
                 else
-                    hl.dsp.window.fullscreenstate({ internal = fullscreen - 1, client = -1 })
+                    hl.dsp.window.fullscreen_state({ internal = fullscreen - 1, client = -1 })
                 end
             end)
         elseif not floating then
             hl.dsp.window.float({ action = "toggle" })
+        end
+    end)
 end
 
 --- 3 finger enviroment pinches
 local statefile = "/tmp/hyprexpo_active"
 
-local function handle3in()
-    hl.exec_cmd("test -f " .. statefile .. " && echo 1 || echo 0", function(out)
+local handle3in = function()
+    hl.dsp.exec_cmd("test -f " .. statefile .. " && echo 1 || echo 0", function(out)
         if out:match("1") then
             hl.dsp.exec_cmd("hyprctl dispatch hyprexpo:expo select")
             hl.exec_cmd("rm " .. statefile)
@@ -79,8 +81,9 @@ local function handle3in()
     end)
 end
 
-local function handle3out()
-    hl.exec_cmd("pgrep -x fuzzel", function(p)
+local handle3out = function()
+    local a = hl.dsp.exec_cmd("pgrep -x fuzzel")
+    hl.notification.create({ text = a, duration = 5000, icon = "ok" })
         if p == "" then
             hl.dsp.exec_cmd("hyprctl dispatch hyprexpo:expo toggle")
             hl.exec_cmd("touch " .. statefile)
@@ -88,5 +91,14 @@ local function handle3out()
         else
             hl.exec_cmd("pkill fuzzel")
         end
-    end)
 end
+
+local swipe = function()
+end
+
+return {
+    handleIn  = handleIn,
+    handleOut = handleOut,
+    handle3in = handle3in,
+    handle3out= handle3out
+}

@@ -167,7 +167,7 @@
                             pane: Component("header_left")
                         ),
                         (
-                            size: "23",
+                            size: "33",
                             pane: Component("header_right")
                         ),
                     ]
@@ -219,7 +219,7 @@
         )),
         "title": Pane(Property(
             content: [
-                (kind: Text("  "), style: (fg: "white")),
+                (kind: Text("   Track "), style: (fg: "light_green", modifiers: "Bold")),
                 (kind: Property(Song(Title)), style: (fg: "white", modifiers: "Bold"),
                     default: (kind: Text("   "), style: (fg: "white", modifiers: "Bold"))),
             ],
@@ -260,7 +260,7 @@
         ),
         "artist": Pane(Property(
             content: [
-                (kind: Text("  "), style: (fg: "white")),
+                (kind: Text("  Artist "), style: (fg: "light_green", modifiers: "Bold")),
                 (kind: Property(Song(Artist)), style: (fg: "white", modifiers: "Bold"),
                     default: (kind: Text("   "), style: (fg: "white", modifiers: "Bold"))),
             ], align: Left
@@ -268,10 +268,6 @@
         "states": Split(
             direction: Horizontal,
             panes: [
-                (
-                    size: "100%",
-                    pane: Pane(Property(content: [(kind: Property(Status(InputBuffer())), style: (fg: "light_green"), align: Left)]))
-                ),
                 (
                     size: "12",
                     pane: Pane(Property(content: [
@@ -330,8 +326,14 @@
         "header_right": Split(
             direction: Vertical,
             panes: [
-                (size: "1", pane: Component("states")),
-                (size: "1", pane: Component("volume")),
+                (size: "1", pane: Pane(Empty())),
+                (size: "1", pane: Split(
+                    direction: Horizontal,
+                    panes: [
+                        (size: "12", pane: Component("states")),
+                        (size: "21", pane: Component("volume")),
+                    ]
+                )),
             ]
         ),
         "progress_bar": Split(

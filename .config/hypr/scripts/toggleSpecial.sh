@@ -15,14 +15,16 @@ IS_ACTIVE=$(hyprctl -j activewindow | jq -r \
 # Up = open if not open
 if [[ "$DIRECTION" == "up" ]]; then
     if [[ -z "$OPEN_ON_FOCUSED" ]]; then
-        hyprctl dispatch togglespecialworkspace "$TARGET"
+        hyprctl dispatch 'hl.dsp.workspace.toggle_special("'$TARGET'")'
     fi
 
 # Down = close if open
 elif [[ "$DIRECTION" == "down" ]]; then
     if [[ -n "$OPEN_ON_FOCUSED" ]]; then
-        hyprctl dispatch togglespecialworkspace "$TARGET"
+        hyprctl dispatch 'hl.dsp.workspace.toggle_special("'$TARGET'")'
     elif [[ -z "$IS_ACTIVE" ]];then
-        hyprctl dispatch killactive
+        hyprctl dispatch 'hl.dsp.window.close( )'
     fi
 fi
+
+echo $OPEN_ON_FOCUSED

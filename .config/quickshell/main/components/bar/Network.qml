@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Bluetooth
+import Quickshell.Networking
 import "root:/styles"
 import "root:/services" as Services
 
@@ -15,7 +16,7 @@ Rectangle {
 
     border{
         color:Style.colorBorders
-        width:Style.borders
+        width: 0
     }
 
     RowLayout {
@@ -59,9 +60,7 @@ Rectangle {
 
         Rectangle{
             implicitWidth: connectedNetworkLabel.width + 2*Style.padding
-            implicitHeight: Style.panelHeight - 2*Style.borders
-
-            Layout.margins: Style.borders
+            implicitHeight: Style.panelHeight
 
             color: (Services.NetworkReader.connectionType == "none") ? Style.white : Style.blue
 

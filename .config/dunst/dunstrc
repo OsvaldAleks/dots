@@ -17,8 +17,8 @@
     padding = 10
     horizontal_padding = 10
     text_icon_padding = 10
-    frame_width = 0
-    gap_size = 3
+    frame_width = 1
+    gap_size = 5
     sort = urgency_descending
     idle_threshold = 120
     font = "DejaVu Sans"
@@ -50,6 +50,7 @@
     mouse_middle_click = do_action, close_current
     mouse_right_click = close_all
     background = "#14141e80"
+    separator_color = "#00000000"
 
 [experimental]
     per_monitor_dpi = false
@@ -57,19 +58,19 @@
 [urgency_low]
     foreground = "#d3d4cbff"
     highlight = "#d3d4cbff"
-    frame_color = "#d3d4cbaa"
+    frame_color = "#aaaaaa80"
     timeout = 5
 
 [urgency_normal]
     foreground = "#d3d4cb"
     highlight = "#daee76"
-    frame_color = "#d3d4cbaa"
+    frame_color = "#aaaaaa80"
     timeout = 5
 
 [urgency_critical]
     foreground = "#e17b7b"
     highlight = "#e17b7b"
-    frame_color = "#d3d4cbaa"
+    frame_color = "#aaaaaa80"
     timeout = 0
 
 [ignore_status_updates]
