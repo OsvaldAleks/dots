@@ -139,8 +139,8 @@ hl.bind( vars.mainMod .. " + CTRL + left", hl.dsp.focus( {workspace = "r-1", on_
 hl.bind( vars.mainMod .. " + CTRL + right", hl.dsp.focus( {workspace = "r+1", on_current_monitor = true }))
 hl.bind( vars.mainMod .. " + mouse_down", hl.dsp.focus( {workspace = "r-1", on_current_monitor = true }))
 hl.bind( vars.mainMod .. " + mouse_up", hl.dsp.focus( {workspace = "r+1", on_current_monitor = true }))
-hl.bind( vars.mainMod .. " + mouse:274", hl.dsp.focus( {workspace = "empty", on_current_monitor = true }))
-hl.bind( vars.mainMod .. " + ALT + up", hl.dsp.focus( {workspace = "empty", on_current_monitor = true }))
+hl.bind( vars.mainMod .. " + mouse:274", hl.dsp.focus( {workspace = "emptym", on_current_monitor = true }))
+hl.bind( vars.mainMod .. " + ALT + up", hl.dsp.focus( {workspace = "emptym", on_current_monitor = true }))
 
 --- Move active window (relative)
 hl.bind( vars.mainMod .. " + SHIFT + CTRL + left", hl.dsp.window.move( {workspace = "m-1", follow = true }))
@@ -165,7 +165,7 @@ hl.bind( "XF86MonBrightnessDown", hl.dsp.exec_raw( "brightnessctl set 5%-" ))
 
 hl.bind( vars.mainMod .. " + ALT + 1", hl.dsp.exec_raw( "openrgb -c F8DDB8" ))
 hl.bind( vars.mainMod .. " + ALT + 2", hl.dsp.exec_raw( "openrgb -c FB7D4C" ))
-hl.bind( vars.mainMod .. " + ALT + 3", hl.dsp.exec_raw( "openrgb -c F85909" ))
+hl.bind( vars.mainMod .. " + ALT + 3", hl.dsp.exec_raw( "openrgb -c F84900" ))
 hl.bind( vars.mainMod .. " + ALT + 4", hl.dsp.exec_raw( "openrgb -c C8C949" ))
 hl.bind( vars.mainMod .. " + ALT + 5", hl.dsp.exec_raw( "openrgb -c 78FD38" ))
 

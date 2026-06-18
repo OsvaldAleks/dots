@@ -66,7 +66,7 @@ ColumnLayout{
         Layout.fillHeight: true
         width: Style.panelHeight-Style.padding/2
         radius: width/2
-        color: isDisabled ? Style.black : Style.accentSecondary
+        color: isDisabled ? Style.black : Style.darkGreen
 
         layer.enabled: true
         layer.effect: OpacityMask {
@@ -88,7 +88,7 @@ ColumnLayout{
             radius: Style.cornerRadius/2
             Behavior on radius { NumberAnimation { duration: 150 } }
 
-            color: isDisabled ? Style.colorUrgent : Style.accent
+            color: isDisabled ? Style.colorUrgent : Style.green
         }
 
         MouseArea {

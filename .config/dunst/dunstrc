@@ -42,43 +42,40 @@
     always_run_script = true
     title = Dunst
     class = Dunst
-    corner_radius = 5
+    corner_radius = 3
     ignore_dbusclose = false
     force_xwayland = false
     force_xinerama = false
     mouse_left_click = do_action, close_current
     mouse_middle_click = do_action, close_current
     mouse_right_click = close_all
-    background = "#14141e80"
+    background = "#1D1C1A80"
     separator_color = "#00000000"
+    frame_color = "#89847d80"
 
 [experimental]
     per_monitor_dpi = false
 
 [urgency_low]
-    foreground = "#d3d4cbff"
-    highlight = "#d3d4cbff"
-    frame_color = "#aaaaaa80"
+    foreground = "#F1E4D0"
+    highlight = "#F1E4D0"
     timeout = 5
 
 [urgency_normal]
-    foreground = "#d3d4cb"
+    foreground = "#F1E4D0"
     highlight = "#daee76"
-    frame_color = "#aaaaaa80"
     timeout = 5
 
 [urgency_critical]
-    foreground = "#e17b7b"
-    highlight = "#e17b7b"
-    frame_color = "#aaaaaa80"
+    foreground = "#F2412A"
+    highlight = "#F2412A"
     timeout = 0
 
 [ignore_status_updates]
     appname = "status"
-    background = "#14142e80"
-    foreground = "#6D77A1"
-    highlight = "#6D77A1"
-    frame_color = "#6D77A1aa"
+    foreground = "#EAD91F"
+    highlight = "#b3640b"
+    frame_color = "#b3640b"
     timeout = 0
     format = "<b>%s</b>\n%b\n"
     history_ignore = true

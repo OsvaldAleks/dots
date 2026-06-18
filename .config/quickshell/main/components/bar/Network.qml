@@ -62,7 +62,7 @@ Rectangle {
             implicitWidth: connectedNetworkLabel.width + 2*Style.padding
             implicitHeight: Style.panelHeight
 
-            color: (Services.NetworkReader.connectionType == "none") ? Style.white : Style.blue
+            color: Style.white
 
             topLeftRadius: height / 2
             bottomLeftRadius: height / 2
@@ -86,13 +86,13 @@ Rectangle {
                             return "󰖪"
                         }
                     }
-                    color: (Services.NetworkReader.connectionType == "none") ? Style.darkRed : Style.black
+                    color: (Services.NetworkReader.connectionType == "none") ? Style.darkRed : Style.blue
                     font: Style.fontIcons
                 }
                 Text{
                     id: connectedNetworkText
                     text: Services.NetworkReader.connectionName
-                    color: (Services.NetworkReader.connectionType == "none") ? Style.darkRed : Style.black
+                    color: (Services.NetworkReader.connectionType == "none") ? Style.darkRed : Style.blue
                     font: Style.fontMain
                 }
             }

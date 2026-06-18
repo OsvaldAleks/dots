@@ -23,6 +23,7 @@ hl.monitor({
     mode     = "preferred",
     position = "1920x0",
     scale    = "1",
+--    transform = 1
 })
 
 --- phone
@@ -30,11 +31,11 @@ hl.monitor({
 --- iPad
 --- monitor = HEADLESS-67, 2266x1488@60, 2560x-948, 1
 
-hl.workspace_rule({ workspace = "1", persistent = true, default = true})
-hl.workspace_rule({ workspace = "2", persistent = true })
-hl.workspace_rule({ workspace = "3", persistent = true })
-hl.workspace_rule({ workspace = "4" })
-hl.workspace_rule({ workspace = "5" })
+hl.workspace_rule({ workspace = "1", monitor="eDP-1", persistent = true, default = true})
+hl.workspace_rule({ workspace = "2", monitor="eDP-1", persistent = true })
+hl.workspace_rule({ workspace = "3", monitor="eDP-1", persistent = true })
+hl.workspace_rule({ workspace = "4", monitor="eDP-1" })
+hl.workspace_rule({ workspace = "5", monitor="eDP-1" })
 
 --------------
 --- INPUTS ---

@@ -1,15 +1,13 @@
 {
   "logo": {
-    "type": "auto",
-    "source": "/home/aleks/.config/fastfetch/i2.png",
+    "type": "kitty-direct",
+    "source": "/home/aleks/.config/fastfetch/bbbrd.png",
+    "height": 10,
+    "width": 20,
     "padding": {
-      "top": 11,
-      "left": 4,
+      "top": 4,
+      "left": 1,
       "right": 1
-    },
-    "color": {
-      "1": "94",
-      "2": "34"
     }
   },
   "display": {
@@ -19,7 +17,7 @@
     // Title
     {
       "type": "title",
-      "format": "{#37}╭───────{#47}{#1}{#30}{user-name}{#0}{#37}"
+      "format": "{#37}╭───────{#47}{#1}{#30} {user-name} {#0}{#37}"
     }, 
     {
       "type": "custom",
@@ -28,23 +26,23 @@
     // System Information
     {
       "type": "custom",
-      "format": "{#37}│ {#34}{#0}{#1}{#30}{#44}System Information{#0}{#34}"
+      "format": "{#37}│ {#93}{#0}{#1}{#30}{#103} System Information {#0}{#93}"
     },
     {
       "type": "os",
-      "key": "{#separator}{#37}│  {#keys}{#34}󱞩 󰍹 OS"
+      "key": "{#separator}{#37}│  {#keys}{#93}󱞩 󰍹 OS\t"
     },
     {
       "type": "kernel",
-      "key": "{#separator}{#37}│  {#keys}{#34}󱞩 󰒋 Kernel"
+      "key": "{#separator}{#37}│  {#keys}{#93}󱞩 󰒋 Kernel"
     },
     {
       "type": "uptime",
-      "key": "{#separator}{#37}│  {#keys}{#34}󱞩 󰅐 Uptime"
+      "key": "{#separator}{#37}│  {#keys}{#93}󱞩 󰅐 Uptime"
     },
     {
       "type": "packages",
-      "key": "{#separator}{#37}│  {#keys}{#34}󱞩 󰏖 Packages",
+      "key": "{#separator}{#37}│  {#keys}{#93}󱞩 󰏖 Packages",
       "format": "{all}"
     },
     {
@@ -54,31 +52,31 @@
     // Desktop Environment
     {
       "type": "custom",
-      "format": "{#37}│ {#92}{#0}{#1}{#30}{#102}Desktop Environment{#0}{#92}"
+      "format": "{#37}│ {#33}{#0}{#1}{#30}{#43} Desktop Environment {#0}{#33}"
     },
     {
       "type": "de",
-      "key": "{#separator}{#37}│  {#keys}{#92}󱞩 󰧨 DE"
+      "key": "{#separator}{#37}│  {#keys}{#33}󱞩 󰧨 DE"
     },
     {
       "type": "wm",
-      "key": "{#separator}{#37}│  {#keys}{#92}󱞩 󱂬 WM"
+      "key": "{#separator}{#37}│  {#keys}{#33}󱞩 󱂬 WM\t"
     },
     {
       "type": "wmtheme",
-      "key": "{#separator}{#37}│  {#keys}{#92}󱞩 󰉼 Theme"
+      "key": "{#separator}{#37}│  {#keys}{#33}󱞩 󰉼 Theme"
     },
     {
       "type": "display",
-      "key": "{#separator}{#37}│  {#keys}{#92}󱞩 󰹑 Res"
+      "key": "{#separator}{#37}│  {#keys}{#33}󱞩 󰹑 Res"
     },
     {
       "type": "shell",
-      "key": "{#separator}{#37}│  {#keys}{#92}󱞩 󰞷 Shell"
+      "key": "{#separator}{#37}│  {#keys}{#33}󱞩 󰞷 Shell"
     },
     {
       "type": "terminalfont",
-      "key": "{#separator}{#37}│  {#keys}{#92}󱞩 󰛖 Font"
+      "key": "{#separator}{#37}│  {#keys}{#33}󱞩 󰛖 Font"
     },
     {
       "type": "custom",
@@ -87,7 +85,7 @@
     // Hardware Information
     {
       "type": "custom",
-      "format": "{#37}│ {#91}{#0}{#1}{#30}{#101}Hardware Information{#0}{#91}"
+      "format": "{#37}│ {#91}{#0}{#1}{#30}{#101} Hardware Information {#0}{#91}"
     },
     {
       "type": "cpu",

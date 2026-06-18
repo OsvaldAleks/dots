@@ -90,7 +90,7 @@ Rectangle {
                 color: modelData.active
                     ? specialWorkspaceButton.active
                         ? Style.white
-                        : Style.accent 
+                        : Style.accent
                     : modelData.urgent
                         ? Style.colorUrgent
                         : Style.gray

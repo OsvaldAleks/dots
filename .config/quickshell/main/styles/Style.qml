@@ -24,27 +24,29 @@ Singleton {
     })    
 
     // Colors
-    readonly property color bg: "#8014141e"
-    readonly property color accent: "#7BD687"
-    readonly property color accentSecondary: "#4B8649"
-    readonly property color blue: "#ACB4EB"
-    readonly property color gray: "#AAAAAA"
-    readonly property color darkGray: "#696969"
-    readonly property color white: "#D3D4CB"
-    readonly property color black: "#363647"
-    readonly property color yellow: "#daee76"
-    readonly property color red: "#E17B7B"
-    readonly property color darkRed: "#8b4141"
+    readonly property color bg: "#801D1C1A"
+    readonly property color accent: "#ead91f"
+    readonly property color accentSecondary: "#b3640b"
+    readonly property color green: "#65E127"
+    readonly property color darkGreen: "#4d7503"
+    readonly property color blue: "#1c5e5b"
+    readonly property color gray: "#89847d"
+    readonly property color darkGray: "#4c4a46"
+    readonly property color white: "#F1E4D0"
+    readonly property color black: "#1D1C1A"
+    readonly property color yellow: "#EAD91F"
+    readonly property color red: "#F2412A"
+    readonly property color darkRed: "#852204"
     readonly property color brown: "#a09e45"
 
     readonly property color text: white
     readonly property color colorUrgent: red
-    readonly property color colorBorders: "#80aaaaaa" 
+    readonly property color colorBorders: "#804c4a46" 
 
     // Gradients
     readonly property var bgGradient: Gradient {
         GradientStop { position: 0.0; color: bg }
-        GradientStop { position: 1.0; color: "#8044444e"}
+        GradientStop { position: 1.0; color: "#801D1C1A"}
     } 
     readonly property var bgGradientNone: Gradient {
         GradientStop { position: 0.0; color: bg }

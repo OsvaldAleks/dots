@@ -47,7 +47,7 @@ hl.config({
             col = {
                 active = vars.white,
                 inactive = vars.inactive_border,
-                locked_active = vars.active_border,
+                locked_active = vars.white,
                 locked_inactive = vars.black
             },
             indicator_height = 25,
@@ -61,7 +61,7 @@ hl.config({
             font_size = 14,
             height = 1,
             text_color = vars.text,
-            text_color_inactive = vars.active_border,
+            text_color_inactive = vars.white,
             text_padding = vars.gaps,
             text_offset = -13
         }
@@ -78,9 +78,9 @@ hl.config({
         rounding = vars.rounding,
         rounding_power = 2,
         dim_inactive = true,
-        dim_strength = 0.1,
-        dim_around = 0.1,
-        dim_special = 0.1,
+        dim_strength = 0,
+        dim_around = 0,
+        dim_special = 0,
 
         active_opacity = 1.0,
         inactive_opacity = 0.85,
@@ -118,20 +118,20 @@ hl.config({
 })
 
 
+hl.window_rule({ match = { workspace = "special:main" }, border_size = 1 })
 hl.window_rule({ match = { workspace = "special:main" }, border_color = vars.active_border })
 
 hl.window_rule({ match = { float = false }, border_color = vars.color_transparent })
 hl.window_rule({ match = { float = false }, no_shadow = false })
 hl.window_rule({ match = { float = false }, opacity = "1.0 1.0" })
-hl.window_rule({ match = { pin = true }, border_color = vars.active_border })
+hl.window_rule({ match = { pin = true }, border_color = vars.accent })
 hl.window_rule({ match = { pin = true }, no_shadow = true })
 hl.window_rule({ match = { pin = true }, opacity = "1.0 override 1.0 override" })
 
-hl.window_rule({ match = { fullscreen_state_internal = 1 }, border_color = vars.white })
+hl.window_rule({ match = { fullscreen_state_internal = 1 }, border_color = vars.white .. " " .. vars.white })
 hl.window_rule({ match = { fullscreen_state_internal = 1 }, opacity = "1.0 override 1.0 override" })
 
 hl.window_rule({ match = { fullscreen_state_internal = 1 }, border_size = vars.borders })
-
 
 --[[
 

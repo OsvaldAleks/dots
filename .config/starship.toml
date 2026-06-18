@@ -4,14 +4,14 @@ add_newline = true
 scan_timeout = 2000
 # Define the order and format of the information in our prompt
 format = """\
-[ ](fg:#d3d4cb)\
-[ 󰣇 ](fg:#6d77a1 bg:#d3d4cb)\
+[ ](fg:#F1E4D0)\
+[ 󰣇 ](fg:#b3640b bg:#F1E4D0)\
 ${custom.icon_separator}${custom.icon_separator_no_conda}\
 $conda\
 $directory\
 ${custom.directory_separator_not_git}\
 ${custom.directory_separator_git}\
-$symbol($git_branch[](fg:#daee76))\
+$symbol($git_branch[](fg:#EAD91F))\
 $symbol( $git_commit$git_status$git_metrics$git_state)$fill$cmd_duration$all\
 ${custom.git_config_email}
 $character"""
@@ -25,41 +25,41 @@ symbol = " "
 disabled = true
 
 [character]
-success_symbol = '  [󱞩](fg:#d3d4cb)'
-error_symbol = '  [󱞩](fg:#e17b7b)'
+success_symbol = '  [󱞩](fg:#F1E4D0)'
+error_symbol = '  [󱞩](fg:#F2412A)'
 
 [custom.icon_separator]
 command = ""
-format = "[](fg:#d3d4cb bg:#4b8649)"
+format = "[](fg:#F1E4D0 bg:#4d7503)"
 when = "test -n \"$CONDA_DEFAULT_ENV\""
 
 [custom.icon_separator_no_conda]
 command = ""
-format = "[](fg:#d3d4cb bg:#aaaaaa)"
+format = "[](fg:#F1E4D0 bg:#89847d)"
 when = "test -z \"$CONDA_DEFAULT_ENV\""
 
 [conda]
-format = '[ $symbol$environment ]($style)[](fg:#4b8649 bg:#aaaaaa)'
+format = '[ $symbol$environment ]($style)[](fg:#4d7503 bg:#89847d)'
 symbol = " "
-style = "fg:#d3d4cb bg:#4b8649"
+style = "fg:#F1E4D0 bg:#4d7503"
 
 # Customize the format of the working directory
 [directory]
 truncate_to_repo = true
 format = "[ $path ]($style)"
-style = "fg:#363647 bg:#aaaaaa"
+style = "fg:#F1E4D0 bg:#89847d"
 
 [git_branch]
 symbol = " "
 format = "[ $symbol$branch(:$remote_branch) ]($style)"
-style = "fg:#363647 bg:#daee76"
+style = "fg:#1D1C1A bg:#EAD91F"
 
 [git_metrics]
 disabled = false
 
 [nodejs]
 format = "[$symbol($version )]($style)"
-style = "fg:14141e bg:#daee76"
+style = "fg:#1D1C1A bg:#EAD91F"
 
 [package]
 disabled = true # Enable to output the current working directory's package version
@@ -78,7 +78,7 @@ format = "[$symbol$percentage]($style) "
 
 [[battery.display]]
 threshold = 20
-style = '#e17b7b'
+style = '#F2412A'
 
 # Output the current git config email address
 [custom.git_config_email]
@@ -93,7 +93,7 @@ style = "text"
 [custom.directory_separator_git]
 description = "Output a styled separator right after the directory when inside a git repository."
 command = ""
-format = "[](fg:#aaaaaa bg:#daee76)"
+format = "[](fg:#89847d bg:#EAD91F)"
 # Only when inside git repository
 when = "git rev-parse --is-inside-work-tree >/dev/null 2>&1"
 
@@ -101,7 +101,7 @@ when = "git rev-parse --is-inside-work-tree >/dev/null 2>&1"
 [custom.directory_separator_not_git]
 description = "Output a styled separator right after the directory when NOT inside a git repository."
 command = ""
-format = "[](fg:#aaaaaa)"
+format = "[](fg:#89847d)"
 # Only when NOT inside a git repository
 when = "! git rev-parse --is-inside-work-tree > /dev/null 2>&1"
 

@@ -165,7 +165,7 @@ Rectangle{
             visible: expanded && activePlayer.loopSupported
             color: !activePlayer || (activePlayer.loopState === MprisLoopState.None)
                 ? Style.black
-                : Style.accentSecondary
+                : Style.accent
             text: activePlayer && (activePlayer.loopState === MprisLoopState.Track)
                 ? ""
                 : ""
@@ -188,7 +188,7 @@ Rectangle{
         Text {
             id: shuffleState
             visible: expanded && activePlayer && activePlayer.shuffleSupported
-            color: activePlayer && activePlayer.shuffle ? Style.accentSecondary : Style.black
+            color: activePlayer && activePlayer.shuffle ? Style.accent : Style.black
             text: ""
             font: Style.fontIcons 
             Layout.rightMargin: Style.padding

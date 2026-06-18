@@ -7,29 +7,29 @@ local val = {}
 val.mainMod = "SUPER"
 
 --- Colors
-val.white = "rgba(d3d4cbff)"
-val.blue = "rgba(acb4ebff)"
-val.active_border = "rgba(aaaaaa80)"
-val.inactive_border = "rgba(14141e80)"
-val.warning = "rgba(e17b7bff)"
-val.text = "rgba(14141eff)"
-val.active_shadow = "rgba(14141e77)"
-val.inactive_shadow = "rgba(14141e22)"
-val.black = "rgb(14141e)"
-val.green = "rgb(7bd687)"
+val.white = "rgba(F1E4D0ff)"
+val.blue = "rgba(45CBCEff)"
+val.active_border = "rgba(89847d80)"
+val.inactive_border = "rgba(1D1C1A80)"
+val.warning = "rgba(F2412Aff)"
+val.text = "rgba(1D1C1Aff)"
+val.active_shadow = "rgba(1D1C1A77)"
+val.inactive_shadow = "rgba(1D1C1A22)"
+val.black = "rgb(1D1C1A)"
+val.accent = "rgb(ead91f)"
 val.color_transparent = "rgba(00000000)"
 
 --- Look and feel
-val.rounding = 5
+val.rounding = 3
 val.gaps = 5
-val.borders = 1
+val.borders = 2
 
 val.blur_size = 3
 val.blur_passes = 2
 val.noise = 0.05
-val.contrast = 0.7
-val.vibrancy = 0.2
-val.vibrancy_darkness = 0.2
+val.contrast = 0.8
+val.vibrancy = 0.4
+val.vibrancy_darkness = 0.3
 
 --- Programs
 val.terminal = "kitty"

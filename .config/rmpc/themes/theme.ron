@@ -12,7 +12,7 @@
     modal_backdrop: false,
     preview_label_style: (fg: "yellow"),
     preview_metadata_group_style: (fg: "yellow", modifiers: "Bold"),
-    highlighted_item_style: (fg: "light_green", modifiers: "Bold"),
+    highlighted_item_style: (fg: "light_yellow", modifiers: "Bold"),
     current_item_style: (fg: "black", bg: "white"),
     borders_style: (fg: "dark_gray"),
     highlight_border_style: (fg: "white"),
@@ -27,17 +27,17 @@
         playlist_style: None,
     ),
     level_styles: (
-        info: (fg: "light_blue", bg: "green"),
-        warn: (fg: "light_yellow", bg: "green"),
-        error: (fg: "light_red", bg: "green"),
-        debug: (fg: "light_green", bg: "green"),
-        trace: (fg: "light_magenta", bg: "green"),
+        info: (fg: "white", bg: "yellow"),
+        warn: (fg: "light_yellow", bg: "yellow"),
+        error: (fg: "light_red", bg: "yellow"),
+        debug: (fg: "light_green", bg: "yellow"),
+        trace: (fg: "light_magenta", bg: "yellow"),
     ),
     progress_bar: (
         symbols: ["", "█", "", "█", ""],
-        track_style: (fg: "green", bg: "dark_gray"),
-        elapsed_style: (fg: "light_green"),
-        thumb_style: (fg: "light_green", bg:"green"),
+        track_style: (fg: "yellow", bg: "dark_gray"),
+        elapsed_style: (fg: "light_yellow"),
+        thumb_style: (fg: "light_yellow", bg:"yellow"),
         use_track_when_empty: false,
     ),
     scrollbar: (
@@ -207,7 +207,7 @@
 
         orientation: Bottom,
 
-        bar_color: Single("light_green"),
+        bar_color: Single("light_yellow"),
     ),
     components: {
         "state": Pane(Property(
@@ -219,7 +219,7 @@
         )),
         "title": Pane(Property(
             content: [
-                (kind: Text("   Track "), style: (fg: "light_green", modifiers: "Bold")),
+                (kind: Text("   Track "), style: (fg: "light_yellow", modifiers: "Bold")),
                 (kind: Property(Song(Title)), style: (fg: "white", modifiers: "Bold"),
                     default: (kind: Text("   "), style: (fg: "white", modifiers: "Bold"))),
             ],
@@ -232,8 +232,8 @@
                 (size: "1", pane: Pane(Property(content: [(kind: Text(" "), style: (bg: "gray"))]))),
                 (size: "2", pane: Pane(Property(content: [(kind: Text(" "), style: (fg: "black", bg: "gray"))]))),
                 (size: "1", pane: Pane(Property(content: [(kind: Text(" "), style: (bg: "gray"))]))),
-                (size: "1", pane: Pane(Property(content: [(kind: Text(""), style: (fg: "gray", bg: "light_green"))]))),
-                (size: "100%", pane: Pane(Volume(kind: Slider(symbols: (start: "█", filled: "█", thumb: "", track: "█", end: ""), track_style: (fg: "green"), filled_style: (fg: "light_green"), thumb_style: (fg: "light_green", bg: "green"),)))),
+                (size: "1", pane: Pane(Property(content: [(kind: Text(""), style: (fg: "gray", bg: "light_yellow"))]))),
+                (size: "100%", pane: Pane(Volume(kind: Slider(symbols: (start: "█", filled: "█", thumb: "", track: "█", end: ""), track_style: (fg: "yellow"), filled_style: (fg: "light_yellow"), thumb_style: (fg: "light_yellow", bg: "yellow"),)))),
             ]
         ),
         "elapsed": Split(
@@ -260,7 +260,7 @@
         ),
         "artist": Pane(Property(
             content: [
-                (kind: Text("  Artist "), style: (fg: "light_green", modifiers: "Bold")),
+                (kind: Text("  Artist "), style: (fg: "light_yellow", modifiers: "Bold")),
                 (kind: Property(Song(Artist)), style: (fg: "white", modifiers: "Bold"),
                     default: (kind: Text("   "), style: (fg: "white", modifiers: "Bold"))),
             ], align: Left
@@ -274,14 +274,14 @@
                         (kind: Property(Status(RepeatV2(
                             on_label: " ",
                             off_label: " ",
-                            on_style: (fg: "light_green"),
+                            on_style: (fg: "light_yellow"),
                             off_style: (fg: "gray"),
                         )))),
                         (kind: Text(" ")),
                         (kind: Property(Status(RandomV2(
                             on_label: " ",
                             off_label: " ",
-                            on_style: (fg: "light_green"),
+                            on_style: (fg: "light_yellow"),
                             off_style: (fg: "gray"),
                         )))),
                         (kind: Text(" ")),
@@ -289,18 +289,18 @@
                             on_label: "󰆘 ",
                             off_label: "󰆘 ",
                             oneshot_label: "󱛤 ",
-                            on_style: (fg: "light_green"),
+                            on_style: (fg: "light_yellow"),
                             off_style: (fg: "gray"),
-                            oneshot_style: (fg: "light_green"),
+                            oneshot_style: (fg: "light_yellow"),
                         )))),
                         (kind: Text(" ")),
                         (kind: Property(Status(SingleV2(
                             on_label: " ",
                             off_label: " ",
                             oneshot_label: "!",
-                            on_style: (fg: "light_green"),
+                            on_style: (fg: "light_yellow"),
                             off_style: (fg: "gray"),
-                            oneshot_style: (fg: "light_green"),
+                            oneshot_style: (fg: "light_yellow"),
                         )))),
                         ],
                         align: Left
@@ -312,7 +312,7 @@
             content: [
                 (kind: Transform(Replace(content: (kind: Property(Status(InputMode()))), replacements: [
                     (match: "Normal", replace: (kind: Text(" NORMAL "), style: (fg: "white", bg: "blue"))),
-                    (match: "Insert", replace: (kind: Text(" INSERT "), style: (fg: "white", bg: "green"))),
+                    (match: "Insert", replace: (kind: Text(" INSERT "), style: (fg: "white", bg: "yellow"))),
                 ])))
             ], align: Center
         )),
@@ -346,11 +346,11 @@
             ]
         ),
         "active_tab": Pane(Property(content: [
-                                    (kind: Text(""), style: (fg: "10")),
-                                    (kind: Text(" "), style: (bg:"light_green")),
-                                    (kind: Property(Status(ActiveTab)),style: (fg: "black", bg:"light_green", modifiers:"Bold")), 
-                                    (kind: Text(" "), style: (bg:"light_green")),
-                                    (kind: Text(""), style: (fg: "light_green", bg:"dark_gray")),
+                                    (kind: Text(""), style: (fg: "light_yellow")),
+                                    (kind: Text(" "), style: (bg:"light_yellow")),
+                                    (kind: Property(Status(ActiveTab)),style: (fg: "black", bg:"light_yellow", modifiers:"Bold")), 
+                                    (kind: Text(" "), style: (bg:"light_yellow")),
+                                    (kind: Text(""), style: (fg: "light_yellow", bg:"dark_gray")),
                                     (kind: Text("    "), style: (bg:"dark_gray"))
                                     ], align: Center)),
         "lyrics": Split(
