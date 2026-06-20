@@ -176,7 +176,20 @@ hl.gesture({
     fingers = 2,
     direction = "pinchin",
     action = function()
-        hl.exec_cmd("sh /home/aleks/.config/hypr/scripts/pinch.sh in")
+    	local window = hl.get_active_window()
+	local workspace = hl.get_active_workspace()
+
+	local current_state = window.fullscreen
+
+	local num_windows = workspace.windows
+
+	if window.floating then
+		hl.dispatch(hl.dsp.window.float( {action = "off"} ))
+	elseif num_windows == 1 then
+		hl.dispatch(hl.dsp.window.fullscreen_state( { internal = 2, client = -1}))
+	else
+		hl.dispatch(hl.dsp.window.fullscreen_state( { internal = (current_state + 1) , client = -1}))
+	end
     end
 })
 
@@ -184,7 +197,15 @@ hl.gesture({
     fingers = 2,
     direction = "pinchout",
     action = function()
-        hl.exec_cmd("sh /home/aleks/.config/hypr/scripts/pinch.sh out")
+    	local window = hl.get_active_window()
+	
+	local current_state = window.fullscreen
+
+	if current_state == 0 then
+		hl.dispatch(hl.dsp.window.float( {action = "on"} ))
+	else
+		hl.dispatch(hl.dsp.window.fullscreen_state( { internal = 0, client = -1}))
+	end
     end
 })
 
@@ -220,7 +241,19 @@ hl.gesture({
     fingers = 3,
     direction = "up",
     action = function()
-        hl.exec_cmd("sh /home/aleks/.config/hypr/scripts/toggleSpecial.sh up")
+        local window = hl.get_active_window()
+
+        if not window then
+		hl.dispatch(hl.dsp.workspace.toggle_special( "main" ))
+		return
+        end
+
+    	local ws = window.workspace.name
+	local name = ws:match("([^:]+)$")
+
+        if name ~= "main" then
+		hl.dispatch(hl.dsp.workspace.toggle_special( "main" ))
+	end
     end
 })
 
@@ -228,7 +261,21 @@ hl.gesture({
     fingers = 3,
     direction = "down",
     action = function()
-        hl.exec_cmd("sh /home/aleks/.config/hypr/scripts/toggleSpecial.sh down")
+	
+        local window = hl.get_active_window()
+
+        if not window then
+		return
+        end
+
+    	local ws = window.workspace.name
+	local name = ws:match("([^:]+)$")
+
+        if name == "main" then
+		hl.dispatch(hl.dsp.workspace.toggle_special( "main" ))
+	else
+		hl.dispatch(hl.dsp.window.close( ))
+	end
     end
 })
 

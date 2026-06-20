@@ -124,7 +124,7 @@ Rectangle {
             ratio: Services.BrightnessReader.percent
             iconList: ["󰃚", "󰃛", "󰃜", "󰃞", "󰃟", "󰃠"]
             onTrackClicked: (ratio) => {
-                var percent = Math.round(ratio * 100)
+                var percent = Math.round(ratio * 100)+1
                 Quickshell.execDetached({
                     command: ["brightnessctl", "set", percent + "%"]
                 })
@@ -148,7 +148,7 @@ Rectangle {
                     const min = Services.ScreenTempReader.minVal
                     const target = Math.floor((1-ratio)*(max-min)+min)
                     Quickshell.execDetached({
-                        command: ["busctl", "--user", "set-property", "rs.wl-gammarelay", "/", "rs.wl.gammarelay", "Temperature", "q", target]
+                    	command: ["hyprctl", "hyprsunset", "temperature", target]
                     })
                 }
             }
@@ -160,7 +160,7 @@ Rectangle {
                 const min = Services.ScreenTempReader.minVal
                 const target = Math.floor((1-ratio)*(max-min)+min)
                 Quickshell.execDetached({
-                    command: ["busctl", "--user", "set-property", "rs.wl-gammarelay", "/", "rs.wl.gammarelay", "Temperature", "q", target]
+                    command: ["hyprctl", "hyprsunset", "temperature", target]
                 })
             }
         }
