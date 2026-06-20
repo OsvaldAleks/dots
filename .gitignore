@@ -16,6 +16,8 @@
 !/.config/fuzzel/**
 !/.config/quickshell/
 !/.config/quickshell/**
+!/.config/nvim/
+!/.config/nvim/**
 !/README.md
 !/Pictures/
 !/Pictures/dotfilePics/
