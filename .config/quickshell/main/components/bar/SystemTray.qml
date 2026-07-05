@@ -12,7 +12,9 @@ RowLayout {
     id: tray
     implicitHeight: contents.height
     visible: SystemTray.items.values.length > 0
-
+Component.onCompleted: {
+    console.log("Tray items:", SystemTray.items.values.length)
+}
     Repeater {
         id: contents
         model: SystemTray.items

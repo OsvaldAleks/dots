@@ -6,7 +6,7 @@ import "root:/styles"
 ColumnLayout{
     id: sliderInfo
     property bool expanded: false
-    property real ratio: 0.0
+    property real ratio: 0.3
     property bool isDisabled: false
     property var iconList: []
     property var disabledIcon: ""

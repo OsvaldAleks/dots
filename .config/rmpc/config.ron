@@ -2,11 +2,11 @@
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]
 (
-    address: "~/.mpd/socket",
+    address: "0.0.0.0:6600",
     password: "iReallyWannaEatHotCoals",
     theme: "./themes/theme.ron",
-    lyrics_dir: "~/Nextcloud - personal/Music/",
-    cache_dir: "~/Nextcloud - personal/Music/rmpc/",
+    lyrics_dir: "~/Music/",
+    cache_dir: "~/Music/rmpc/",
     on_song_change: None,
     volume_step: 5,
     max_fps: 30,

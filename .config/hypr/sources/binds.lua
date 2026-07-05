@@ -155,13 +155,27 @@ hl.bind( "XF86AudioPlay", hl.dsp.exec_raw( "playerctl play-pause" ))
 hl.bind( "XF86AudioNext", hl.dsp.exec_raw( "playerctl next" ))
 hl.bind( "XF86AudioPrev", hl.dsp.exec_raw( "playerctl previous" ))
 
-hl.bind( "XF86AudioRaiseVolume", hl.dsp.exec_raw( "wpctl set-volume -l 1 @DEFAULT_SINK@ .05+" ))
-hl.bind( "XF86AudioLowerVolume", hl.dsp.exec_raw( "wpctl set-volume -l 1 @DEFAULT_SINK@ .05-" ))
+hl.bind( "XF86AudioRaiseVolume", hl.dsp.exec_raw( "wpctl set-volume -l 1 @DEFAULT_SINK@ .05+" ), { repeating = true })
+hl.bind( "XF86AudioLowerVolume", hl.dsp.exec_raw( "wpctl set-volume -l 1 @DEFAULT_SINK@ .05-" ), { repeating = true })
 hl.bind( "XF86AudioMute", hl.dsp.exec_raw( "wpctl set-mute @DEFAULT_SINK@ toggle" ))
 hl.bind( "XF86AudioMicMute", hl.dsp.exec_raw( "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle" ))
 
-hl.bind( "XF86MonBrightnessUp", hl.dsp.exec_raw( "brightnessctl set 5%+" ))
-hl.bind( "XF86MonBrightnessDown", hl.dsp.exec_raw( "brightnessctl set 5%-" ))
+hl.bind( "XF86MonBrightnessUp", hl.dsp.exec_raw( "brightnessctl set 5%+" ), { repeating = true })
+hl.bind(
+    "XF86MonBrightnessDown",
+    hl.dsp.exec_raw([[
+        sh -c '
+        current=$(brightnessctl g)
+
+        if [ "$current" -le 10 ]; then
+            brightnessctl set 10
+        else
+            brightnessctl set 5%-
+            [ "$(brightnessctl g)" -lt 10 ] && brightnessctl set 10
+        fi
+        '
+    ]]), { repeating = true }
+)
 
 hl.bind( vars.mainMod .. " + ALT + 1", hl.dsp.exec_raw( "openrgb -c F8DDB8" ))
 hl.bind( vars.mainMod .. " + ALT + 2", hl.dsp.exec_raw( "openrgb -c FB7D4C" ))

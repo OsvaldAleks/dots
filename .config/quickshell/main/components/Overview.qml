@@ -23,8 +23,10 @@ PanelWindow {
     
     Item{
         id: wrapper
-
-        anchors.centerIn: parent
+     
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.margins: 2*Style.padding
 
         implicitWidth: body.implicitWidth
         implicitHeight: body.implicitHeight
@@ -83,6 +85,7 @@ PanelWindow {
                     delegate: Workspace{
                         visible: modelData.id > 0
                         id: workspaceIndicator
+                        dropBounds: body
 
                         workspace: modelData
                     }
@@ -114,7 +117,7 @@ PanelWindow {
                         anchors.fill: parent
                         hoverEnabled: true
                         onClicked: {
-                            Hyprland.dispatch('workspace ' + Hyprland.workspaces.values[Hyprland.workspaces.values.length-1].id+1)
+                            Hyprland.dispatch('hl.dsp.focus( {workspace=' + (Hyprland.workspaces.values[Hyprland.workspaces.values.length-1].id+1) + '} )')
                         }
                     }
 
@@ -130,24 +133,13 @@ PanelWindow {
                     }
                 }
             }
-            HoverHandler {
-                id: hoverChecker
-                margin: 2*Style.padding
-                onHoveredChanged: {
-                    if (!hovered) {
-                        overview.active = false
-                    }
-                }
-            }
-            HoverHandler {
-                onHoveredChanged: {
-                    if (!hovered) {
-                        workspaceGrid.hoveredWorkspace = Hyprland.focusedWorkspace.id
-                    }
-                    else{
-                        workspaceGrid.hoveredWorkspace = 0
-                    }
-                }
+        }
+    }
+    HoverHandler {
+        id: hoverChecker
+        onHoveredChanged: {
+            if (!hovered) {
+                overview.active = false
             }
         }
     }

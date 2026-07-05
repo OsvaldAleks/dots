@@ -31,6 +31,25 @@ Rectangle{
 
     color: Style.accentSecondary
 
+    Repeater {
+        model: playerList
+
+        delegate: Item {
+            visible: false
+            width: 0
+            height: 0
+
+            Connections {
+                target: modelData
+
+                function onIsPlayingChanged() {
+                    if (target.isPlaying)
+                        playerIdx = playerList.indexOf(target)
+                }
+            }
+        }
+    }
+
     RowLayout{
         id: activePlayerControls
 

@@ -22,13 +22,13 @@ val.color_transparent = "rgba(00000000)"
 --- Look and feel
 val.rounding = 3
 val.gaps = 5
-val.borders = 2
+val.borders = 1
 
 val.blur_size = 3
-val.blur_passes = 2
+val.blur_passes = 3
 val.noise = 0.05
-val.contrast = 0.8
-val.vibrancy = 0.4
+val.contrast = 0.9
+val.vibrancy = 0.2
 val.vibrancy_darkness = 0.3
 
 --- Programs

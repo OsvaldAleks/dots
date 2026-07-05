@@ -4,7 +4,6 @@ import Quickshell
 import Quickshell.Bluetooth
 import Quickshell.Networking
 import "root:/styles"
-import "root:/services" as Services
 
 Rectangle {
     implicitHeight: Style.panelHeight
@@ -17,6 +16,57 @@ Rectangle {
     border{
         color:Style.colorBorders
         width: 0
+    }
+
+    QtObject {
+        id: network
+
+        readonly property NetworkDevice activeDevice: {
+            var wifi = null
+
+            for (let i = 0; i < Networking.devices.values.length; i++) {
+                const dev = Networking.devices.values[i]
+
+                if (!dev.connected)
+                    continue
+
+                if (dev.type === DeviceType.Wired)
+                    return dev
+
+                if (dev.type === DeviceType.Wifi)
+                    wifi = dev
+            }
+            return wifi
+        }
+
+        readonly property string icon: {
+            if (!activeDevice)
+                return "󰖪"
+
+            switch (activeDevice.type) {
+            case DeviceType.Wired:
+                return "󱎔"
+            case DeviceType.Wifi:
+                return "󰖩"
+            default:
+                return "󰖪"
+            }
+        }
+
+        readonly property string name: {
+            if (!activeDevice)
+                return Networking.wifiEnabled ? "Disconnected" : "Disabled"
+
+            for (let i = 0; i < activeDevice.networks.values.length; i++) {
+                const net = activeDevice.networks.values[i]
+                if (net.connected)
+                return net.name 
+            }
+
+            return activeDevice.name
+        }
+
+        readonly property color textColor: activeDevice ? Style.blue : Style.darkRed
     }
 
     RowLayout {
@@ -69,30 +119,22 @@ Rectangle {
             topRightRadius: Style.cornerRadius/2
             bottomRightRadius: Style.cornerRadius/2
 
-
-            RowLayout{
+            RowLayout {
                 id: connectedNetworkLabel
                 spacing: Style.padding
                 anchors.centerIn: parent
-                Text{
+
+                Text {
                     id: connectedNetworkIcon
-                    text: {
-                        switch (Services.NetworkReader.connectionType) {
-                        case "wifi":
-                            return "󰖩"
-                        case "ethernet":
-                            return "󱎔"
-                        default:
-                            return "󰖪"
-                        }
-                    }
-                    color: (Services.NetworkReader.connectionType == "none") ? Style.darkRed : Style.blue
+                    text: network.icon
+                    color: network.textColor
                     font: Style.fontIcons
                 }
-                Text{
+
+                Text {
                     id: connectedNetworkText
-                    text: Services.NetworkReader.connectionName
-                    color: (Services.NetworkReader.connectionType == "none") ? Style.darkRed : Style.blue
+                    text: network.name
+                    color: network.textColor
                     font: Style.fontMain
                 }
             }

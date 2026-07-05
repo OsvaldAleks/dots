@@ -7,38 +7,64 @@ import Quickshell.Io
 Item {
     id: brightnessReader
 
+    property string backlightDir: ""
     property int brightness: 0
     property int maxBrightness: 1
     property real percent: 0
 
-    // current brightness
+    Process {
+        id: detectBacklight
+
+        command: [
+            "sh",
+            "-c",
+            "for d in /sys/class/backlight/*; do basename \"$d\"; break; done"
+        ]
+
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                brightnessReader.backlightDir =
+                    "/sys/class/backlight/" + text.trim()
+            }
+        }
+    }
+
     FileView {
         id: backlight
-        path: "/sys/class/backlight/amdgpu_bl2/brightness"
+
+        path: backlightDir
+            ? `${backlightDir}/brightness`
+            : ""
+
         watchChanges: true
         preload: true
 
         onLoaded: {
             brightness = parseInt(text())
             percent = brightness / maxBrightness
+            console.log("brightness", brightness,
+                    "max", maxBrightness,
+                    "percent", percent)
+
         }
+
         onFileChanged: reload()
     }
 
-    // max brightness
     FileView {
         id: maxBacklight
-        path: "/sys/class/backlight/amdgpu_bl2/max_brightness"
+
+        path: backlightDir
+            ? `${backlightDir}/max_brightness`
+            : ""
+
         preload: true
-        watchChanges: false
 
         onLoaded: {
             maxBrightness = parseInt(text())
             percent = brightness / maxBrightness
         }
-    }
-
-    onBrightnessChanged: {
-        percent = Math.round(brightness / maxBrightness * 100)
     }
 }

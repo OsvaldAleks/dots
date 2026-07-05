@@ -14,13 +14,14 @@ Item {
     property bool hovered: false
     property HyprlandWorkspace workspace: null
     property var draggedToplevel: null
+    property Item dropBounds: null
 
     Rectangle {
         anchors.fill: parent
         color: "transparent"
         radius: Style.cornerRadius
         border.width: Style.borders
-        border.color: workspaceIndicator.hovered 
+        border.color: workspaceIndicator.hovered
             ? Style.white
             : workspace.active
                 ? Style.accent
@@ -72,6 +73,7 @@ Item {
 
                 property var toplevel: modelData
                 property bool dragging: false
+                property bool movedOut: false
 
                 // Captured lazily at drag-start once GridLayout has positioned the item
                 property real originX: 0
@@ -85,6 +87,36 @@ Item {
                         originCaptured = true
                     }
                 }
+
+                // Checked live on every drag movement — fires the move the instant
+                // the icon's center crosses the panel's edge, no mouse-up needed.
+                function checkDragOutOfBounds() {
+                    if (movedOut || !workspaceIndicator.dropBounds) return
+
+                    var center = mapToItem(workspaceIndicator.dropBounds, width / 2, height / 2)
+                    var bounds = workspaceIndicator.dropBounds
+
+                    var outside = center.x < 0 || center.y < 0
+                        || center.x > bounds.width || center.y > bounds.height
+                    if (!outside) return
+
+                    var focusedId = Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id : 0
+                    if (focusedId === 0 || focusedId === workspace.id) return
+
+                    // Lock this delegate down immediately: Hyprland's model update
+                    // will destroy it shortly, and we don't want the still-active
+                    // DragHandler/MouseArea touching a dying item in the meantime.
+                    movedOut = true
+                    dragging = false
+                    dragHandler.enabled = false
+                    clickArea.enabled = false
+
+                    Hyprland.dispatch(`hl.dsp.window.move({ workspace = ${focusedId}, follow = false, window = "address:0x${toplevel.address}" })`)
+                    overview.active = false
+                }
+
+                onXChanged: if (dragging) checkDragOutOfBounds()
+                onYChanged: if (dragging) checkDragOutOfBounds()
 
                 // Snap-back animation — only fires when dragging goes false
                 Behavior on x {
@@ -125,19 +157,21 @@ Item {
                     onActiveChanged: {
                         if (active) {
                             toplevelItem.ensureOriginCaptured()
-                            dragging = true
-                            workspaceIndicator.draggedToplevel = toplevel
+                            toplevelItem.dragging = true
+                            toplevelItem.movedOut = false
+                            workspaceIndicator.draggedToplevel = toplevelItem.toplevel
                         } else {
-                            dragging = false
+                            toplevelItem.dragging = false
 
-                            var targetWorkspaceId = workspaceGrid.hoveredWorkspace
+                            if (!toplevelItem.movedOut) {
+                                var targetWorkspaceId = workspaceGrid.hoveredWorkspace
 
-                            if (targetWorkspaceId !== 0 && targetWorkspaceId != workspace.id) {                    
-                                Hyprland.dispatch(`hl.dsp.window.move({ workspace = ${targetWorkspaceId}, follow = false, window = "address:0x${toplevel.address}" })`)
-                            } else {
-                                // Snap back to captured origin
-                                toplevelItem.x = toplevelItem.originX
-                                toplevelItem.y = toplevelItem.originY
+                                if (targetWorkspaceId !== 0 && targetWorkspaceId != workspace.id) {
+                                    Hyprland.dispatch(`hl.dsp.window.move({ workspace = ${targetWorkspaceId}, follow = false, window = "address:0x${toplevelItem.toplevel.address}" })`)
+                                } else {
+                                    toplevelItem.x = toplevelItem.originX
+                                    toplevelItem.y = toplevelItem.originY
+                                }
                             }
 
                             workspaceIndicator.draggedToplevel = null
@@ -148,7 +182,7 @@ Item {
                 ColumnLayout {
                     anchors.fill: parent
                     spacing: 4
-                    opacity: dragging ? 0.6 : 1.0
+                    opacity: toplevelItem.dragging ? 0.6 : 1.0
 
                     Behavior on opacity {
                         NumberAnimation { duration: 100 }
@@ -163,10 +197,8 @@ Item {
                             anchors.centerIn: parent
                             source: {
                                 var entry = DesktopEntries.byId(modelData.wayland.appId)
-                                if (entry != null && entry.icon)
-                                    return "file:///usr/share/icons/Papirus/48x48/apps/" + entry.icon + ".svg"
-                                return "file:///usr/share/icons/Papirus/48x48/categories/application-default-icon.svg"
-
+                                var iconName = (entry != null && entry.icon) ? entry.icon : "application-x-executable"
+                                return Quickshell.iconPath(iconName, "application-x-executable")
                             }
                             width: 32
                             height: 32

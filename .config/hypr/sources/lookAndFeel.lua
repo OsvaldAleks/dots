@@ -117,6 +117,7 @@ hl.config({
     },
 })
 
+-- WINDOW RULES
 
 hl.window_rule({ match = { workspace = "special:main" }, border_size = 1 })
 hl.window_rule({ match = { workspace = "special:main" }, border_color = vars.active_border })
@@ -124,7 +125,7 @@ hl.window_rule({ match = { workspace = "special:main" }, border_color = vars.act
 hl.window_rule({ match = { float = false }, border_color = vars.color_transparent })
 hl.window_rule({ match = { float = false }, no_shadow = false })
 hl.window_rule({ match = { float = false }, opacity = "1.0 1.0" })
-hl.window_rule({ match = { pin = true }, border_color = vars.accent })
+hl.window_rule({ match = { pin = true }, border_color = vars.white .. " " .. vars.white })
 hl.window_rule({ match = { pin = true }, no_shadow = true })
 hl.window_rule({ match = { pin = true }, opacity = "1.0 override 1.0 override" })
 
@@ -133,20 +134,7 @@ hl.window_rule({ match = { fullscreen_state_internal = 1 }, opacity = "1.0 overr
 
 hl.window_rule({ match = { fullscreen_state_internal = 1 }, border_size = vars.borders })
 
---[[
-
-# PINNED RULES
-
-windowrule = match:pin true, border_color $active_border $active_border $active_border
-windowrule = match:pin true, opacity 1.0 override 1.0 override
-
-# RIGHT CLICK MENUS
-windowrule=match:class ^()$,match:title ^()$, no_blur off
-windowrule=match:class ^()$,match:title ^()$, opaque 0
-
-# FULLSCREEN WINDOWS
-windowrule=match:fullscreen_state_internal 1, border_size 2
-]]
+-- LAYER RULES
 
 hl.layer_rule({ match = { namespace = "launcher" }, blur = true, dim_around = true })
 
@@ -157,24 +145,8 @@ hl.layer_rule({ match = { namespace = "quickshell" }, blur = true})
 hl.layer_rule({ match = { namespace = "quickshell" }, ignore_alpha = 0.49})
 
 hl.layer_rule({ match = { namespace = "^hypr.*" }, no_anim = true })
---[[
 
-# Fuzzel
-layerrule=match:namespace launcher, blur on
-layerrule=match:namespace launcher, dim_around on
-# dunst
-layerrule=match:namespace notifications, blur on
-# Quickshell
-layerrule=match:namespace quickshell,blur on
-
-layerrule=match:namespace ^hypr.*,no_anim on
-layerrule=match:namespace selection,no_anim on
-layerrule=match:namespace swww-daemon, no_anim on
-
-layerrule=match:namespace ^.*, ignore_alpha 0.49
-
---]]
-
+-- ANIMATINOS
 
 hl.curve( "quick", { type = "bezier", points = { {0.7, 0.9}, {0.1, 1.0} } } )
 hl.curve( "overshoot", { type = "bezier", points = { {0.5, 0.9}, {0.1, 1.1} } } )
@@ -191,34 +163,3 @@ hl.animation({ leaf = "specialWorkspaceOut", enabled = true, speed = 2, bezier =
 
 hl.animation({ leaf = "windowsMove", enabled = true, speed = 1, bezier = "quick" })
 
---[[
-
-# https://wiki.hyprland.org/Configuring/Variables/#animations
-animations {
-    enabled = true
-
-    # https://wiki.hyprland.org/Configuring/Animations/
-    bezier = easeOutQuint,0.23,1,0.32,1
-    bezier = almostLinear,0.5,0.5,0.75,1.0
-    bezier = quick,0.5,0,0.1,1
-
-    animation = global, 1, 10, quick
-    animation = border, 1, 5.39, easeOutQuint
-    animation = windows, 1, 2, easeOutQuint
-    animation = windowsIn, 1, 2, easeOutQuint, popin 87%
-    animation = windowsOut, 1, 1.49, quick, popin 87%
-    animation = fadeIn, 1, 1.73, almostLinear
-    animation = fadeOut, 1, 1.46, almostLinear
-    animation = fade, 1, 3.03, quick
-    animation = layers, 1, 1.2, quick, slidevert
-    animation = layersIn, 1, 1.2, quick, slidevert
-    animation = layersOut, 1, 1.2, quick, slidevert
-    animation = fadeLayersIn, 1, 1.79, almostLinear
-    animation = fadeLayersOut, 1, 1.39, almostLinear
-    animation = workspaces, 1, 1.5, almostLinear
-    animation = workspacesIn, 1, 1.2, almostLinear
-    animation = workspacesOut, 1, 1.2, almostLinear
-    animation = specialWorkspace, 1, 1.4, quick, slidevert 20%
-}
-
-]]

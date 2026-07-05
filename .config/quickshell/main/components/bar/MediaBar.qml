@@ -133,19 +133,25 @@ Rectangle {
     
         SliderInfo{
             id: tempInfo
-            visible: wrapper.expanded || !Services.ScreenTempReader.disabled
+            visible: wrapper.expanded || !tempInfo.isDisabled
             expanded: wrapper.expanded
             Layout.topMargin: wrapper.expanded*Style.padding 
             Layout.bottomMargin: wrapper.expanded*Style.padding 
             ratio: 1-Services.ScreenTempReader.ratio
             iconList: ["","","","",""]
             disabledIcon: "󰸁"
-            isDisabled: Services.ScreenTempReader.disabled
+            isDisabled: true
+
             onLabelClicked: {
-                Services.ScreenTempReader.disabled = !Services.ScreenTempReader.disabled
-                if(!Services.ScreenTempReader.disabled){
-                    const max = Services.ScreenTempReader.maxVal
-                    const min = Services.ScreenTempReader.minVal
+                tempInfo.isDisabled = !tempInfo.isDisabled
+                if(tempInfo.isDisabled) {
+                    Quickshell.execDetached({
+                    	command: ["hyprctl", "hyprsunset", "identity"]
+                    })
+                }
+                else {
+                    const max = 6500
+                    const min = 1500
                     const target = Math.floor((1-ratio)*(max-min)+min)
                     Quickshell.execDetached({
                     	command: ["hyprctl", "hyprsunset", "temperature", target]
@@ -154,10 +160,10 @@ Rectangle {
             }
 
             onTrackClicked: (ratio) => {
-                if(Services.ScreenTempReader.disabled)
+                if(tempInfo.isDisabled)
                     return
-                const max = Services.ScreenTempReader.maxVal
-                const min = Services.ScreenTempReader.minVal
+                const max = 6500
+                const min = 1500
                 const target = Math.floor((1-ratio)*(max-min)+min)
                 Quickshell.execDetached({
                     command: ["hyprctl", "hyprsunset", "temperature", target]
