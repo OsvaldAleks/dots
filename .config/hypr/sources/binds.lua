@@ -137,8 +137,8 @@ end
 --- Switch workspaces (relative)
 hl.bind( vars.mainMod .. " + CTRL + left", hl.dsp.focus( {workspace = "r-1", on_current_monitor = true }))
 hl.bind( vars.mainMod .. " + CTRL + right", hl.dsp.focus( {workspace = "r+1", on_current_monitor = true }))
-hl.bind( vars.mainMod .. " + mouse_down", hl.dsp.focus( {workspace = "r-1", on_current_monitor = true }))
-hl.bind( vars.mainMod .. " + mouse_up", hl.dsp.focus( {workspace = "r+1", on_current_monitor = true }))
+hl.bind( vars.mainMod .. " + mouse_down", hl.dsp.focus( {workspace = "r+1", on_current_monitor = true }))
+hl.bind( vars.mainMod .. " + mouse_up", hl.dsp.focus( {workspace = "r-1", on_current_monitor = true }))
 hl.bind( vars.mainMod .. " + mouse:274", hl.dsp.focus( {workspace = "emptym", on_current_monitor = true }))
 hl.bind( vars.mainMod .. " + ALT + up", hl.dsp.focus( {workspace = "emptym", on_current_monitor = true }))
 
