@@ -37,8 +37,24 @@ hl.bind( vars.mainMod .. " + V", hl.dsp.window.float( "toggle" ))
 hl.bind( vars.mainMod .. " + P", hl.dsp.window.pin( ))
 hl.bind( "mouse:274", hl.dsp.window.pin( ), { non_consuming = true })
 hl.bind( vars.mainMod .. " + J", hl.dsp.layout( "togglesplit" ) )
-hl.bind( vars.mainMod .. " + F", hl.dsp.window.fullscreen( { mode = "fullscreen", action = "toggle" } ))
-hl.bind( vars.mainMod .. " + ALT + F", hl.dsp.window.fullscreen( { mode = "maximized", action = "toggle" } ))
+
+local toggle_fullscreen = function (internal)
+    local window = hl.get_active_window()
+    local current_state = window.fullscreen
+
+    hl.dispatch(hl.dsp.window.fullscreen_state({
+        internal = ((current_state == internal) and 0) or internal,
+        client = -1
+    }))
+end
+
+hl.bind( vars.mainMod .. " + F", function()
+    toggle_fullscreen(2)
+end)
+
+hl.bind( vars.mainMod .. " + ALT + F", function()
+    toggle_fullscreen(1)
+end)
 
 hl.bind("SUPER + tab", function ()
     local layouts     = { "scrolling", "dwindle", "master" }
@@ -94,7 +110,7 @@ hl.define_submap("resize", function()
     hl.bind("down", hl.dsp.window.resize({ x = 0, y = -10, relative = true}), { repeating = true })
 
     hl.bind("escape", hl.dsp.exec_raw( "~/.config/hypr/scripts/window_control.sh --disable_resize" ))
-    hl.bind("Return", hl.dsp.submap( "~/.config/hypr/scripts/window_control.sh --disable_resize" ))
+    hl.bind("Return", hl.dsp.exec_raw( "~/.config/hypr/scripts/window_control.sh --disable_resize" ))
 end)
 
 --- Move floating using submap
@@ -109,7 +125,7 @@ hl.define_submap("move", function()
     hl.bind("up", hl.dsp.window.move({ x = 10, y = -10, relative = true}), { repeating = true })
 
     hl.bind("escape", hl.dsp.exec_raw( "~/.config/hypr/scripts/window_control.sh --disable_move" ))
-    hl.bind("Return", hl.dsp.submap( "~/.config/hypr/scripts/window_control.sh --disable_move" ))
+    hl.bind("Return", hl.dsp.exec_raw( "~/.config/hypr/scripts/window_control.sh --disable_move" ))
 end)
 
 --- Group stuff
@@ -191,19 +207,19 @@ hl.gesture({
     direction = "pinchin",
     action = function()
     	local window = hl.get_active_window()
-	local workspace = hl.get_active_workspace()
+	    local workspace = hl.get_active_workspace()
 
-	local current_state = window.fullscreen
+	    local current_state = window.fullscreen
 
-	local num_windows = workspace.windows
+	    local num_windows = workspace.windows
 
-	if window.floating then
-		hl.dispatch(hl.dsp.window.float( {action = "off"} ))
-	elseif num_windows == 1 then
-		hl.dispatch(hl.dsp.window.fullscreen_state( { internal = 2, client = -1}))
-	else
-		hl.dispatch(hl.dsp.window.fullscreen_state( { internal = (current_state + 1) , client = -1}))
-	end
+	    if window.floating then
+		    hl.dispatch(hl.dsp.window.float( {action = "off"} ))
+	    elseif num_windows == 1 then
+		    hl.dispatch(hl.dsp.window.fullscreen_state( { internal = 2, client = -1}))
+	    else
+		    hl.dispatch(hl.dsp.window.fullscreen_state( { internal = (current_state + 1) , client = -1}))
+	    end
     end
 })
 
@@ -258,16 +274,16 @@ hl.gesture({
         local window = hl.get_active_window()
 
         if not window then
-		hl.dispatch(hl.dsp.workspace.toggle_special( "main" ))
-		return
+		    hl.dispatch(hl.dsp.workspace.toggle_special( "main" ))
+		    return
         end
 
     	local ws = window.workspace.name
-	local name = ws:match("([^:]+)$")
+	    local name = ws:match("([^:]+)$")
 
         if name ~= "main" then
-		hl.dispatch(hl.dsp.workspace.toggle_special( "main" ))
-	end
+		    hl.dispatch(hl.dsp.workspace.toggle_special( "main" ))
+	    end
     end
 })
 
@@ -279,17 +295,17 @@ hl.gesture({
         local window = hl.get_active_window()
 
         if not window then
-		return
+		    return
         end
 
     	local ws = window.workspace.name
-	local name = ws:match("([^:]+)$")
+	    local name = ws:match("([^:]+)$")
 
         if name == "main" then
-		hl.dispatch(hl.dsp.workspace.toggle_special( "main" ))
-	else
-		hl.dispatch(hl.dsp.window.close( ))
-	end
+		    hl.dispatch(hl.dsp.workspace.toggle_special( "main" ))
+	    else
+		    hl.dispatch(hl.dsp.window.close( ))
+	    end
     end
 })
 

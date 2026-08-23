@@ -93,12 +93,20 @@ local handle3out = function()
         end
 end
 
-local swipe = function()
+local toggle_fullscreen = function(internal)
+    local window = hl.get_active_window()
+    local current_state = window.fullscreen
+
+    hl.dispatch(hl.dsp.window.fullscreen_state({
+        internal = current_state == internal and 0 or internal,
+        client = -1
+    }))
 end
 
 return {
     handleIn  = handleIn,
     handleOut = handleOut,
     handle3in = handle3in,
-    handle3out= handle3out
+    handle3out= handle3out,
+    toggle_fullscreen= toggle_fullscreen
 }

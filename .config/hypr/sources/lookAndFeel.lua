@@ -129,6 +129,8 @@ hl.window_rule({ match = { pin = true }, border_color = vars.white .. " " .. var
 hl.window_rule({ match = { pin = true }, no_shadow = true })
 hl.window_rule({ match = { pin = true }, opacity = "1.0 override 1.0 override" })
 
+hl.window_rule({ match = { workspace = "s[0]w[tv1]", float = false }, opacity = "1.0 override 1.0 override" })
+
 hl.window_rule({ match = { fullscreen_state_internal = 1 }, border_color = vars.white .. " " .. vars.white })
 hl.window_rule({ match = { fullscreen_state_internal = 1 }, opacity = "1.0 override 1.0 override" })
 
