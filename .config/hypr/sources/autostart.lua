@@ -1,7 +1,7 @@
 hl.on("hyprland.start", function () 
   hl.exec_cmd( "awww-daemon & ~/.config/hypr/scripts/wallpaperSwitcher.sh" )
   hl.exec_cmd( "hyprctl setcursor \"Vmix Cursors\" 18" )
-  hl.exec_cmd( "QML2_IMPORT_PATH=/nix/store/h3nbjvrm84vxmn8fs319rbhic2ibq524-qt5compat-6.11.0/lib/qt-6/qml qs -p .config/quickshell/main/shell.qml" )
+  hl.exec_cmd( "QML2_IMPORT_PATH=\"$(nix eval --raw nixpkgs#qt6Packages.qt5compat.outPath)/lib/qt-6/qml\" qs -p ~/.config/quickshell/main/shell.qml" )
   hl.exec_cmd( "wl-gammarelay-rs &" )
   hl.exec_cmd( "hyprctl setcursor Vimix-cursors 24" )
   hl.exec_cmd( "hyprctl dismissnotify" )

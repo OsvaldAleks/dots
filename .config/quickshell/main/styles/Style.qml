@@ -6,7 +6,7 @@ Singleton {
     id: style
 
     // Fonts properties
-    readonly property string fontFamMain: "DejaVu Sans Mono"
+    readonly property string fontFamMain: "DejaVuSansM Nerd Font"
 
     readonly property int textSize: 14
     readonly property int textSizeLg: 20

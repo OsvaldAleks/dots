@@ -13,6 +13,7 @@ ColumnLayout{
     signal labelClicked()
     signal trackClicked(real ratio)
 
+    property real internal_ratio: ratio
     Item {
         id: clickableLabel
         implicitWidth: 2*Style.panelHeight
@@ -41,7 +42,7 @@ ColumnLayout{
                 renderType: Text.NativeRendering
 
                 text: {
-                    let idx = Math.floor(sliderInfo.ratio * sliderInfo.iconList.length)
+                    let idx = Math.floor(ratio * sliderInfo.iconList.length)
                     idx = Math.max(0, Math.min(idx, sliderInfo.iconList.length - 1))
                     idx = idx ? idx : 0
 
@@ -83,7 +84,7 @@ ColumnLayout{
 
             anchors.bottom: parent.bottom
             implicitWidth: parent.width
-            height: parent.height * sliderInfo.ratio
+            height: parent.height * ratio
             Behavior on height { NumberAnimation { duration: 50 } }
             radius: Style.cornerRadius/2
             Behavior on radius { NumberAnimation { duration: 150 } }
@@ -102,27 +103,27 @@ ColumnLayout{
             onPressed: (mouse) => {
                 marker.radius = marker.width
                 dragging = true
-                sliderInfo.ratio = (parent.height-mouse.y)/parent.height
-                sliderInfo.trackClicked(sliderInfo.ratio)
+                internal_ratio = (parent.height-mouse.y)/parent.height
+                sliderInfo.trackClicked(internal_ratio)
             }
 
             onReleased: (mouse) => {
                 marker.radius = Style.cornerRadius/2
                 dragging = false
-                sliderInfo.ratio = Math.max(0,Math.min(1,(parent.height-mouse.y)/parent.height))
-                sliderInfo.trackClicked(sliderInfo.ratio)
+                internal_ratio = Math.max(0,Math.min(1,(parent.height-mouse.y)/parent.height))
+                sliderInfo.trackClicked(internal_ratio)
             }
 
             onPositionChanged: (mouse) => {
                 if(dragging){
-                    sliderInfo.ratio = Math.max(0,Math.min(1,(parent.height-mouse.y)/parent.height))
-                    sliderInfo.trackClicked(sliderInfo.ratio)
+                    internal_ratio = Math.max(0,Math.min(1,(parent.height-mouse.y)/parent.height))
+                    sliderInfo.trackClicked(internal_ratio)
                 }
             }
 
             onClicked: (mouse) => {
-                const ratio = (parent.height-mouse.y)/parent.height
-                sliderInfo.trackClicked(ratio)
+                internal_ratio = (parent.height-mouse.y)/parent.height
+                sliderInfo.trackClicked(internal_ratio)
             }
         }
         WheelHandler {
@@ -130,7 +131,8 @@ ColumnLayout{
             acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
             margin: Style.padding
             onWheel: (event) => {
-                ratio = Math.min(1,Math.max(0,ratio + event.angleDelta.y/10000))
+                internal_ratio = Math.min(1,Math.max(0,internal_ratio + event.angleDelta.y/10000))
+                sliderInfo.trackClicked(internal_ratio)
             }
         }
     }

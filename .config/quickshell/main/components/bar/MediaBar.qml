@@ -105,6 +105,7 @@ Rectangle {
             Layout.bottomMargin: wrapper.expanded*Style.padding
             Layout.alignment: Qt.AlignVCenter
             ratio: Pipewire.defaultAudioSink ? Pipewire.defaultAudioSink.audio.volume : 0
+            internal_ratio: Pipewire.defaultAudioSink ? Pipewire.defaultAudioSink.audio.volume : 0
             isDisabled: !Pipewire.defaultAudioSink || Pipewire.defaultAudioSink.audio.muted
             iconList: ["","",""]
             disabledIcon: ""
@@ -112,7 +113,9 @@ Rectangle {
                 Pipewire.defaultAudioSink.audio.muted = !Pipewire.defaultAudioSink.audio.muted
             }
             onTrackClicked: (ratio) => {
-                Pipewire.defaultAudioSink.audio.volume = ratio
+                Quickshell.execDetached({
+                    command: ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", Math.round(ratio*100) + "%"]
+                })
             }
         }
 
@@ -124,9 +127,9 @@ Rectangle {
             ratio: Services.BrightnessReader.percent
             iconList: ["󰃚", "󰃛", "󰃜", "󰃞", "󰃟", "󰃠"]
             onTrackClicked: (ratio) => {
-                var percent = Math.round(ratio * 100)+1
+                console.log("SLIDER CLICK", ratio)
                 Quickshell.execDetached({
-                    command: ["brightnessctl", "set", percent + "%"]
+                    command: ["brightnessctl", "set", Math.round(ratio*99)+1 + "%"]
                 })
             }
         }
