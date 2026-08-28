@@ -43,7 +43,7 @@ local toggle_fullscreen = function (internal)
     local current_state = window.fullscreen
 
     hl.dispatch(hl.dsp.window.fullscreen_state({
-        internal = ((current_state == internal) and 0) or internal,
+        internal = (current_state == internal) and 0 or internal,
         client = -1
     }))
 end

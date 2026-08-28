@@ -1,6 +1,6 @@
 [global]
     icon_theme = Papirus-dark
-    monitor = 0
+    monitor = eDP-1
     width = (350, 350)
     height = (50,1000)
     origin = top-center

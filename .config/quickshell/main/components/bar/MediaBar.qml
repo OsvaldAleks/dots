@@ -125,7 +125,7 @@ Rectangle {
             Layout.topMargin: wrapper.expanded*Style.padding 
             Layout.bottomMargin: wrapper.expanded*Style.padding 
             ratio: Services.BrightnessReader.percent
-            iconList: ["󰃚", "󰃛", "󰃜", "󰃞", "󰃟", "󰃠"]
+            iconList: ["󰃜", "󰃛", "󰃚", "󰃞", "󰃞", "󰃟", "󰃟", "󰃠"]
             onTrackClicked: (ratio) => {
                 console.log("SLIDER CLICK", ratio)
                 Quickshell.execDetached({
@@ -140,7 +140,7 @@ Rectangle {
             expanded: wrapper.expanded
             Layout.topMargin: wrapper.expanded*Style.padding 
             Layout.bottomMargin: wrapper.expanded*Style.padding 
-            ratio: 1-Services.ScreenTempReader.ratio
+            ratio: internal_ratio
             iconList: ["","","","",""]
             disabledIcon: "󰸁"
             isDisabled: true
