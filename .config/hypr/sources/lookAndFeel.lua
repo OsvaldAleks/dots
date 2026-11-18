@@ -30,7 +30,7 @@ hl.config({
 
     scrolling = {
         fullscreen_on_one_column = false,
-        follow_min_visible = 1.1,
+        follow_min_visible = 0.1,
         focus_fit_method = 0
     },
 
@@ -68,19 +68,20 @@ hl.config({
     },
 
     cursor = {
-        default_monitor = "eDP-1",
-        inactive_timeout = 180,
-        persistent_warps = true,
-        hide_on_key_press = true
+        default_monitor = "HDMI-A-1",
+        inactive_timeout = 4,
+        persistent_warps = false,
+        hide_on_key_press = false,
+        no_hardware_cursors = 1,
     },
 
     decoration = {
         rounding = vars.rounding,
         rounding_power = 2,
         dim_inactive = true,
-        dim_strength = 0,
-        dim_around = 0,
-        dim_special = 0,
+        dim_strength = 0.2,
+        dim_around = 0.2,
+        dim_special = 0.2,
 
         active_opacity = 1.0,
         inactive_opacity = 0.85,
@@ -115,6 +116,10 @@ hl.config({
         disable_splash_rendering = true,
         font_family = "DejaVu Sans Mono"
     },
+
+    opengl = {
+        nvidia_anti_flicker = false
+    }
 })
 
 -- WINDOW RULES

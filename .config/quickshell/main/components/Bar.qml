@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Effects
 import Quickshell
 import Quickshell.Hyprland
+import Quickshell.Services.UPower
 import "root:/styles/"
 import "root:/components/bar"
 import "root:/components/menus"
@@ -85,6 +86,7 @@ PanelWindow {
         Battery {
             Layout.alignment: Qt.AlignTop
             Layout.topMargin: Style.padding
+            visible: (UPower.displayDevice.isLaptopBattery) 
         }
 
         Network { 

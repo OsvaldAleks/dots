@@ -59,7 +59,7 @@ Singleton {
     readonly property int panelHeight: 25
     readonly property int cornerRadius: 5
     readonly property int padding: 10
-    readonly property int borders: 1
+    readonly property int borders: 2
 
     // Effects
     readonly property real shadowBlur : 1

@@ -42,6 +42,8 @@ val.menuToggle = "pkill fuzzel || fuzzel"
 --- ENV VARIABLES ---
 ---------------------
 
+hl.env("AQ_DRM_DEVICES", "/dev/dri/card0:/dev/dri/card1")
+
 hl.env("HYPRSHOT_DIR", "/home/aleks/Pictures/Screenshots")
 
 hl.env("LIBVA_DRIVER_NAME","nvidia")

@@ -83,7 +83,7 @@ PanelWindow {
                     model: Hyprland.workspaces
 
                     delegate: Workspace{
-                        visible: modelData.id > 0 && modelData.monitor.name == "eDP-1"
+                        visible: modelData.id > 0 && modelData.monitor.name == "HDMI-A-1"
                         id: workspaceIndicator
                         dropBounds: body
 
